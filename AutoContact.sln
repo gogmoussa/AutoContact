@@ -3,11 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31129.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoContact", "AutoContact\AutoContact.csproj", "{3738F0ED-9148-46A4-9A9E-6CEAE6F03F56}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoContactDAL", "AutoContactDAL\AutoContactDAL.csproj", "{D5DB0DF4-B1F6-4220-B7DC-5D9A3F626326}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoContactViewModels", "AutoContactViewModels\AutoContactViewModels.csproj", "{4A7EDF89-0B4D-4ABF-A16A-4CFA37636447}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoContact", "AutoContact\AutoContact.csproj", "{3738F0ED-9148-46A4-9A9E-6CEAE6F03F56}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +15,6 @@ Global
 		{3738F0ED-9148-46A4-9A9E-6CEAE6F03F56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3738F0ED-9148-46A4-9A9E-6CEAE6F03F56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3738F0ED-9148-46A4-9A9E-6CEAE6F03F56}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D5DB0DF4-B1F6-4220-B7DC-5D9A3F626326}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D5DB0DF4-B1F6-4220-B7DC-5D9A3F626326}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D5DB0DF4-B1F6-4220-B7DC-5D9A3F626326}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D5DB0DF4-B1F6-4220-B7DC-5D9A3F626326}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4A7EDF89-0B4D-4ABF-A16A-4CFA37636447}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4A7EDF89-0B4D-4ABF-A16A-4CFA37636447}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4A7EDF89-0B4D-4ABF-A16A-4CFA37636447}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4A7EDF89-0B4D-4ABF-A16A-4CFA37636447}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
