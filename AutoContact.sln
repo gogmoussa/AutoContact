@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.31129.286
+VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoContact", "AutoContactApp\AutoContact.csproj", "{EC5CFB37-F547-45B2-8EAF-48683B689C36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoContact", "AutoContact\AutoContact.csproj", "{AFDA20B8-3F37-46B9-A538-6728EC78CE99}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{EC5CFB37-F547-45B2-8EAF-48683B689C36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EC5CFB37-F547-45B2-8EAF-48683B689C36}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EC5CFB37-F547-45B2-8EAF-48683B689C36}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EC5CFB37-F547-45B2-8EAF-48683B689C36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFDA20B8-3F37-46B9-A538-6728EC78CE99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFDA20B8-3F37-46B9-A538-6728EC78CE99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFDA20B8-3F37-46B9-A538-6728EC78CE99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFDA20B8-3F37-46B9-A538-6728EC78CE99}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {D6473929-D023-4E52-8B8B-3B884444EFE7}
+		SolutionGuid = {A456C3ED-8854-4D9E-946C-A4F788EE0A4C}
 	EndGlobalSection
 EndGlobal
