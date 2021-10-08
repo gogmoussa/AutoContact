@@ -28,6 +28,16 @@ namespace AutoContactApp.Controllers
             return View();
         }
 
+        public IActionResult MechanicMechanic()
+        {
+            return View();
+        }
+
+        public IActionResult AdminMechanic()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
