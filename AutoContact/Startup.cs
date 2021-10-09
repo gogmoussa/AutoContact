@@ -13,17 +13,27 @@ namespace AutoContactApp
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            HostingEnvironment = env;
         }
 
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment HostingEnvironment { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            if (HostingEnvironment.IsDevelopment())
+            {
+                services.AddWebOptimizer(minifyJavaScript: false, minifyCss: false);
+            }
+            else
+            {
+                services.AddWebOptimizer();
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,6 +50,9 @@ namespace AutoContactApp
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+
+            app.UseWebOptimizer();
+
             app.UseStaticFiles();
 
             app.UseRouting();
