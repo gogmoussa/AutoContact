@@ -23,7 +23,7 @@ namespace AutoContactApp.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult ClientProfile()
         {
             return View();
         }
