@@ -37,8 +37,16 @@ namespace AutoContactApp.Controllers
         {
             return View();
         }
+        public IActionResult AdminClient()
+        {
+            return View();
+        }
 
         public IActionResult AdminLogin()
+        {
+            return View();
+        }
+        public IActionResult AdminDashboard()
         {
             return View();
         }

@@ -1,0 +1,87 @@
+﻿@{
+    ViewData["Title"] = "Admin Login";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <style>
+
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <form>
+            <h1>Dashboard</h1>
+            <p>This is the administrator view page</p>
+            <div class="card">
+                <h5 class="card-header">Appointments on
+                <script>document.write(new Date().toDateString());</script> <span class="badge badge-primary badge-pill">10</span></h5>
+                <div class="card-body">
+                    <p class="card-text">Appointment Time: Details</p>
+                </div>
+            </div>
+            <div class="row my-4">
+                <div class="col-12 col-md-6">
+                    <div class="card">
+                        <h5 class="card-header">Notifications <span class="badge badge-primary badge-pill">3</span></h5>
+                        <div class="card-body">
+                            <p class="card-text">- [Client] overdue for oil change</p>
+                            <p class="card-text">- [Mechanic] purchase order request</p>
+                            <p class="card-text">- [Mechanic] create new employee profile</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="card">
+                        <h5 class="card-header">Inventory</h5>
+                        <div class="card-body">
+                            <h5 class="card-title">Current Stock (units): 1500</h5>
+                            <p class="card-text">Products to Reorder: <b class="text-danger">7</b></p>
+                            <p class="card-text">Zero Stock Products: <b class="text-danger">2</b></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <h5 class="card-header">Latest Invoices</h5>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Order</th>
+                                            <th scope="col">Description</th>
+                                            <th scope="col">Client</th>
+                                            <th scope="col">Total</th>
+                                            <th scope="col">Date</th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">12345678</th>
+                                            <td>Premium Oil Change</td>
+                                            <td>testing@gmail.com</td>
+                                            <td>$79.99</td>
+                                            <td>Oct 09 2021</td>
+                                            <td><a href="#" class="btn btn-sm btn-primary">View</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <a href="#" class="btn btn-block btn-light disabled">View all</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+
+
