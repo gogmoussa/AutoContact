@@ -1,4 +1,5 @@
-﻿using AutoContactApp.Models;
+﻿using AutoContact.Models;
+using AutoContactApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -6,16 +7,21 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoContact.Helpers;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
 namespace AutoContactApp.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly AutoContactContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, AutoContactContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -46,6 +52,41 @@ namespace AutoContactApp.Controllers
         {
             return View();
         }
+
+        // POST: Home/AdminLogin
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AdminLogin(string email, string password)
+        {
+            if (ModelState.IsValid)
+            {
+                if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password))
+                {
+                    var employee = await (from emp in _context.Employees
+                                          join ema in _context.Emails on emp.EmailId equals ema.EmailId
+                                          where ema.Email1 == email
+                                          select new { Email = ema.Email1, Password = emp.HashPass, Salt = emp.HashSalt }).FirstOrDefaultAsync();
+
+                    if (employee != null && Crypto.hashPassword(password, employee.Salt).Equals(employee.Password))
+                    {
+                        HttpContext.Session.SetString("email", email);
+                        return RedirectToAction(nameof(AdminDashboard));
+                    }
+                }
+            }
+            ModelState.AddModelError("Error", "Invalid Login");
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Remove("email");
+            return RedirectToAction(nameof(AdminLogin));
+        }
+
         public IActionResult AdminDashboard()
         {
             return View();
