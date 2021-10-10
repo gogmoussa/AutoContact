@@ -34,7 +34,7 @@
                      alt="Sample image">
             </div>
             <div class="col-xl-5">
-                <form>
+                <form method="post" asp-controller="home" asp-action="adminlogin">
                     <div>
                         <div class="header1">
                             <h5>Welcome Back</h5>
@@ -45,11 +45,11 @@
                     </div>
                     <!-- Email input -->
                     <div class="form-group">
-                        <input type="email" class="form-control form-control-lg" id="loginEmail" placeholder="Email" required />
+                        <input type="email" class="form-control form-control-lg" id="loginEmail" name="email" placeholder="Email" required />
                     </div>
                     <!-- Password input -->
                     <div class="form-group">
-                        <input type="password" class="form-control form-control-lg" id="userPassword" placeholder="Password" required />
+                        <input type="password" class="form-control form-control-lg" id="userPassword" name="password" placeholder="Password" required />
                     </div>
 
                     <div class="d-flex justify-content-between align-items-center">
@@ -64,15 +64,16 @@
                     </div>
                     <!-- Submit button -->
                     <div class="text-center text-lg-start mt-3">
-                        <a href="~/Home/AdminDashboard" class="btn btn-primary btn-lg" style="padding-left: 30px; padding-right: 30px;">Login</a>
+                        <input type="submit" class="btn btn-primary btn-lg" style="padding-left: 30px; padding-right: 30px;" value="Login" />
                         @*<button class="btn btn-primary btn-lg" type="submit" href="~/Home/AdminDashboard" style="padding-left: 30px; padding-right: 30px;">Login</button>*@
-
+                        <div class="col-12">
+                            @Html.ValidationMessage("Error")
+                        </div>
                         <p class="small mt-2 pt-1">
                             Don't have an account? <a href="#!"
                                                       class="btn-link">Request Access</a>
                         </p>
                     </div>
-
                 </form>
             </div>
         </div>

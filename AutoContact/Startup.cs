@@ -1,6 +1,8 @@
+using AutoContact.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,7 +27,15 @@ namespace AutoContactApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);//We set Time here 
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
             services.AddControllersWithViews();
+            services.AddDbContext<AutoContactContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("AutoContactContext")));
             if (HostingEnvironment.IsDevelopment())
             {
                 services.AddWebOptimizer(minifyJavaScript: false, minifyCss: false);
@@ -58,6 +68,8 @@ namespace AutoContactApp
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
