@@ -2,30 +2,35 @@
     ViewData["Title"] = "Client";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Client View from Admin Perspective</h1>
-    <p>To do: Create clickable table that will open client profile page (or modal).</p>
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <style>
+    </style>
+</head>
+<body>
+    <div class="text-center">
+        <h1 class="display-4">Client View from Admin Perspective</h1>
+        <p>Click a mechanic to visit their profile page</p>
 
-    <!-- Mechanic List -->
-    <div class="table-responsive">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Phone No</th>
-                    <th scope="col">Date Added</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">Karen Komplaint</th>
-                    <td>karen.komplaint@aol.com</td>
-                    <td>555-555-6547</td>
-                    <td>2021-10-08</td>
-                </tr>
-            </tbody>
-        </table>
+        <!-- Client List -->
+        <div class="list-group" id="clientList">
+            <div class="list-group-item text-white bg-secondary row d-flex text-center" id="heading">
+                <div class="col">Name</div>
+                <div class="col">Email</div>
+                <div class="col">Phone No</div>
+                <div class="col">Date Added</div>
+            </div>
+            <button class="list-group-item row d-flex">
+                <div class="col">Karen Komplaint</div>
+                <div class="col">karen.komplaint@aol.com</div>
+                <div class="col">555-555-6547</div>
+                <div class="col">2021-10-08</div>
+            </button>
+        </div>
     </div>
-</div>
+</body>
+</html>

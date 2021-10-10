@@ -8,14 +8,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <style>
-
+        .font {
+            margin-bottom: 25px;
+            font-family: 'Montserrat', sans-serif;
+        }
     </style>
 </head>
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid font pt-3 pb-3">
         <form>
-            <h1>Dashboard</h1>
-            <p>This is the administrator view page</p>
+            <h1 class="pb-2">Hi, [Admin Name]</h1>
+            <p>This is the admin dashboard view page</p>
             <div class="card">
                 <h5 class="card-header">Appointments on
                 <script>document.write(new Date().toDateString());</script> <span class="badge badge-primary badge-pill">10</span></h5>
