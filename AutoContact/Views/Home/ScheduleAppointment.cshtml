@@ -1,0 +1,175 @@
+﻿@{
+    ViewData["Title"] = "Profile";
+}
+@section Scripts {
+
+    <script type="text/javascript">
+        $(function () {
+            $('#datepicker').datepicker({
+                format: 'DD/MM/YYYY'
+            });
+        });
+    </script>
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <style>
+        .banner3 {
+            font-family: "Montserrat", sans-serif;
+            color: #8d97ad;
+            font-weight: 300;
+            max-height: 800px;
+        }
+
+        .banner3 .banner {
+            position: relative;
+            max-height: 700px;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center top;
+            width: 100%;
+            display: table;
+        }
+
+        .banner3 h1,
+        .banner3 h2,
+        .banner3 h3,
+        .banner3 h4,
+        .banner3 h5,
+        .banner3 h6 {
+            color: #3e4555;
+        }
+
+        .banner3 .font-weight-medium {
+            font-weight: 500;
+        }
+
+        .banner3 .subtitle {
+            color: #8d97ad;
+            line-height: 24px;
+        }
+
+        .banner3 .btn-danger-gradiant {
+            background: #ff4d7e;
+            background: -webkit-linear-gradient(legacy-direction(to right), #ff4d7e 0%, #ff6a5b 100%);
+            background: -webkit-gradient(linear, left top, right top, from(#ff4d7e), to(#ff6a5b));
+            background: -webkit-linear-gradient(left, #ff4d7e 0%, #ff6a5b 100%);
+            background: -o-linear-gradient(left, #ff4d7e 0%, #ff6a5b 100%);
+            background: linear-gradient(to right, #ff4d7e 0%, #ff6a5b 100%);
+            border: 0px;
+        }
+
+        .banner3 .btn-danger-gradiant:hover {
+            background: #ff6a5b;
+            background: -webkit-linear-gradient(legacy-direction(to right), #ff6a5b 0%, #ff4d7e 100%);
+            background: -webkit-gradient(linear, left top, right top, from(#ff6a5b), to(#ff4d7e));
+            background: -webkit-linear-gradient(left, #ff6a5b 0%, #ff4d7e 100%);
+            background: -o-linear-gradient(left, #ff6a5b 0%, #ff4d7e 100%);
+            background: linear-gradient(to right, #ff6a5b 0%, #ff4d7e 100%);
+        }
+
+        .banner3 .btn-danger-gradiant.active,
+        .banner3 .btn-danger-gradiant:active,
+        .banner3 .btn-danger-gradiant:focus {
+            -webkit-box-shadow: 0px;
+            box-shadow: 0px;
+            opacity: 1;
+        }
+
+        .banner3 .btn-md {
+            padding: 15px 45px;
+            font-size: 16px;
+        }
+
+        .banner3 .form-row {
+            margin: 0;
+        }
+
+        .banner3 label.font-12 {
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .banner3 .form-control {
+            color: #8d97ad;
+            -o-text-overflow: ellipsis;
+            text-overflow: ellipsis;
+        }
+
+        .banner3 .date label {
+            cursor: pointer;
+            margin: 0;
+        }
+
+        .banner3 .font-14 {
+            font-size: 14px;
+        }
+
+        .banner3 .text-inverse {
+            color: #3e4555 !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="banner3">
+        <div class="py-5 banner" style=" background-image: url(https://www.readersdigest.ca/wp-content/uploads/2020/04/mechanic-tools-fixing-car.jpg);">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7 col-lg-5">
+                        <h3 class="my-3 text-white font-weight-medium text-uppercase">Book Appointment</h3>
+                        <div class="bg-white">
+                            <div class="form-row border-bottom p-4">
+                                <label class="text-inverse font-12 text-uppercase">Select Location</label>
+                                <select class="border-0 p-0 font-14 form-control" id="sellocation">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                </select>
+                            </div>
+                            <div class="form-row p-4 position-relative">
+                                <label class="text-inverse font-12 text-uppercase">Booking Date</label>
+                                <div class="input-group date">
+                                    <input type="text" class="border-0 p-0 font-14 form-control" id="datepicker" />
+                                    <label class="mt-2" for="datepicker">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
+                                            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+                                        </svg>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-row border-bottom p-4 position-relative">
+                                <label class="text-inverse font-12 text-uppercase">Booking Time</label>
+                                <div class='input-group'>
+                                    <select class="border-0 p-0 font-14 form-control" id="seltime">
+                                        <option>1:00</option>
+                                        <option>2:00</option>
+                                        <option>3:00</option>
+                                        <option>4:00</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row border-bottom p-4">
+                                <label class="text-inverse font-12 text-uppercase">Message</label>
+                                <textarea col="1" row="1" class="border-0 p-0 font-weight-light font-14 form-control" placeholder="Write Down the Message"></textarea>
+                            </div>
+                            <div>
+                                <button class="m-0 border-0 py-4 font-14 font-weight-medium btn btn-danger-gradiant btn-block position-relative rounded-0 text-center text-white text-uppercase">
+                                    <span>Book Yor Appointment Now</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

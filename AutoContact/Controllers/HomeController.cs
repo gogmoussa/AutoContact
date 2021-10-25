@@ -29,6 +29,11 @@ namespace AutoContactApp.Controllers
             return View();
         }
 
+        public IActionResult ScheduleAppointment()
+        {
+            return View();
+        }
+
         public IActionResult ClientProfile()
         {
             return View();
