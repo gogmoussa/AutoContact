@@ -8,6 +8,18 @@
             $('#datepicker').datepicker({
                 format: 'DD/MM/YYYY'
             });
+
+            $('#bookbutton').click(function () {
+                // get the data from the forum
+
+                // pass the data to controller
+
+                // confirm add
+
+                alert("Appoinment Booked");
+
+                // clear data
+            })
         });
     </script>
 
@@ -24,17 +36,17 @@
             font-family: "Montserrat", sans-serif;
             color: #8d97ad;
             font-weight: 300;
-            max-height: 800px;
         }
 
         .banner3 .banner {
             position: relative;
-            max-height: 700px;
-            background-size: cover;
             background-repeat: no-repeat;
             background-position: center top;
             width: 100%;
             display: table;
+            background-image: url("../images/mechanic-tools-fixing-car.jpg");
+            min-height: 83vh;
+            margin-top: 15px;
         }
 
         .banner3 h1,
@@ -119,7 +131,7 @@
 </head>
 <body>
     <div class="banner3">
-        <div class="py-5 banner" style=" background-image: url(https://www.readersdigest.ca/wp-content/uploads/2020/04/mechanic-tools-fixing-car.jpg);">
+        <div class="py-5 banner">
             <div class="container">
                 <div class="row">
                     <div class="col-md-7 col-lg-5">
@@ -161,7 +173,7 @@
                                 <textarea col="1" row="1" class="border-0 p-0 font-weight-light font-14 form-control" placeholder="Write Down the Message"></textarea>
                             </div>
                             <div>
-                                <button class="m-0 border-0 py-4 font-14 font-weight-medium btn btn-danger-gradiant btn-block position-relative rounded-0 text-center text-white text-uppercase">
+                                <button id="bookbutton" class="m-0 border-0 py-4 font-14 font-weight-medium btn btn-danger-gradiant btn-block position-relative rounded-0 text-center text-white text-uppercase">
                                     <span>Book Yor Appointment Now</span>
                                 </button>
                             </div>
