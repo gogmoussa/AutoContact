@@ -1,0 +1,253 @@
+﻿@{
+    ViewData["Title"] = "Appointments";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .apt-container {
+            background-color: lightskyblue;
+            border-radius: 3px;            
+        }
+    </style>
+</head>
+<body>
+    <div class="container pt-3">
+        <h1 class="pb-2">Appointments</h1>
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-auto">
+                        <button class="btn btn-secondary" type="button"><</button>
+                        <button class="btn btn-secondary" type="button">></button>
+                    </div>
+                    <div class="col pt-2 card-text">
+                        October 24 - 30, 2021
+                    </div>
+                </div>
+            </div>
+            <table class="table table-bordered table-sm text-center">
+                <thead class="thead-light">
+                    <tr>
+                        <th colspan="2"></th>
+                        <th scope="col">Sun, Oct 24</th>
+                        <th scope="col">Mon, Oct 25</th>
+                        <th scope="col">Tue, Oct 26</th>
+                        <th scope="col">Wed, Oct 27</th>
+                        <th scope="col">Thur, Oct 28</th>
+                        <th scope="col">Fri, Oct 29</th>
+                        <th scope="col">Sat, Oct 30</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="2" class="text-right border-right-0">8</td>
+                        <td class="border-left-0">00</td>
+                        <td id="sun"></td>
+                        <td id="mon" rowspan="1" >
+                            <div class="apt-container">
+                                <small><b>Karen Komplaint</b></small><br />
+                                <small>Contact: 555-555-0123</small><br />
+                                <small>Oil Change</small>
+                            </div>
+                        </td>
+                        <td id="tue"></td>
+                        <td id="wed"></td>
+                        <td id="thur"></td>
+                        <td id="fri"></td>
+                        <td id="sat"></td>
+                    </tr>
+                    <tr>
+                        <td class="border-left-0">&nbsp;</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td id="mon" rowspan="2">
+                            <div class="apt-container">
+                                <small><b>Sally Struthers</b></small><br />
+                                <small>Contact: 555-555-4567</small><br />
+                                <small>Tire Rotation</small>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2" class="text-right border-right-0">9</td>
+                        <td class="border-left-0">00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="border-left-0">&nbsp;</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2" class="text-right border-right-0">10</td>
+                        <td class="border-left-0">00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="border-left-0">&nbsp;</td>
+                        <td></td>
+                        <td></td>
+                        <td id="mon" rowspan="1">
+                            <div class="apt-container"> 
+                                <small><b>Ken Komplaint</b></small><br />
+                                <small>Contact: 555-555-3210</small><br />
+                                <small>Oil Change</small>
+                            </div>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2" class="text-right border-right-0">11</td>
+                        <td class="border-left-0">00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="border-left-0">&nbsp;</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2" class="text-right border-right-0">12</td>
+                        <td class="border-left-0">00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="border-left-0">&nbsp;</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2" class="text-right border-right-0">1</td>
+                        <td class="border-left-0">00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="border-left-0">&nbsp;</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2" class="text-right border-right-0">2</td>
+                        <td class="border-left-0">00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="border-left-0">&nbsp;</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2" class="text-right border-right-0">3</td>
+                        <td class="border-left-0">00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="border-left-0">&nbsp;</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2" class="text-right border-right-0">4</td>
+                        <td class="border-left-0">00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="border-left-0">&nbsp;</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
