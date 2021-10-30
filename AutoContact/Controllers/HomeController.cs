@@ -33,12 +33,15 @@ namespace AutoContactApp.Controllers
         {
             return View();
         }
+        public IActionResult ViewAppointment()
+        {
+            return View();
+        }
 
         public IActionResult ClientProfile()
         {
             return View();
         }
-
         public IActionResult MechanicMechanic()
         {
             return View();
