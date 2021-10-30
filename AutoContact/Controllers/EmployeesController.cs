@@ -25,6 +25,14 @@ namespace AutoContact.Controllers
             return View(await _context.Employees.ToListAsync());
         }
 
+        // GET: Employees
+        public async Task<IActionResult> Mechanic()
+        {
+            List<Employee> empList = await _context.Employees.ToListAsync();
+
+            return View(new Employees(empList));
+        }
+
         // GET: Employees/Details/5
         public async Task<IActionResult> Details(long? id)
         {

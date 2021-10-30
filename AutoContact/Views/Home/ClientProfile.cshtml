@@ -1,7 +1,28 @@
 ﻿@{
     ViewData["Title"] = "Profile";
 }
+@section Scripts {
 
+    <script type="text/javascript">
+        $(function () {
+            //Also need a function to load in the current mechanic info 
+
+            //This will update the mechanic info
+            $('#submitbutton').click(function () {
+                // get the data from the forum
+
+                // pass the data to controller
+
+                // confirm add
+
+                alert("Changes Saved");
+
+                // clear data
+            })
+        });
+    </script>
+
+}
 <!DOCTYPE html>
 <html>
 <head>
@@ -84,6 +105,7 @@
                         </div>
                     </div>
                 </div>
+
                 <hr class="my-4" />
                 <div class="form-row">
                     <div class="form-group col-md-6">
@@ -157,7 +179,7 @@
                         </ul>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Save Change</button>
+                <button id="submitbutton" class="btn btn-primary">Save Changes</button>
             </form>
         </div>
 
