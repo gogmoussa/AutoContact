@@ -13,7 +13,7 @@ namespace AutoContact.Models
         public string DriverLicence { get; set; }
         public DateTime? BirthDate { get; set; }
         public long AddressId { get; set; }
-        public long EmailId { get; set; }
+        public string Email { get; set; }
         public string HashPass { get; set; }
         public string HashSalt { get; set; }
     }
