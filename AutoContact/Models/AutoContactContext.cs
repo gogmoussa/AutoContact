@@ -26,7 +26,7 @@ namespace AutoContact.Models
         public virtual DbSet<CarClient> CarClients { get; set; }
         public virtual DbSet<Client> Clients { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
-        public virtual DbSet<Email> Emails { get; set; }
+        //public virtual DbSet<Email> Emails { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Invoice> Invoices { get; set; }
         public virtual DbSet<LoanerCar> LoanerCars { get; set; }
@@ -190,19 +190,19 @@ namespace AutoContact.Models
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<Email>(entity =>
-            {
-                entity.HasNoKey();
+            //modelBuilder.Entity<Email>(entity =>
+            //{
+            //    entity.HasNoKey();
 
-                entity.ToTable("Email");
+            //    entity.ToTable("Email");
 
-                entity.Property(e => e.AddedDate).HasColumnType("date");
+            //    entity.Property(e => e.AddedDate).HasColumnType("date");
 
-                entity.Property(e => e.Email1)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .HasColumnName("Email");
-            });
+            //    entity.Property(e => e.Email1)
+            //        .IsRequired()
+            //        .HasMaxLength(50)
+            //        .HasColumnName("Email");
+            //});
 
             modelBuilder.Entity<Employee>(entity =>
             {
