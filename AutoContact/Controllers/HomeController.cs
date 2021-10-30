@@ -73,9 +73,8 @@ namespace AutoContactApp.Controllers
                 if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password))
                 {
                     var employee = await (from emp in _context.Employees
-                                          join ema in _context.Emails on emp.EmailId equals ema.EmailId
-                                          where ema.Email1 == email
-                                          select new { Email = ema.Email1, Password = emp.HashPass, Salt = emp.HashSalt }).FirstOrDefaultAsync();
+                                        where emp.Email == email
+                                        select new { Email = emp.Email, Password = emp.HashPass, Salt = emp.HashSalt }).FirstOrDefaultAsync();
 
                     if (employee != null && Crypto.hashPassword(password, employee.Salt).Equals(employee.Password))
                     {

@@ -15,7 +15,7 @@ namespace AutoContact.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
         public long AddressId { get; set; }
-        public long EmailId { get; set; }
+        public string Email { get; set; }
         public string EmployeeSin { get; set; }
         public long? Manager { get; set; }
         public DateTime HireDate { get; set; }
