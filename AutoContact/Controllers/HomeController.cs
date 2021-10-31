@@ -74,12 +74,12 @@ namespace AutoContactApp.Controllers
                 {
                     var employee = await (from emp in _context.Employees
                                         where emp.Email == email
-                                        select new { Email = emp.Email, Password = emp.HashPass, Salt = emp.HashSalt }).FirstOrDefaultAsync();
+                                        select new { EmployeeId = emp.EmployeeId, Email = emp.Email, Password = emp.HashPass, Salt = emp.HashSalt }).FirstOrDefaultAsync();
 
                     if (employee != null && Crypto.hashPassword(password, employee.Salt).Equals(employee.Password))
                     {
                         HttpContext.Session.SetString("email", email);
-                        return RedirectToAction(nameof(AdminDashboard));
+                        return RedirectToAction("AdminDashboard", new { id = employee.EmployeeId });
                     }
                 }
             }
@@ -94,9 +94,21 @@ namespace AutoContactApp.Controllers
             return RedirectToAction(nameof(AdminLogin));
         }
 
-        public IActionResult AdminDashboard()
+        public async Task<IActionResult> AdminDashboard(long? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var employee = await _context.Employees
+                .FirstOrDefaultAsync(m => m.EmployeeId == id);
+            if (employee == null)
+            {
+                return NotFound();
+            }
+
+            return View(employee);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

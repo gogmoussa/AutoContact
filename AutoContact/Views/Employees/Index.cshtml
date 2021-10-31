@@ -4,92 +4,87 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <style>
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <h1>Employees</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AddressId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EmployeeSin)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Manager)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HireDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TerminationDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TerminationReason)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HashPass)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HashSalt)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AddressId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EmployeeSin)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Manager)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HireDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TerminationDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TerminationReason)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HashPass)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HashSalt)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.EmployeeId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.EmployeeId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.EmployeeId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+        <a type="button" class="btn btn-outline-primary mt-2 mb-2" asp-action="Create"><i class="bi bi-plus"></i> New Employee</a>
+
+        <!-- Mechanic List -->
+
+        <table class="table text-center">
+            <thead>
+                <tr>
+                    <th colspan="2">
+                        Name
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AddressId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EmployeeSin)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Manager)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.HireDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TerminationDate)
+                    </th>
+                    <th colsan="2"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AddressId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmployeeSin)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Manager)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HireDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TerminationDate)
+                        </td>
+                        <td>
+                            <a asp-action="MechanicEdit" asp-route-id="@item.EmployeeId"><i class="bi bi-pencil-square"></i></a>
+                            <a asp-action="Delete" asp-route-id="@item.EmployeeId"><i class="bi bi-trash"></i></a>
+                            <a asp-action="MechanicDetails" asp-route-id="@item.EmployeeId"><i class="bi bi-three-dots-vertical"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

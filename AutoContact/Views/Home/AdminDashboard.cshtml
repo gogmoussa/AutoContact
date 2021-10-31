@@ -1,4 +1,5 @@
-﻿@{
+﻿@model AutoContact.Models.Employee
+@{
     ViewData["Title"] = "Admin Login";
 }
 <!DOCTYPE html>
@@ -17,11 +18,13 @@
 <body>
     <div class="container-fluid font pt-3 pb-3">
         <form>
-            <h1 class="pb-2">Hi, [Admin Name]</h1>
+            <h1 class="pb-2">Hi, @Html.DisplayFor(model => model.FirstName)</h1>
             <p>This is the admin dashboard view page</p>
             <div class="card">
-                <h5 class="card-header">Appointments on
-                <script>document.write(new Date().toDateString());</script> <span class="badge badge-primary badge-pill">10</span></h5>
+                <h5 class="card-header">
+                    Appointments on
+                    <script>document.write(new Date().toDateString());</script> <span class="badge badge-primary badge-pill">10</span>
+                </h5>
                 <div class="card-body">
                     <p class="card-text">Appointment Time: Details</p>
                 </div>
