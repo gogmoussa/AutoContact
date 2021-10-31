@@ -25,12 +25,22 @@ namespace AutoContact.Controllers
             return View(await _context.Employees.ToListAsync());
         }
 
-        // GET: Employees
-        public async Task<IActionResult> Mechanic()
+        // GET: Employees/Details/5
+        public async Task<IActionResult> MechanicDetails(long? id)
         {
-            List<Employee> empList = await _context.Employees.ToListAsync();
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-            return View(new Employees(empList));
+            var employee = await _context.Employees
+                .FirstOrDefaultAsync(m => m.EmployeeId == id);
+            if (employee == null)
+            {
+                return NotFound();
+            }
+
+            return View(employee);
         }
 
         // GET: Employees/Details/5
@@ -124,6 +134,59 @@ namespace AutoContact.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
+            }
+            return View(employee);
+        }
+
+        // GET: Employees/Edit/5
+        public async Task<IActionResult> MechanicEdit(long? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var employee = await _context.Employees.FindAsync(id);
+            if (employee == null)
+            {
+                return NotFound();
+            }
+            return View(employee);
+        }
+
+        // POST: Employees/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> MechanicEdit(long id, [Bind("EmployeeId,FirstName,LastName,AddressId,Email,EmployeeSin,Manager,HireDate,TerminationDate,TerminationReason,HashPass,HashSalt")] Employee employee)
+        {
+            if (id != employee.EmployeeId)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    employee.HashSalt = Crypto.generateSalt();
+                    employee.HashPass = Crypto.hashPassword(employee.HashPass, employee.HashSalt);
+                    _context.Update(employee);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!EmployeeExists(employee.EmployeeId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction("MechanicDetails", new { id = 1 });
             }
             return View(employee);
         }
