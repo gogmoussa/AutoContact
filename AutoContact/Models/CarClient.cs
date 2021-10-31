@@ -11,5 +11,8 @@ namespace AutoContact.Models
         public long CarId { get; set; }
         public long ClientId { get; set; }
         public bool IsOwner { get; set; }
+
+        public virtual Car Car { get; set; }
+        public virtual Client Client { get; set; }
     }
 }

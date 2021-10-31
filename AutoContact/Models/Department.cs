@@ -10,5 +10,7 @@ namespace AutoContact.Models
         public long DepartmentId { get; set; }
         public string DepartmentName { get; set; }
         public long EmployeeId { get; set; }
+
+        public virtual Employee Employee { get; set; }
     }
 }

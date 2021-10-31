@@ -1,36 +1,31 @@
-﻿using AutoContact.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using AutoContact.Models;
 
 namespace AutoContact.Controllers
 {
-    public class AppointmentController : Controller
+    public class AppointmentsController : Controller
     {
         private readonly AutoContactContext _context;
 
-        public AppointmentController(AutoContactContext context)
+        public AppointmentsController(AutoContactContext context)
         {
             _context = context;
         }
+
         // GET: Appointments
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Appointments.ToListAsync());
+            var autoContactContext = _context.Appointments.Include(a => a.Car);
+            return View(await autoContactContext.ToListAsync());
         }
-        // GET: Appointments
-        public async Task<IActionResult> Appointment()
-        {
-            List<Appointment> appts = await _context.Appointments.ToListAsync();
 
-            return View(new Appointments(appts));
-        }
-        // GET: AppointmentController/Details/5
+        // GET: Appointments/Details/5
         public async Task<IActionResult> Details(long? id)
         {
             if (id == null)
@@ -39,6 +34,7 @@ namespace AutoContact.Controllers
             }
 
             var appointment = await _context.Appointments
+                .Include(a => a.Car)
                 .FirstOrDefaultAsync(m => m.AppointmentId == id);
             if (appointment == null)
             {
@@ -47,15 +43,20 @@ namespace AutoContact.Controllers
 
             return View(appointment);
         }
-        // GET: AppointmentController/Create
+
+        // GET: Appointments/Create
         public IActionResult Create()
         {
+            ViewData["CarId"] = new SelectList(_context.Cars, "CarId", "Colour");
             return View();
         }
-        // POST: AppointmentController/Create
+
+        // POST: Appointments/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AppointmentId,AppointmentStartTime,BookedAtTime,InvoiceId,CarId")] Appointment appointment)
+        public async Task<IActionResult> Create([Bind("AppointmentId,AppointmentStartTime,BookedAtTime,BookingEmployeeId,InvoiceId,CarId")] Appointment appointment)
         {
             if (ModelState.IsValid)
             {
@@ -63,9 +64,11 @@ namespace AutoContact.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CarId"] = new SelectList(_context.Cars, "CarId", "Colour", appointment.CarId);
             return View(appointment);
         }
-        // GET: AppointmentController/Edit/5
+
+        // GET: Appointments/Edit/5
         public async Task<IActionResult> Edit(long? id)
         {
             if (id == null)
@@ -78,12 +81,16 @@ namespace AutoContact.Controllers
             {
                 return NotFound();
             }
+            ViewData["CarId"] = new SelectList(_context.Cars, "CarId", "Colour", appointment.CarId);
             return View(appointment);
         }
-        // POST: AppointmentController/Edit/5
+
+        // POST: Appointments/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("AppointmentId,AppointmentStartTime,BookedAtTime,InvoiceId,CarId")] Appointment appointment)
+        public async Task<IActionResult> Edit(long id, [Bind("AppointmentId,AppointmentStartTime,BookedAtTime,BookingEmployeeId,InvoiceId,CarId")] Appointment appointment)
         {
             if (id != appointment.AppointmentId)
             {
@@ -110,8 +117,11 @@ namespace AutoContact.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CarId"] = new SelectList(_context.Cars, "CarId", "Colour", appointment.CarId);
             return View(appointment);
         }
+
+        // GET: Appointments/Delete/5
         public async Task<IActionResult> Delete(long? id)
         {
             if (id == null)
@@ -120,6 +130,7 @@ namespace AutoContact.Controllers
             }
 
             var appointment = await _context.Appointments
+                .Include(a => a.Car)
                 .FirstOrDefaultAsync(m => m.AppointmentId == id);
             if (appointment == null)
             {
@@ -128,7 +139,8 @@ namespace AutoContact.Controllers
 
             return View(appointment);
         }
-        // POST: AppointmentController/Delete/5
+
+        // POST: Appointments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
@@ -138,6 +150,7 @@ namespace AutoContact.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
         private bool AppointmentExists(long id)
         {
             return _context.Appointments.Any(e => e.AppointmentId == id);
