@@ -12,8 +12,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Employees\MechanicDetails.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="Views\Home\Index1.cshtml" />
     <Content Remove="Views\Home\Index2.cshtml" />
+    <Content Remove="Views\Home\MechanicMechanic.cshtml" />
     <Content Remove="Views\Home\_ViewStart.cshtml" />
   </ItemGroup>
 
