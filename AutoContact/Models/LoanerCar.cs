@@ -7,11 +7,18 @@ namespace AutoContact.Models
 {
     public partial class LoanerCar
     {
+        public LoanerCar()
+        {
+            Invoices = new HashSet<Invoice>();
+        }
+
         public long LoanerCarId { get; set; }
         public string Vin { get; set; }
         public string Make { get; set; }
         public string Model { get; set; }
         public string Colour { get; set; }
         public long Odometer { get; set; }
+
+        public virtual ICollection<Invoice> Invoices { get; set; }
     }
 }

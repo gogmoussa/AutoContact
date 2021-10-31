@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.Extensions.Configuration;
 
 #nullable disable
 
@@ -36,11 +35,8 @@ namespace AutoContact.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                IConfigurationRoot configuration = new ConfigurationBuilder()
-                            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-                            .AddJsonFile("appsettings.json")
-                            .Build();
-                optionsBuilder.UseSqlServer(configuration.GetConnectionString("AutoContactContext"));
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Server=(Local);Database=AutoContact;Trusted_Connection=True;");
             }
         }
 
@@ -50,22 +46,32 @@ namespace AutoContact.Models
 
             modelBuilder.Entity<AccessLevel>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("AccessLevel");
+
+                entity.Property(e => e.AccessLevelId).ValueGeneratedNever();
 
                 entity.Property(e => e.AccessLevel1)
                     .IsRequired()
                     .HasMaxLength(20)
                     .IsUnicode(false)
                     .HasColumnName("AccessLevel");
+
+                entity.HasOne(d => d.Client)
+                    .WithMany(p => p.AccessLevels)
+                    .HasForeignKey(d => d.ClientId)
+                    .HasConstraintName("FK_AccessLevel_Client");
+
+                entity.HasOne(d => d.Employee)
+                    .WithMany(p => p.AccessLevels)
+                    .HasForeignKey(d => d.EmployeeId)
+                    .HasConstraintName("FK_AccessLevel_Employee");
             });
 
             modelBuilder.Entity<Address>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("Address");
+
+                entity.Property(e => e.AddressId).ValueGeneratedNever();
 
                 entity.Property(e => e.CityName)
                     .IsRequired()
@@ -96,27 +102,45 @@ namespace AutoContact.Models
 
             modelBuilder.Entity<Appointment>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("Appointment");
+
+                entity.Property(e => e.AppointmentId).ValueGeneratedNever();
 
                 entity.Property(e => e.AppointmentStartTime).HasColumnType("datetime");
 
                 entity.Property(e => e.BookedAtTime).HasColumnType("datetime");
+
+                entity.HasOne(d => d.Car)
+                    .WithMany(p => p.Appointments)
+                    .HasForeignKey(d => d.CarId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Appointment_Car");
             });
 
             modelBuilder.Entity<AppointmentInvoice>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("AppointmentInvoice");
+
+                entity.Property(e => e.AppointmentInvoiceId).ValueGeneratedNever();
+
+                entity.HasOne(d => d.Appointment)
+                    .WithMany(p => p.AppointmentInvoices)
+                    .HasForeignKey(d => d.AppointmentId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_AppointmentInvoice_Appointment");
+
+                entity.HasOne(d => d.Invoice)
+                    .WithMany(p => p.AppointmentInvoices)
+                    .HasForeignKey(d => d.InvoiceId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_AppointmentInvoice_Invoice");
             });
 
             modelBuilder.Entity<Car>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("Car");
+
+                entity.Property(e => e.CarId).ValueGeneratedNever();
 
                 entity.Property(e => e.Colour)
                     .IsRequired()
@@ -145,19 +169,35 @@ namespace AutoContact.Models
                 entity.HasNoKey();
 
                 entity.ToTable("CarClient");
+
+                entity.HasOne(d => d.Car)
+                    .WithMany()
+                    .HasForeignKey(d => d.CarId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_CarClient_Car");
+
+                entity.HasOne(d => d.Client)
+                    .WithMany()
+                    .HasForeignKey(d => d.ClientId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_CarClient_Client");
             });
 
             modelBuilder.Entity<Client>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("Client");
+
+                entity.Property(e => e.ClientId).ValueGeneratedNever();
 
                 entity.Property(e => e.BirthDate).HasColumnType("date");
 
                 entity.Property(e => e.DriverLicence)
                     .HasMaxLength(17)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Email)
+                    .IsRequired()
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.FirstName)
                     .IsRequired()
@@ -176,18 +216,30 @@ namespace AutoContact.Models
                     .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.HasOne(d => d.Address)
+                    .WithMany(p => p.Clients)
+                    .HasForeignKey(d => d.AddressId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Client_Address");
             });
 
             modelBuilder.Entity<Department>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("Department");
+
+                entity.Property(e => e.DepartmentId).ValueGeneratedNever();
 
                 entity.Property(e => e.DepartmentName)
                     .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.HasOne(d => d.Employee)
+                    .WithMany(p => p.Departments)
+                    .HasForeignKey(d => d.EmployeeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Department_Employee");
             });
 
             modelBuilder.Entity<Email>(entity =>
@@ -209,6 +261,10 @@ namespace AutoContact.Models
                 entity.ToTable("Employee");
 
                 entity.Property(e => e.EmployeeId).ValueGeneratedNever();
+
+                entity.Property(e => e.Email)
+                    .IsRequired()
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.EmployeeSin)
                     .IsRequired()
@@ -242,13 +298,24 @@ namespace AutoContact.Models
                 entity.Property(e => e.TerminationReason)
                     .HasMaxLength(10)
                     .IsFixedLength(true);
+
+                entity.HasOne(d => d.Address)
+                    .WithMany(p => p.Employees)
+                    .HasForeignKey(d => d.AddressId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Employee_Address");
+
+                entity.HasOne(d => d.ManagerNavigation)
+                    .WithMany(p => p.InverseManagerNavigation)
+                    .HasForeignKey(d => d.Manager)
+                    .HasConstraintName("FK_Employee_Employee");
             });
 
             modelBuilder.Entity<Invoice>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("Invoice");
+
+                entity.Property(e => e.InvoiceId).ValueGeneratedNever();
 
                 entity.Property(e => e.CancelledDate).HasColumnType("date");
 
@@ -261,13 +328,24 @@ namespace AutoContact.Models
                 entity.Property(e => e.InvoiceDate).HasColumnType("date");
 
                 entity.Property(e => e.PaidDate).HasColumnType("date");
+
+                entity.HasOne(d => d.Employee)
+                    .WithMany(p => p.Invoices)
+                    .HasForeignKey(d => d.EmployeeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Invoice_Employee");
+
+                entity.HasOne(d => d.LoanerCar)
+                    .WithMany(p => p.Invoices)
+                    .HasForeignKey(d => d.LoanerCarId)
+                    .HasConstraintName("FK_Invoice_LoanerCar");
             });
 
             modelBuilder.Entity<LoanerCar>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("LoanerCar");
+
+                entity.Property(e => e.LoanerCarId).ValueGeneratedNever();
 
                 entity.Property(e => e.Colour)
                     .IsRequired()
@@ -293,13 +371,25 @@ namespace AutoContact.Models
 
             modelBuilder.Entity<Phone>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.PhoneNumId);
 
                 entity.ToTable("Phone");
+
+                entity.Property(e => e.PhoneNumId).ValueGeneratedNever();
 
                 entity.Property(e => e.PhoneNum)
                     .IsRequired()
                     .HasMaxLength(20);
+
+                entity.HasOne(d => d.Client)
+                    .WithMany(p => p.Phones)
+                    .HasForeignKey(d => d.ClientId)
+                    .HasConstraintName("FK_Phone_Client");
+
+                entity.HasOne(d => d.Employee)
+                    .WithMany(p => p.Phones)
+                    .HasForeignKey(d => d.EmployeeId)
+                    .HasConstraintName("FK_Phone_Employee");
             });
 
             OnModelCreatingPartial(modelBuilder);

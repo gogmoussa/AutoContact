@@ -11,5 +11,8 @@ namespace AutoContact.Models
         public long? ClientId { get; set; }
         public long? EmployeeId { get; set; }
         public string AccessLevel1 { get; set; }
+
+        public virtual Client Client { get; set; }
+        public virtual Employee Employee { get; set; }
     }
 }

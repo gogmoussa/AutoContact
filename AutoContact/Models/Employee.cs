@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -8,21 +7,34 @@ namespace AutoContact.Models
 {
     public partial class Employee
     {
-        [Key]
+        public Employee()
+        {
+            AccessLevels = new HashSet<AccessLevel>();
+            Departments = new HashSet<Department>();
+            InverseManagerNavigation = new HashSet<Employee>();
+            Invoices = new HashSet<Invoice>();
+            Phones = new HashSet<Phone>();
+        }
+
         public long EmployeeId { get; set; }
-        [Display(Name = "First Name")]
         public string FirstName { get; set; }
-        [Display(Name = "Last Name")]
         public string LastName { get; set; }
         public long AddressId { get; set; }
-        public string Email { get; set; }
         public string EmployeeSin { get; set; }
         public long? Manager { get; set; }
         public DateTime HireDate { get; set; }
         public DateTime? TerminationDate { get; set; }
         public string TerminationReason { get; set; }
-        [Display(Name = "Password")]
         public string HashPass { get; set; }
         public string HashSalt { get; set; }
+        public string Email { get; set; }
+
+        public virtual Address Address { get; set; }
+        public virtual Employee ManagerNavigation { get; set; }
+        public virtual ICollection<AccessLevel> AccessLevels { get; set; }
+        public virtual ICollection<Department> Departments { get; set; }
+        public virtual ICollection<Employee> InverseManagerNavigation { get; set; }
+        public virtual ICollection<Invoice> Invoices { get; set; }
+        public virtual ICollection<Phone> Phones { get; set; }
     }
 }
