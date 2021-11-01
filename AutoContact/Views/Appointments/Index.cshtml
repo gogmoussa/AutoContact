@@ -1,0 +1,71 @@
+﻿@model IEnumerable<AutoContact.Models.Appointment>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <style>
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <h1>Appointments</h1>
+
+        <a type="button" class="btn btn-outline-primary mt-2 mb-2" asp-action="Create"><i class="bi bi-plus"></i> New Appointment</a>
+        <table class="table text-center">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AppointmentStartTime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BookedAtTime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BookingEmployeeId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.InvoiceId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Car)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AppointmentStartTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BookedAtTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BookingEmployeeId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.InvoiceId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Car.Colour)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.AppointmentId"><i class="bi bi-pencil-square"></i></a>
+                            <a asp-action="Delete" asp-route-id="@item.AppointmentId"><i class="bi bi-trash"></i></a>
+                            <a asp-action="Details" asp-route-id="@item.AppointmentId"><i class="bi bi-three-dots-vertical"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
