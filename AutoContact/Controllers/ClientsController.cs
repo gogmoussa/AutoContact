@@ -62,7 +62,7 @@ namespace AutoContact.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ClientId,FirstName,LastName,DriverLicense,BirthdDate,AddressId,Email,HashPass,HashSalt")] Client client)
+        public async Task<IActionResult> Create([Bind("ClientId,FirstName,LastName,DriverLicence,BirthDate,AddressId,Email,HashPass,HashSalt")] Client client)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +96,7 @@ namespace AutoContact.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("ClientId,FirstName,LastName,AddressId,Email,ClientSin,Manager,HireDate,TerminationDate,TerminationReason,HashPass,HashSalt")] Client client)
+        public async Task<IActionResult> Edit(long id, [Bind("ClientId,FirstName,LastName,DriverLicence,BirthDate,AddressId,Email,HashPass,HashSalt")] Client client)
         {
             if (id != client.ClientId)
             {

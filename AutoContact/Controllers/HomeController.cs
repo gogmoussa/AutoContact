@@ -37,21 +37,12 @@ namespace AutoContactApp.Controllers
         {
             return View();
         }
-
-        public IActionResult ClientProfile()
-        {
-            return View();
-        }
         public IActionResult MechanicMechanic()
         {
             return View();
         }
 
         public IActionResult AdminMechanic()
-        {
-            return View();
-        }
-        public IActionResult AdminClient()
         {
             return View();
         }
