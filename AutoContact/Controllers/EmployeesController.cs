@@ -22,7 +22,8 @@ namespace AutoContact.Controllers
         // GET: Employees
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Employees.ToListAsync());
+            var autoContactContext = _context.Employees.Include(e => e.Address).Include(e => e.ManagerNavigation);
+            return View(await autoContactContext.ToListAsync());
         }
 
         // GET: Employees/Details/5
@@ -34,6 +35,8 @@ namespace AutoContact.Controllers
             }
 
             var employee = await _context.Employees
+                .Include(e => e.Address)
+                .Include(e => e.ManagerNavigation)
                 .FirstOrDefaultAsync(m => m.EmployeeId == id);
             if (employee == null)
             {
@@ -52,6 +55,8 @@ namespace AutoContact.Controllers
             }
 
             var employee = await _context.Employees
+                .Include(e => e.Address)
+                .Include(e => e.ManagerNavigation)
                 .FirstOrDefaultAsync(m => m.EmployeeId == id);
             if (employee == null)
             {
@@ -93,7 +98,7 @@ namespace AutoContact.Controllers
                 return NotFound();
             }
 
-            var employee = await _context.Employees.FindAsync(id);
+            var employee = await _context.Employees.Include(x => x.Address).FirstOrDefaultAsync(e => e.EmployeeId == id);
             if (employee == null)
             {
                 return NotFound();
@@ -200,7 +205,9 @@ namespace AutoContact.Controllers
             }
 
             var employee = await _context.Employees
-                .FirstOrDefaultAsync(m => m.EmployeeId == id);
+               .Include(e => e.Address)
+               .Include(e => e.ManagerNavigation)
+               .FirstOrDefaultAsync(m => m.EmployeeId == id);
             if (employee == null)
             {
                 return NotFound();
