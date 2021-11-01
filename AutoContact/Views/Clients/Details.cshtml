@@ -1,0 +1,188 @@
+﻿@{
+    ViewData["Title"] = "Profile";
+}
+@section Scripts {
+
+    <script type="text/javascript">
+        $(function () {
+            //Also need a function to load in the current mechanic info 
+
+            //This will update the mechanic info
+            $('#submitbutton').click(function () {
+                // get the data from the forum
+
+                // pass the data to controller
+
+                // confirm add
+
+                alert("Changes Saved");
+
+                // clear data
+            })
+        });
+    </script>
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <style>
+        body {
+            color: #8e9194;
+            background-color: #f4f6f9;
+        }
+
+        .avatar-xl img {
+            width: 110px;
+        }
+
+        .rounded-circle {
+            border-radius: 50% !important;
+        }
+
+        img {
+            vertical-align: middle;
+            border-style: none;
+        }
+
+        .text-muted {
+            color: #aeb0b4 !important;
+        }
+
+        .text-muted {
+            font-weight: 300;
+        }
+
+        .form-control {
+            display: block;
+            width: 100%;
+            height: calc(1.5em + 0.75rem + 2px);
+            padding: 0.375rem 0.75rem;
+            font-size: 0.875rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #4d5154;
+            background-color: #ffffff;
+            background-clip: padding-box;
+            border: 1px solid #eef0f3;
+            border-radius: 0.25rem;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <form>
+                <div class="row mt-5 align-items-center">
+                    <div class="col-md-3 text-center mb-5">
+                        <div class="avatar avatar-xl">
+                            <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="..." class="avatar-img rounded-circle" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row align-items-center">
+                            <div class="col-md-7">
+                                <h4 class="mb-1">Brown, Asher</h4>
+                                <p class="small mb-3"><span class="badge badge-dark">New York, USA</span></p>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-md-7">
+                                <p class="text-muted">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit nisl ullamcorper, rutrum metus in, congue lectus. In hac habitasse platea dictumst. Cras urna quam, malesuada vitae risus at,
+                                    pretium blandit sapien.
+                                </p>
+                            </div>
+                            <div class="col">
+                                <p class="small mb-0 text-muted">Nec Urna Suscipit Ltd</p>
+                                <p class="small mb-0 text-muted">P.O. Box 464, 5975 Eget Avenue</p>
+                                <p class="small mb-0 text-muted">(537) 315-1481</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="my-4" />
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputFirstname1">Firstname</label>
+                        <input type="text" id="inputFirstname1" class="form-control" placeholder="Brown" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputLastname2">Lastname</label>
+                        <input type="text" id="inputLastname2" class="form-control" placeholder="Asher" />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputPhoneNo3">Phone</label>
+                        <input type="tel" class="form-control" id="inputPhoneNo3" placeholder="(519) 191-8312" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputDOB4">Date Of Birth</label>
+                        <input type="datetime" class="form-control" id="inputDOB4" placeholder="10/10/1997" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail5">Email</label>
+                    <input type="email" class="form-control" id="inputEmail5" placeholder="brown@asher.me" />
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputAddress6">Address</label>
+                        <input type="text" class="form-control" id="inputAddress6" placeholder="5975 Eget Avenue" />
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="inputProvince7">Province</label>
+                        <select id="inputProvince7" class="form-control">
+                            <option selected="">Choose...</option>
+                            <option>...</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="inputPostalCode8">Postal Code</label>
+                        <input type="text" class="form-control" id="inputPostalCode8" placeholder="N5Y 5S8" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputDriverLicense9">Driver License</label>
+                    <input type="text" class="form-control" id="inputDriverLicense9" placeholder="XXXXXXXXXXXXXXXXXX" />
+                </div>
+                <hr class="my-4" />
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="inputPassword4">Old Password</label>
+                            <input type="password" class="form-control" id="inputPassword5" />
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword5">New Password</label>
+                            <input type="password" class="form-control" id="inputPassword5" />
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword6">Confirm Password</label>
+                            <input type="password" class="form-control" id="inputPassword6" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="mb-2">Password requirements</p>
+                        <p class="small text-muted mb-2">To create a new password, you have to meet all of the following requirements:</p>
+                        <ul class="small text-muted pl-4 mb-0">
+                            <li>Minimum 8 character</li>
+                            <li>At least one special character</li>
+                            <li>At least one number</li>
+                            <li>Can’t be the same as a previous password</li>
+                        </ul>
+                    </div>
+                </div>
+                <button id="submitbutton" class="btn btn-primary">Save Changes</button>
+            </form>
+        </div>
+
+    </div>
+</body>
+</html>
