@@ -104,6 +104,31 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        $(function () {
+            var page = sessionStorage.getItem('page');
+            var navbar = document.querySelectorAll('li');
+            if (page == null) {
+                $(navbar[0]).addClass('active').removeClass('active');
+            } else {
+                navbar.forEach((item) => {
+                    if (item.children[0].href == page) {
+                        $(item).addClass('active').siblings().removeClass('active');
+                    }
+                });
+            }
+        })
+
+        $(document).on('click', 'ul li', function () {
+            var page = this.children[0].href;
+            sessionStorage.setItem('page', page);
+        });
+
+        $(document).on('click', 'a', function () {
+            sessionStorage.setItem('page', null);
+        });
+    </script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
