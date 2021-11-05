@@ -102,11 +102,19 @@
                             <span asp-validation-for="BirthDate" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="Email"></label>
-                        <input asp-for="Email" class="form-control" />
-                        <span asp-validation-for="Email" class="text-danger"></span>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="Email"></label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="DriverLicence"></label>
+                            <input asp-for="DriverLicence" class="form-control" />
+                            <span asp-validation-for="DriverLicence" class="text-danger"></span>
+                        </div>
                     </div>
+
                     <hr class="my-4" />
 
                     <p>We need access to address fields, currently only pulling in address id</p>
@@ -151,11 +159,7 @@
                     </div>
 
                     <hr class="my-4" />
-                        <div class="form-group">
-                            <label asp-for="DriverLicence"></label>
-                            <input asp-for="DriverLicence" class="form-control" />
-                            <span asp-validation-for="DriverLicence" class="text-danger"></span>
-                        </div>               
+            
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label asp-for="HashPass"></label>
@@ -168,7 +172,7 @@
                 <br />
                 <div>
                     <button class="btn btn-primary" type="submit" value="Save">Save</button>
-                    <button class="btn btn-primary" asp-action="Index" asp-route-id="@Model.ClientId">Back to List</button>
+                    <button class="btn btn-outline-secondary" asp-action="Index" asp-route-id="@Model.ClientId">Back to List</button>
                 </div>
             </form>
         </div>

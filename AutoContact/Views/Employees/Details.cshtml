@@ -159,12 +159,12 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="manager">Termination Date</label>
-                            <input type="text" class="form-control" id="manager" placeholder="@Html.DisplayFor(model => model.TerminationDate)" readonly>
+                            <label for="terminationDate">Termination Date</label>
+                            <input type="text" class="form-control" id="terminationDate" placeholder="@Html.DisplayFor(model => model.TerminationDate)" readonly>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="hireDate">Termination Reason</label>
-                            <input type="text" class="form-control" id="hireDate" placeholder="@Html.DisplayFor(model => model.TerminationReason)" readonly>
+                            <label for="terminationReason">Termination Reason</label>
+                            <input type="text" class="form-control" id="terminationReason" placeholder="@Html.DisplayFor(model => model.TerminationReason)" readonly>
                         </div>
                     </div>
                     <div class="form-row">
@@ -173,12 +173,11 @@
                             <input type="password" class="form-control" id="sin" placeholder="@Html.DisplayFor(model => model.EmployeeSin)" readonly>
                         </div>
                     </div>
-
                 </div>
                 <br />
                 <div>
                     <button class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.EmployeeId">Edit</button>
-                    <button class="btn btn-primary" asp-action="Index" asp-route-id="@Model.EmployeeId">Back to List</button>
+                    <button class="btn btn-outline-secondary" asp-action="Index" asp-route-id="@Model.EmployeeId">Back to List</button>
                 </div>
             </form>
         </div>
