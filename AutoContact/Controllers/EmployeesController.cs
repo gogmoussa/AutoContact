@@ -77,7 +77,7 @@ namespace AutoContact.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EmployeeId,FirstName,LastName,AddressId,Email,EmployeeSin,Manager,HireDate,TerminationDate,TerminationReason,HashPass,HashSalt")] Employee employee)
+        public async Task<IActionResult> Create([Bind("EmployeeId,FirstName,LastName,AddressId,Email,PhoneNum,EmployeeSin,Manager,HireDate,TerminationDate,TerminationReason,HashPass,HashSalt")] Employee employee)
         {
             if (ModelState.IsValid)
             {
@@ -111,7 +111,7 @@ namespace AutoContact.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("EmployeeId,FirstName,LastName,AddressId,Email,EmployeeSin,Manager,HireDate,TerminationDate,TerminationReason,HashPass,HashSalt")] Employee employee)
+        public async Task<IActionResult> Edit(long id, [Bind("EmployeeId,FirstName,LastName,AddressId,Email,PhoneNum,EmployeeSin,Manager,HireDate,TerminationDate,TerminationReason,HashPass,HashSalt")] Employee employee)
         {
             if (id != employee.EmployeeId)
             {
