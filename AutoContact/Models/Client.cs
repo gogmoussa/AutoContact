@@ -22,6 +22,7 @@ namespace AutoContact.Models
         public string HashPass { get; set; }
         public string HashSalt { get; set; }
         public string Email { get; set; }
+        public string PhoneNum { get; set; }
 
         public virtual Address Address { get; set; }
         public virtual ICollection<AccessLevel> AccessLevels { get; set; }
