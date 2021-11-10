@@ -11,6 +11,7 @@ namespace AutoContact.Models
         {
             Clients = new HashSet<Client>();
             Employees = new HashSet<Employee>();
+            Vendors = new HashSet<Vendor>();
         }
 
         public long AddressId { get; set; }
@@ -23,5 +24,6 @@ namespace AutoContact.Models
 
         public virtual ICollection<Client> Clients { get; set; }
         public virtual ICollection<Employee> Employees { get; set; }
+        public virtual ICollection<Vendor> Vendors { get; set; }
     }
 }

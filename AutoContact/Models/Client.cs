@@ -10,7 +10,6 @@ namespace AutoContact.Models
         public Client()
         {
             AccessLevels = new HashSet<AccessLevel>();
-            Phones = new HashSet<Phone>();
         }
 
         public long ClientId { get; set; }
@@ -26,6 +25,5 @@ namespace AutoContact.Models
 
         public virtual Address Address { get; set; }
         public virtual ICollection<AccessLevel> AccessLevels { get; set; }
-        public virtual ICollection<Phone> Phones { get; set; }
     }
 }
