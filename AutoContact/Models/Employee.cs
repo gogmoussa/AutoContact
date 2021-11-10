@@ -13,7 +13,6 @@ namespace AutoContact.Models
             Departments = new HashSet<Department>();
             InverseManagerNavigation = new HashSet<Employee>();
             Invoices = new HashSet<Invoice>();
-            Phones = new HashSet<Phone>();
         }
 
         public long EmployeeId { get; set; }
@@ -36,6 +35,5 @@ namespace AutoContact.Models
         public virtual ICollection<Department> Departments { get; set; }
         public virtual ICollection<Employee> InverseManagerNavigation { get; set; }
         public virtual ICollection<Invoice> Invoices { get; set; }
-        public virtual ICollection<Phone> Phones { get; set; }
     }
 }
