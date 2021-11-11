@@ -191,18 +191,6 @@ namespace AutoContact.Models
                     .HasConstraintName("FK_CarClient_Client");
             });
 
-            modelBuilder.Entity<Category>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToTable("Category");
-
-                entity.Property(e => e.CategoryName)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .HasColumnName("Category");
-            });
-
             modelBuilder.Entity<Client>(entity =>
             {
                 entity.ToTable("Client");
@@ -424,10 +412,23 @@ namespace AutoContact.Models
 
                 entity.HasOne(d => d.Category)
                     .WithMany(p => p.Parts)
-                    .HasForeignKey(d => d.CategoryId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Part_Category");
+                     .HasForeignKey(d => d.CategoryId)
+                     .OnDelete(DeleteBehavior.ClientSetNull)
+                     .HasConstraintName("FK_Part_Category");
 
+            });
+
+            modelBuilder.Entity<Category>(entity =>
+            {
+                entity.ToTable("Category");
+
+                entity.Property(e => e.CategoryId).ValueGeneratedNever();
+
+                entity.Property(e => e.CategoryName)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnName("Category")
+                    ;
             });
 
             modelBuilder.Entity<PurchaseOrder>(entity =>
