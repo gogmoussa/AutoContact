@@ -420,8 +420,6 @@ namespace AutoContact.Models
 
             modelBuilder.Entity<Category>(entity =>
             {
-                //entity.HasNoKey();
-
                 entity.ToTable("Category");
 
                 entity.Property(e => e.CategoryId).ValueGeneratedNever();
