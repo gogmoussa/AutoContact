@@ -10,22 +10,23 @@ using AutoContact.Helpers;
 
 namespace AutoContact.Controllers
 {
-    public class PartController : Controller
+    public class VendorsController : Controller
     {
         private readonly AutoContactContext _context;
 
-        public PartController(AutoContactContext context)
+        public VendorsController(AutoContactContext context)
         {
             _context = context;
         }
 
-        // GET: Parts 
+        // GET: Vendors
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Parts.ToListAsync());
+            var autoContactContext = _context.Vendors.Include(v => v.Address);
+            return View(await autoContactContext.ToListAsync());
         }
 
-        // GET: Parts/Details/5
+        // GET: Vendors/Details/5
         public async Task<IActionResult> Details(long? id)
         {
             if (id == null)
@@ -33,39 +34,40 @@ namespace AutoContact.Controllers
                 return NotFound();
             }
 
-            var part = await _context.Parts
-                .FirstOrDefaultAsync(m => m.PartId == id);
-            if (part == null)
+            var vendor = await _context.Vendors
+                .Include(e => e.Address)
+                .FirstOrDefaultAsync(m => m.VendorId == id);
+            if (vendor == null)
             {
                 return NotFound();
             }
 
-            return View(part);
+            return View(vendor);
         }
 
-        // GET: Parts/Create
+        // GET: Vendors/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Parts/Create
+        // POST: Vendors/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PartId,Name,Description,VendorId,CostPrice,ReorderQty,EconomicOrderQty,QtyOnHand,QtyOnOrder,CategoryId")] Part part)
+        public async Task<IActionResult> Create([Bind("VendorId,Name,AddressId,Phone,Email,MainContact,Type")] Vendor vendor)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(part);
+                _context.Add(vendor);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(part);
+            return View(vendor);
         }
 
-        // GET: Clients/Edit/5
+        // GET: Vendors/Edit/5
         public async Task<IActionResult> Edit(long? id)
         {
             if (id == null)
@@ -73,22 +75,22 @@ namespace AutoContact.Controllers
                 return NotFound();
             }
 
-            var part = await _context.Parts.FindAsync(id);
-            if (part == null)
+            var vendor = await _context.Vendors.Include(x => x.Address).FirstOrDefaultAsync(e => e.VendorId == id);
+            if (vendor == null)
             {
                 return NotFound();
             }
-            return View(part);
+            return View(vendor);
         }
 
-        // POST: Clients/Edit/5
+        // POST: Vendors/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("PartId,Name,Description,VendorId,CostPrice,ReorderQty,EconomicOrderQty,QtyOnHand,QtyOnOrder,CategoryId")] Part part)
+        public async Task<IActionResult> Edit(long id, [Bind("VendorId,Name,AddressId,Phone,Email,MainContact,Type")] Vendor vendor)
         {
-            if (id != part.PartId)
+            if (id != vendor.VendorId)
             {
                 return NotFound();
             }
@@ -97,12 +99,12 @@ namespace AutoContact.Controllers
             {
                 try
                 {
-                    _context.Update(part);
+                    _context.Update(vendor);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PartExists(part.PartId))
+                    if (!VendorExists(vendor.VendorId))
                     {
                         return NotFound();
                     }
@@ -113,10 +115,10 @@ namespace AutoContact.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(part);
+            return View(vendor);
         }
 
-        // GET: Clients/Delete/5
+        // GET: Vendors/Delete/5
         public async Task<IActionResult> Delete(long? id)
         {
             if (id == null)
@@ -124,31 +126,31 @@ namespace AutoContact.Controllers
                 return NotFound();
             }
 
-            var part = await _context.Parts
-                .FirstOrDefaultAsync(m => m.PartId == id);
-            if (part == null)
+            var vendor = await _context.Vendors
+                .Include(e => e.Address)
+                .FirstOrDefaultAsync(m => m.VendorId == id);
+            if (vendor == null)
             {
                 return NotFound();
             }
 
-            return View(part);
+            return View(vendor);
         }
 
-        // POST: Clients/Delete/5
+        // POST: Vendors/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
         {
-            var part = await _context.Parts.FindAsync(id);
-            _context.Parts.Remove(part);
+            var vendor = await _context.Vendors.FindAsync(id);
+            _context.Vendors.Remove(vendor);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PartExists(long id)
+        private bool VendorExists(long id)
         {
-            return _context.Parts.Any(e => e.PartId == id);
-        }
+            return _context.Vendors.Any(e => e.VendorId == id);
+        }     
     }
 }
-
