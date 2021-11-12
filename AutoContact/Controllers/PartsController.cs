@@ -26,6 +26,13 @@ namespace AutoContact.Controllers
             return View(await autoContactContext.ToListAsync());
         }
 
+        // GET: Parts
+        public async Task<IActionResult> MechanicIndex()
+        {
+            var autoContactContext = _context.Parts.Include(p => p.Vendor).Include(p => p.Category);
+            return View(await autoContactContext.ToListAsync());
+        }
+
         // GET: Parts/Details/5
         public async Task<IActionResult> Details(long? id)
         {
