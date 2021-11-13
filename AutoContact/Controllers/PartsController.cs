@@ -53,6 +53,26 @@ namespace AutoContact.Controllers
             return View(part);
         }
 
+        // GET: Parts/Details/5
+        public async Task<IActionResult> MechanicDetails(long? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var part = await _context.Parts
+                .Include(e => e.Vendor)
+                .Include(e => e.Category)
+                .FirstOrDefaultAsync(m => m.PartId == id);
+            if (part == null)
+            {
+                return NotFound();
+            }
+
+            return View(part);
+        }
+
         // GET: Parts/Create
         public IActionResult Create()
         {
