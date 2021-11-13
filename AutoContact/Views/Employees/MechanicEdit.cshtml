@@ -116,43 +116,48 @@
                                     <span asp-validation-for="Email" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
+                                    <label asp-for="PhoneNum" class="control-label"></label>
+                                    <input asp-for="PhoneNum" class="form-control" />
+                                    <span asp-validation-for="PhoneNum" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
                                     <label asp-for="EmployeeSin" class="control-label"></label>
                                     <input asp-for="EmployeeSin" class="form-control" />
                                     <span asp-validation-for="EmployeeSin" class="text-danger"></span>
                                 </div>
                                 <!-- THESE FIELDS SHOULD ONLY BE MODIFIED BY AN ADMIN
-                                <div class="form-group">
-                                    <label asp-for="Manager" class="control-label"></label>
-                                    <input asp-for="Manager" class="form-control" />
-                                    <span asp-validation-for="Manager" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="HireDate" class="control-label"></label>
-                                    <input asp-for="HireDate" class="form-control" />
-                                    <span asp-validation-for="HireDate" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="TerminationDate" class="control-label"></label>
-                                    <input asp-for="TerminationDate" class="form-control" />
-                                    <span asp-validation-for="TerminationDate" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="TerminationReason" class="control-label"></label>
-                                    <input asp-for="TerminationReason" class="form-control" />
-                                    <span asp-validation-for="TerminationReason" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="HashPass" class="control-label"></label>
-                                    <input asp-for="HashPass" class="form-control" />
-                                    <span asp-validation-for="HashPass" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="HashSalt" class="control-label"></label>
-                                    <input asp-for="HashSalt" class="form-control" />
-                                    <span asp-validation-for="HashSalt" class="text-danger"></span>
-                                </div>
-                                    -->
-                                <br/>
+    <div class="form-group">
+        <label asp-for="Manager" class="control-label"></label>
+        <input asp-for="Manager" class="form-control" />
+        <span asp-validation-for="Manager" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="HireDate" class="control-label"></label>
+        <input asp-for="HireDate" class="form-control" />
+        <span asp-validation-for="HireDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TerminationDate" class="control-label"></label>
+        <input asp-for="TerminationDate" class="form-control" />
+        <span asp-validation-for="TerminationDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TerminationReason" class="control-label"></label>
+        <input asp-for="TerminationReason" class="form-control" />
+        <span asp-validation-for="TerminationReason" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="HashPass" class="control-label"></label>
+        <input asp-for="HashPass" class="form-control" />
+        <span asp-validation-for="HashPass" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="HashSalt" class="control-label"></label>
+        <input asp-for="HashSalt" class="form-control" />
+        <span asp-validation-for="HashSalt" class="text-danger"></span>
+    </div>
+        -->
+                                <br />
                                 <div class="form-group">
                                     <div class="row justify-content-center">
                                         <input type="submit" value="Save" class="btn btn-primary" />&nbsp;&nbsp;&nbsp;<a asp-action="MechanicDetails" asp-route-id="1" class="btn btn-primary">Back to Profile</a>
