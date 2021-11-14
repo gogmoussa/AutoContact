@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -16,6 +17,7 @@ namespace AutoContact.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string DriverLicence { get; set; }
+        [DataType(DataType.Date)]
         public DateTime? BirthDate { get; set; }
         public long AddressId { get; set; }
         public string HashPass { get; set; }

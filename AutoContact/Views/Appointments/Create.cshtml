@@ -130,24 +130,15 @@
                                 </div>
                                 <div class="form-row p-4 position-relative">
                                     <label asp-for="AppointmentStartTime" class="text-inverse font-12 text-uppercase">Booking Date</label>
-                                    <div class="input-group date">
-                                        <input asp-for="AppointmentStartTime" type="datetime" class="border-0 p-0 font-14 form-control" id="datepicker" />
-                                        <label class="m-2" for="datepicker">
-                                            <i class="bi bi-calendar"></i>
-                                        </label>
+                                    <div class="input-group">
+                                        <input asp-for="AppointmentStartTime" type="date" class="border-0 p-0 font-14 form-control" id="bookingDate" />
                                         <span asp-validation-for="AppointmentStartTime" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="form-row border-bottom p-4 position-relative">
                                     <label class="text-inverse font-12 text-uppercase">Booking Time</label>
-                                    <div class='input-group'>
-                                        <select class="border-0 p-0 font-14 form-control" id="seltime">
-                                            <option>1:00</option>
-                                            <option>2:00</option>
-                                            <option>3:00</option>
-                                            <option>4:00</option>
-                                        </select>
-                                    </div>
+                                    <input asp-for="AppointmentStartTime" type="time" class="border-0 p-0 font-14 form-control" id="bookingTime" />
+                                    <span asp-validation-for="AppointmentStartTime" class="text-danger"></span>
                                 </div>
                                 <div class="form-row border-bottom p-4">
                                     <label class="text-inverse font-12 text-uppercase">Message</label>
@@ -165,7 +156,6 @@
     </div>
 </body>
 </html>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
