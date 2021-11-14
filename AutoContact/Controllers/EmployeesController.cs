@@ -111,7 +111,7 @@ namespace AutoContact.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("EmployeeId,FirstName,LastName,AddressId,Email,PhoneNum,EmployeeSin,Manager,HireDate,TerminationDate,TerminationReason,HashPass,HashSalt")] Employee employee)
+        public async Task<IActionResult> Edit(long id, [Bind("EmployeeId,FirstName,LastName,AddressId,Email,PhoneNum,EmployeeSin,Manager,HireDate,TerminationDate,TerminationReason,HashPass,HashSalt")] Employee employee, [Bind("AddressId,StreetNum,UnitNum,StreetName,CityName,ProvinceName,Country")] Address address)
         {
             if (id != employee.EmployeeId)
             {
@@ -125,6 +125,12 @@ namespace AutoContact.Controllers
                     employee.HashSalt = Crypto.generateSalt();
                     employee.HashPass = Crypto.hashPassword(employee.HashPass, employee.HashSalt);
                     _context.Update(employee);
+                    //await _context.SaveChangesAsync();
+
+                    if (address.UnitNum == null)
+                        address.UnitNum = " ";
+
+                    _context.Update(address);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -151,7 +157,7 @@ namespace AutoContact.Controllers
                 return NotFound();
             }
 
-            var employee = await _context.Employees.FindAsync(id);
+            var employee = await _context.Employees.Include(x => x.Address).FirstOrDefaultAsync(e => e.EmployeeId == id);
             if (employee == null)
             {
                 return NotFound();
@@ -164,7 +170,7 @@ namespace AutoContact.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> MechanicEdit(long id, [Bind("EmployeeId,FirstName,LastName,AddressId,Email,PhoneNum,EmployeeSin,Manager,HireDate,TerminationDate,TerminationReason,HashPass,HashSalt")] Employee employee)
+        public async Task<IActionResult> MechanicEdit(long id, [Bind("EmployeeId,FirstName,LastName,AddressId,Email,PhoneNum,EmployeeSin,Manager,HireDate,TerminationDate,TerminationReason,HashPass,HashSalt")] Employee employee, [Bind("AddressId,StreetNum,UnitNum,StreetName,CityName,ProvinceName,Country")] Address address)
         {
             if (id != employee.EmployeeId)
             {
@@ -178,6 +184,12 @@ namespace AutoContact.Controllers
                     employee.HashSalt = Crypto.generateSalt();
                     employee.HashPass = Crypto.hashPassword(employee.HashPass, employee.HashSalt);
                     _context.Update(employee);
+                    //await _context.SaveChangesAsync();
+
+                    if (address.UnitNum == null)
+                        address.UnitNum = " ";
+
+                    _context.Update(address);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
