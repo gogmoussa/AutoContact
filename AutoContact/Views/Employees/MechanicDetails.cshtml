@@ -93,7 +93,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="firstName">First Name</label>
-                            <input type="text" class="form-control" id="firstName" placeholder=" @Html.DisplayFor(model => model.FirstName)" readonly>
+                            <input type="text" class="form-control" id="firstName" placeholder="@Html.DisplayFor(model => model.FirstName)" readonly>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="lastName">Last Name</label>
@@ -112,38 +112,37 @@
                     </div>
                     <hr class="my-4" />
 
-                    <p>We need access to address fields, currently only pulling in address id</p>
                     <!-- Address -->
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="streetNum">Street Number</label>
-                            <input type="text" class="form-control" id="streetNum" placeholder="" readonly>
+                            <input type="text" class="form-control" id="streetNum" placeholder="@Html.DisplayFor(model => model.Address.StreetNum)" readonly>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="unitNum">Unit Number</label>
-                            <input type="text" class="form-control" id="unitNum" placeholder="" readonly>
+                            <input type="text" class="form-control" id="unitNum" placeholder="@Html.DisplayFor(model => model.Address.UnitNum)" readonly>
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="streetName">Street Name</label>
-                            <input type="text" class="form-control" id="streetName" placeholder="" readonly>
+                            <input type="text" class="form-control" id="streetName" placeholder="@Html.DisplayFor(model => model.Address.StreetName)" readonly>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="cityName">City Name</label>
-                            <input type="text" class="form-control" id="cityName" placeholder="" readonly>
+                            <input type="text" class="form-control" id="cityName" placeholder="@Html.DisplayFor(model => model.Address.CityName)" readonly>
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="province">State/Province/Territory</label>
-                            <input type="text" class="form-control" id="province" placeholder="" readonly>
+                            <input type="text" class="form-control" id="province" placeholder="@Html.DisplayFor(model => model.Address.ProvinceName)" readonly>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="country">Country</label>
-                            <input type="text" class="form-control" id="province" placeholder="" readonly>
+                            <input type="text" class="form-control" id="province" placeholder="@Html.DisplayFor(model => model.Address.Country)" readonly>
                         </div>
                     </div>
 
