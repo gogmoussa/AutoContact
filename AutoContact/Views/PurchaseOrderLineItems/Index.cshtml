@@ -1,0 +1,71 @@
+﻿@model IEnumerable<AutoContact.Models.PurchaseOrderLineItem>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <style>
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <h1>Purchase Order Line Items</h1>
+
+        <a type="button" class="btn btn-outline-primary mt-2 mb-2" asp-action="Create"><i class="bi bi-plus"></i> New Purchase Order Line Items</a>
+        <table class="table text-center">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PurchaseOrderLineItemId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PurchaseOrder)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Part)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Qty)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Price)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PurchaseOrderLineItemId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PurchaseOrderId)
+                    </td>
+                    <td>
+                        $@Html.DisplayFor(modelItem => item.Part.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Qty)
+                    </td>
+                    <td>
+                        $@Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.PurchaseOrderLineItemId"><i class="bi bi-pencil-square"></i></a>
+                        <a asp-action="Delete" asp-route-id="@item.PurchaseOrderLineItemId"><i class="bi bi-trash"></i></a>
+                        <a asp-action="Details" asp-route-id="@item.PurchaseOrderLineItemId"><i class="bi bi-three-dots-vertical"></i></a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
