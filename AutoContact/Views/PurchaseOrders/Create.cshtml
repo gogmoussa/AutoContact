@@ -3,50 +3,127 @@
 @{
     ViewData["Title"] = "Create";
 }
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <style>
+        body {
+            color: #8e9194;
+            background-color: #f4f6f9;
+        }
 
-<h1>Create</h1>
+        .avatar-xl img {
+            width: 110px;
+        }
 
-<h4>Purchase Order</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="PurchaseOrderId" class="control-label"></label>
-                <input asp-for="PurchaseOrderId" class="form-control" />
-                <span asp-validation-for="PurchaseOrderId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="VendorId" class="control-label"></label>
-                <select asp-for="VendorId" class="form-control" asp-items="ViewBag.VendorId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Amount" class="control-label"></label>
-                <input asp-for="Amount" class="form-control" />
-                <span asp-validation-for="Amount" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PODate" class="control-label"></label>
-                <input asp-for="PODate" class="form-control" />
-                <span asp-validation-for="PODate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CancelledDate" class="control-label"></label>
-                <input asp-for="CancelledDate" class="form-control" />
-                <span asp-validation-for="CancelledDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        .rounded-circle {
+            border-radius: 50% !important;
+        }
+
+        img {
+            vertical-align: middle;
+            border-style: none;
+        }
+
+        .text-muted {
+            color: #aeb0b4 !important;
+        }
+
+        .text-muted {
+            font-weight: 300;
+        }
+
+        .form-control {
+            display: block;
+            width: 100%;
+            height: calc(1.5em + 0.75rem + 2px);
+            padding: 0.375rem 0.75rem;
+            font-size: 0.875rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #4d5154;
+            background-color: #ffffff;
+            background-clip: padding-box;
+            border: 1px solid #eef0f3;
+            border-radius: 0.25rem;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+                        <div class="row justify-content-center">
+                            <div class="col-md-4">
+                                </br>
+                                </br>
+                                <h1>Create</h1>
+                                </br>
+                                <h2>Purchase Order</h2>
+                                </br>
+                                <hr />
+                                <div class="row">
+                                    <div class="col-lg">
+                                        <form asp-action="Create">
+                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                            <input type="hidden" asp-for="PurchaseOrderId" />
+                                            <!--<div class="form-group">
+        <label asp-for="PurchaseOrderId" class="control-label"></label>
+        <input asp-for="PurchaseOrderId" class="form-control" />
+    </div> -->
+                                            <div class="form-group">
+                                                <label asp-for="VendorId" class="control-label">Vendor</label>
+                                                <!--<select asp-for="VendorId" class="form-control" asp-items="ViewBag.VendorId"></select>-->
+                                                @Html.DropDownList("VendorId", (IEnumerable<SelectListItem>)ViewBag.Vendors, "Select A Vendor", new { @class = "form-control" })
+                                            </div>
+                                            <hr />
+                                            <div class="form-group">
+                                                <label asp-for="PODate" class="control-label">Order Date</label>
+                                                <input asp-for="PODate" class="form-control" />
+                                                <span asp-validation-for="PODate" class="text-danger"></span>
+                                            </div>
+                                            <hr />
+                                            <div class="form-group">
+                                                <label asp-for="CancelledDate" class="control-label">Cancellation Date</label>
+                                                <input asp-for="CancelledDate" class="form-control" />
+                                                <span asp-validation-for="CancelledDate" class="text-danger"></span>
+                                            </div>
+                                            <hr />
+
+                                            <!--<div>
+        <a asp-controller="PurchaseOrderLineItems" asp-action="Create" class="btn btn-primary btn-block">Add Items</a>
     </div>
-</div>
+    </br>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <div>
+        <a asp-contoller="PurchaseOrderLineItems" asp-action="Index" class="btn btn-primary btn-block">View Items</a>
+    </div>
+    </br>-->
+                                            <div class="form-group">
+                                                <input type="submit" value="Create Purchase Order" class="btn btn-primary btn-block" />
+                                                </br>
+                                                <a asp-action="Index" class="btn btn-primary btn-block">View Past Orders</a>
+                                            </div>
+                                            </br>
+                                            <!--<div>
+                                                    <a asp-action="Index" class="btn btn-primary btn-block">View Previous Orders</a>
+                                                </div>
+                                                -->
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    </body>
+    </html>
+
+
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

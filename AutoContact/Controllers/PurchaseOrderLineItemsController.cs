@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AutoContact.Models;
 using AutoContact.Helpers;
+using System.Collections;
 
 namespace AutoContact.Controllers
 {
@@ -49,6 +50,8 @@ namespace AutoContact.Controllers
         // GET: POLineItems/Create
         public IActionResult Create()
         {
+            ViewBag.Parts = new SelectList(_context.Parts, "PartId", "Name");
+
             return View();
         }
 

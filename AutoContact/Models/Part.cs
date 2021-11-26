@@ -22,7 +22,6 @@ namespace AutoContact.Models
         public int? QtyOnHand { get; set; }
         public int? QtyOnOrder { get; set; }
         public long CategoryId { get; set; }
-
         public virtual Vendor Vendor { get; set; }
         public virtual Category Category { get; set; }
         public virtual ICollection<PurchaseOrderLineItem> PurchaseOrderLineItems { get; set; }
