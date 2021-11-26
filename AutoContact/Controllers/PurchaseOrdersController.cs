@@ -23,6 +23,7 @@ namespace AutoContact.Controllers
         public async Task<IActionResult> Index()
         {
             var autoContactContext = _context.PurchaseOrders.Include(p => p.Vendor);
+
             return View(await autoContactContext.ToListAsync());
         }
 
@@ -45,9 +46,13 @@ namespace AutoContact.Controllers
             return View(purchaseOrder);
         }
 
+
+    
         // GET: PurchaseOrders/Create
         public IActionResult Create()
         {
+            ViewBag.Vendors = new SelectList(_context.Vendors, "VendorId", "Name");
+
             return View();
         }
 
@@ -62,8 +67,31 @@ namespace AutoContact.Controllers
             {
                 _context.Add(purchaseOrder);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                TempData["CurrentPurchaseOrderId"] = purchaseOrder.PurchaseOrderId.ToString();
+
+                var items = _context.PurchaseOrderLineItems.ToList();
+                List<PurchaseOrderLineItem> poItems = new List<PurchaseOrderLineItem>();
+                poItems.Add(new PurchaseOrderLineItem());
+                List<Part> poParts = new List<Part>();
+                poParts.Add(new Part());
+
+                foreach (var item in items)
+                {
+                    if (purchaseOrder.PurchaseOrderId == item.PurchaseOrderId)
+                    {
+                        poItems.Add(item);
+                        poParts.Add(item.Part);
+                    }
+                }
+
+                ViewBag.PurchaseOrderLineItems = new SelectList(poItems, "PurchaseOrderLineItemId");
+                ViewBag.Parts = new SelectList(poParts, "PartId", "Name");
+
+                long id = purchaseOrder.PurchaseOrderId;
+                return RedirectToAction("Details", new { id = purchaseOrder.PurchaseOrderId });
             }
+
             return View(purchaseOrder);
         }
 
@@ -117,6 +145,8 @@ namespace AutoContact.Controllers
             }
             return View(purchaseOrder);
         }
+
+
 
         // GET: PurchaseOrders/Delete/5
         public async Task<IActionResult> Delete(long? id)
