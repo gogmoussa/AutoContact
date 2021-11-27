@@ -16,10 +16,16 @@
     <div class="container-fluid">
         <h1>Appointments</h1>
 
-        <a type="button" class="btn btn-outline-primary mt-2 mb-2" asp-action="Create"><i class="bi bi-plus"></i> New Appointment</a>
+        <a type="button" class="btn btn-outline-primary mt-2 mb-2" asp-action="Create"><i class="bi bi-plus"></i>New Appointment</a>
         <table class="table text-center">
             <thead>
                 <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ClientId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AppointmentDate)
+                    </th>
                     <th>
                         @Html.DisplayNameFor(model => model.AppointmentStartTime)
                     </th>
@@ -28,9 +34,6 @@
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.BookingEmployeeId)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.InvoiceId)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Car)
@@ -43,6 +46,12 @@
                 {
                     <tr>
                         <td>
+                            @Html.DisplayFor(modelItem => item.ClientId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AppointmentDate)
+                        </td>
+                        <td>
                             @Html.DisplayFor(modelItem => item.AppointmentStartTime)
                         </td>
                         <td>
@@ -52,10 +61,7 @@
                             @Html.DisplayFor(modelItem => item.BookingEmployeeId)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.InvoiceId)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Car.Colour)
+                            @Html.DisplayFor(modelItem => item.Car.Model)
                         </td>
                         <td>
                             <a asp-action="Edit" asp-route-id="@item.AppointmentId"><i class="bi bi-pencil-square"></i></a>

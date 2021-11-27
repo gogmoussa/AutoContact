@@ -50,14 +50,6 @@
                     <h1 class="mt-4">New Client</h1>
 
                     <hr class="my-4" />
-
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label asp-for="ClientId"></label>
-                            <input asp-for="ClientId" class="form-control" />
-                            <span asp-validation-for="ClientId" class="text-danger"></span>
-                        </div>
-                    </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label asp-for="FirstName"></label>
@@ -90,15 +82,6 @@
 
                     <hr class="my-4" />
 
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label asp-for="AddressId"></label>
-                            <input asp-for="AddressId" class="form-control" />
-                            <span asp-validation-for="AddressId" class="text-danger"></span>
-                        </div>
-                    </div>
-
-                    <p>We need access to address fields, currently only pulling in address id</p>
                     <!-- Address -->
                     <div class="form-row">
                         <div class="form-group col-md-6">
@@ -107,17 +90,17 @@
                             <span asp-validation-for="Address.StreetNum" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-6">
-                            <label asp-for="Address.UnitNum"></label>
-                            <input asp-for="Address.UnitNum" class="form-control" />
-                            <span asp-validation-for="Address.UnitNum" class="text-danger"></span>
+                            <label asp-for="Address.StreetName"></label>
+                            <input asp-for="Address.StreetName" class="form-control" />
+                            <span asp-validation-for="Address.StreetName" class="text-danger"></span>
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label asp-for="Address.StreetName"></label>
-                            <input asp-for="Address.StreetName" class="form-control" />
-                            <span asp-validation-for="Address.StreetName" class="text-danger"></span>
+                            <label asp-for="Address.UnitNum"></label>
+                            <input asp-for="Address.UnitNum" class="form-control" />
+                            <span asp-validation-for="Address.UnitNum" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-6">
                             <label asp-for="Address.CityName"></label>
@@ -144,13 +127,6 @@
                         <label asp-for="DriverLicence"></label>
                         <input asp-for="DriverLicence" class="form-control" />
                         <span asp-validation-for="DriverLicence" class="text-danger"></span>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label asp-for="HashPass"></label>
-                            <input asp-for="HashPass" class="form-control" />
-                            <span asp-validation-for="HashPass" class="text-danger"></span>
-                        </div>
                     </div>
 
                 </div>

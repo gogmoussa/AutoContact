@@ -47,7 +47,7 @@ namespace AutoContact.Controllers
         // GET: Appointments/Create
         public IActionResult Create()
         {
-            ViewData["CarId"] = new SelectList(_context.Cars, "CarId", "Colour");
+            ViewData["CarId"] = new SelectList(_context.Cars, "CarId", "Model");
             return View();
         }
 
@@ -56,16 +56,20 @@ namespace AutoContact.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AppointmentId,AppointmentStartTime,BookedAtTime,BookingEmployeeId,InvoiceId,CarId")] Appointment appointment)
+        public async Task<IActionResult> Create([Bind("AppointmentId,AppointmentDate,AppointmentStartTime,BookedAtTime,Message,BookingEmployeeId,ClientId,CarId")] Appointment appointment, [Bind("CarId,Vin,Make,Model,Colour,Odometer")] Car car)
         {
             if (ModelState.IsValid)
             {
+                car.Vin ??= "";
+                _context.Add(car);
                 appointment.BookedAtTime = DateTime.Now;
+                appointment.CarId = car.CarId;
                 _context.Add(appointment);
+                
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CarId"] = new SelectList(_context.Cars, "CarId", "Colour", appointment.CarId);
+            ViewData["CarId"] = new SelectList(_context.Cars, "CarId", "Model", appointment.CarId);
             return View(appointment);
         }
 
@@ -77,12 +81,12 @@ namespace AutoContact.Controllers
                 return NotFound();
             }
 
-            var appointment = await _context.Appointments.FindAsync(id);
+            var appointment = await _context.Appointments.Include(a => a.Car).FirstOrDefaultAsync(a => a.AppointmentId == id);
             if (appointment == null)
             {
                 return NotFound();
             }
-            ViewData["CarId"] = new SelectList(_context.Cars, "CarId", "Colour", appointment.CarId);
+            ViewData["CarId"] = new SelectList(_context.Cars, "CarId", "Model", appointment.CarId);
             return View(appointment);
         }
 
@@ -91,7 +95,7 @@ namespace AutoContact.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("AppointmentId,AppointmentStartTime,BookedAtTime,BookingEmployeeId,InvoiceId,CarId")] Appointment appointment)
+        public async Task<IActionResult> Edit(long id, [Bind("AppointmentId,Appointme,AppointmentStartTime,BookedAtTime,Message,BoontDatekingEmployeeId,ClientId,CarId")] Appointment appointment, [Bind("CarId,Vin,Make,Model,Colour,Odometer")] Car car)
         {
             if (id != appointment.AppointmentId)
             {
@@ -102,7 +106,9 @@ namespace AutoContact.Controllers
             {
                 try
                 {
+                    _context.Update(car);                    
                     _context.Update(appointment);
+
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -118,7 +124,7 @@ namespace AutoContact.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CarId"] = new SelectList(_context.Cars, "CarId", "Colour", appointment.CarId);
+            ViewData["CarId"] = new SelectList(_context.Cars, "CarId", "Model", appointment.CarId);
             return View(appointment);
         }
 

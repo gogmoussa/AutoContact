@@ -22,15 +22,7 @@ namespace AutoContact.Controllers
         // GET: Clients
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Clients.ToListAsync());
-        }
-
-        // GET: Clients
-        public async Task<IActionResult> Mechanic()
-        {
-            List<Client> clList = await _context.Clients.ToListAsync();
-
-            return View(new Clients(clList));
+            return View(await _context.Clients.Include(c => c.Address).ToListAsync());
         }
 
         // GET: Clients/Details/5
@@ -41,7 +33,7 @@ namespace AutoContact.Controllers
                 return NotFound();
             }
 
-            var client = await _context.Clients
+            var client = await _context.Clients.Include(c => c.Address)
                 .FirstOrDefaultAsync(m => m.ClientId == id);
             if (client == null)
             {
@@ -83,7 +75,7 @@ namespace AutoContact.Controllers
                 return NotFound();
             }
 
-            var client = await _context.Clients.FindAsync(id);
+            var client = await _context.Clients.Include(c => c.Address).FirstOrDefaultAsync(c => c.ClientId == id);
             if (client == null)
             {
                 return NotFound();
@@ -96,7 +88,7 @@ namespace AutoContact.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("ClientId,FirstName,LastName,DriverLicence,BirthDate,AddressId,Email,PhoneNum,HashPass,HashSalt")] Client client)
+        public async Task<IActionResult> Edit(long id, [Bind("ClientId,FirstName,LastName,DriverLicence,BirthDate,AddressId,Email,PhoneNum,HashPass,HashSalt")] Client client, [Bind("AddressId,StreetNum,UnitNum,StreetName,CityName,ProvinceName,Country")] Address address)
         {
             if (id != client.ClientId)
             {
@@ -110,6 +102,10 @@ namespace AutoContact.Controllers
                     client.HashSalt = Crypto.generateSalt();
                     client.HashPass = Crypto.hashPassword(client.HashPass, client.HashSalt);
                     _context.Update(client);
+
+                    address.UnitNum ??= "";
+                    _context.Update(address);
+
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -136,7 +132,7 @@ namespace AutoContact.Controllers
                 return NotFound();
             }
 
-            var client = await _context.Clients
+            var client = await _context.Clients.Include(c => c.Address)
                 .FirstOrDefaultAsync(m => m.ClientId == id);
             if (client == null)
             {
@@ -159,7 +155,7 @@ namespace AutoContact.Controllers
 
         private bool ClientExists(long id)
         {
-            return _context.Clients.Any(e => e.ClientId == id);
+            return _context.Clients.Any(c => c.ClientId == id);
         }
     }
 }

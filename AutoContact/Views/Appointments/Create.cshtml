@@ -1,7 +1,7 @@
 ﻿@model AutoContact.Models.Appointment
-
 @{
     ViewData["Title"] = "Schedule Appointment";
+
 }
 
 <!DOCTYPE html>
@@ -122,27 +122,42 @@
                                 <div class="form-row border-bottom p-4">
                                     <label class="text-inverse font-12 text-uppercase">Select Location</label>
                                     <select class="border-0 p-0 font-14 form-control" id="sellocation">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
+                                        <option>London</option>
+                                        <option>Toronto</option>
+                                        <option>Waterloo</option>
+                                        <option>Ottawa</option>
                                     </select>
                                 </div>
                                 <div class="form-row p-4 position-relative">
-                                    <label asp-for="AppointmentStartTime" class="text-inverse font-12 text-uppercase">Booking Date</label>
-                                    <div class="input-group">
-                                        <input asp-for="AppointmentStartTime" type="date" class="border-0 p-0 font-14 form-control" id="bookingDate" />
-                                        <span asp-validation-for="AppointmentStartTime" class="text-danger"></span>
-                                    </div>
+                                    <label asp-for="AppointmentDate" class="text-inverse font-12 text-uppercase">Booking Date</label>
+                                    <input asp-for="AppointmentDate" type="date" class="border-0 p-0 font-14 form-control" id="bookingDate" />
+                                    <span asp-validation-for="AppointmentDate" class="text-danger"></span>
                                 </div>
                                 <div class="form-row border-bottom p-4 position-relative">
-                                    <label class="text-inverse font-12 text-uppercase">Booking Time</label>
+                                    <label asp-for="AppointmentStartTime" class="text-inverse font-12 text-uppercase">Booking Time</label>
                                     <input asp-for="AppointmentStartTime" type="time" class="border-0 p-0 font-14 form-control" id="bookingTime" />
                                     <span asp-validation-for="AppointmentStartTime" class="text-danger"></span>
                                 </div>
+                                <div class="form-row border-bottom p-4 position-relative">
+                                    <label asp-for="Car" class="text-inverse font-12 text-uppercase">Car</label>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <input asp-for="Car.Make" type="text" class="border-0 p-0 font-14 form-control" placeholder="Make" />
+                                            <span asp-validation-for="Car.Make" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <input asp-for="Car.Model" type="text" class="border-0 p-0 font-14 form-control" placeholder="Model" />
+                                            <span asp-validation-for="Car.Model" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <input asp-for="Car.Colour" type="text" class="border-0 p-0 font-14 form-control" placeholder="Color" />
+                                            <span asp-validation-for="Car.Colour" asp-validation asp- class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="form-row border-bottom p-4">
-                                    <label class="text-inverse font-12 text-uppercase">Message</label>
-                                    <textarea col="1" row="1" class="border-0 p-0 font-weight-light font-14 form-control" placeholder="Write Down the Message"></textarea>
+                                    <label asp-for="Message" class="text-inverse font-12 text-uppercase">Message</label>
+                                    <textarea asp-for="Message" col="1" row="1" class="border-0 p-0 font-weight-light font-14 form-control" placeholder="Write Down the Message"></textarea>
                                 </div>
                                 <div>
                                     <input type="submit" id="bookbutton" value="Book Yor Appointment Now" class="m-0 border-0 py-4 font-14 font-weight-medium btn btn-danger-gradiant btn-block position-relative rounded-0 text-center text-white text-uppercase" />

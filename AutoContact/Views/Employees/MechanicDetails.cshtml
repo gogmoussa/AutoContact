@@ -71,19 +71,10 @@
                                 <p class="small mb-3"><span class="badge badge-dark">@Html.DisplayFor(model => model.Email)</span></p>
                             </div>
                         </div>
-                        <div class="row mb-4">
-                            <div class="col-md-7">
-                                <!-- Remove? -->
-                                <p class="text-muted">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit nisl ullamcorper, rutrum metus in, congue lectus. In hac habitasse platea dictumst. Cras urna quam, malesuada vitae risus at,
-                                    pretium blandit sapien.
-                                </p>
-                            </div>
-                            <div class="col">
-                                <!-- If we can figure out how to get the address update here??? -->
-                                <p class="small mb-0 text-muted">Nec Urna Suscipit Ltd</p>
-                                <p class="small mb-0 text-muted">P.O. Box 464, 5975 Eget Avenue</p>
-                                <p class="small mb-0 text-muted">(537) 315-1481</p>
+                        <div class="row mb-3">
+                            <div class="col-md-5">
+                                <p class="small mb-0 text-muted">@Html.DisplayFor(model => model.Address.StreetNum) @Html.DisplayFor(model => model.Address.StreetName), @Html.DisplayFor(model => model.Address.CityName), @Html.DisplayFor(model => model.Address.ProvinceName)</p>
+                                <p class="small mb-0 text-muted">@Html.DisplayFor(model => model.PhoneNum)</p>
                             </div>
                         </div>
                     </div>
@@ -119,15 +110,15 @@
                             <input type="text" class="form-control" id="streetNum" placeholder="@Html.DisplayFor(model => model.Address.StreetNum)" readonly>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="unitNum">Unit Number</label>
-                            <input type="text" class="form-control" id="unitNum" placeholder="@Html.DisplayFor(model => model.Address.UnitNum)" readonly>
+                            <label for="streetName">Street Name</label>
+                            <input type="text" class="form-control" id="streetName" placeholder="@Html.DisplayFor(model => model.Address.StreetName)" readonly>
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="streetName">Street Name</label>
-                            <input type="text" class="form-control" id="streetName" placeholder="@Html.DisplayFor(model => model.Address.StreetName)" readonly>
+                            <label for="unitNum">Unit Number</label>
+                            <input type="text" class="form-control" id="unitNum" placeholder="@Html.DisplayFor(model => model.Address.UnitNum)" readonly>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="cityName">City Name</label>

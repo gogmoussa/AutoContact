@@ -70,19 +70,10 @@
                                 <p class="small mb-3"><span class="badge badge-dark">@Html.DisplayFor(model => model.Email)</span></p>
                             </div>
                         </div>
-                        <div class="row mb-4">
-                            <div class="col-md-7">
-                                <!-- Remove? -->
-                                <p class="text-muted">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit nisl ullamcorper, rutrum metus in, congue lectus. In hac habitasse platea dictumst. Cras urna quam, malesuada vitae risus at,
-                                    pretium blandit sapien.
-                                </p>
-                            </div>
-                            <div class="col">
-                                <!-- If we can figure out how to get the address update here??? -->
-                                <p class="small mb-0 text-muted">Nec Urna Suscipit Ltd</p>
-                                <p class="small mb-0 text-muted">P.O. Box 464, 5975 Eget Avenue</p>
-                                <p class="small mb-0 text-muted">(537) 315-1481</p>
+                        <div class="row mb-3">
+                            <div class="col-md-5">
+                                <p class="small mb-0 text-muted">@Html.DisplayFor(model => model.Address.StreetNum) @Html.DisplayFor(model => model.Address.StreetName), @Html.DisplayFor(model => model.Address.CityName), @Html.DisplayFor(model => model.Address.ProvinceName)</p>
+                                <p class="small mb-0 text-muted">@Html.DisplayFor(model => model.PhoneNum)</p>
                             </div>
                         </div>
                     </div>
@@ -110,14 +101,14 @@
                                     <span asp-validation-for="Address.StreetNum" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="Address.UnitNum" class="control-label"></label>
-                                    <input asp-for="Address.UnitNum" class="form-control" />
-                                    <span asp-validation-for="Address.UnitNum" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
                                     <label asp-for="Address.StreetName" class="control-label"></label>
                                     <input asp-for="Address.StreetName" class="form-control" />
                                     <span asp-validation-for="Address.StreetName" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Address.UnitNum" class="control-label"></label>
+                                    <input asp-for="Address.UnitNum" class="form-control" />
+                                    <span asp-validation-for="Address.UnitNum" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="Address.CityName" class="control-label"></label>
