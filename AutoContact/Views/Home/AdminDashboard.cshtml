@@ -9,6 +9,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <style>
+        .vertical-center {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
         .font {
             margin-bottom: 25px;
             font-family: 'Montserrat', sans-serif;
@@ -16,76 +22,59 @@
     </style>
 </head>
 <body>
-    <div class="container-fluid font pt-3 pb-3">
-        <form>
-            <h1 class="pb-2">Hi, @Html.DisplayFor(model => model.FirstName)</h1>
-            <p>This is the admin dashboard view page</p>
-            <div class="card">
-                <h5 class="card-header">
-                    Appointments on
-                    <script>document.write(new Date().toDateString());</script> <span class="badge badge-primary badge-pill">10</span>
-                </h5>
-                <div class="card-body">
-                    <p class="card-text">Appointment Time: Details</p>
-                </div>
-            </div>
-            <div class="row my-4">
-                <div class="col-12 col-md-6">
-                    <div class="card">
-                        <h5 class="card-header">Notifications <span class="badge badge-primary badge-pill">3</span></h5>
-                        <div class="card-body">
-                            <p class="card-text">- [Client] overdue for oil change</p>
-                            <p class="card-text">- [Mechanic] purchase order request</p>
-                            <p class="card-text">- [Mechanic] create new employee profile</p>
-                        </div>
+    <div class="container font pt-3 pb-3">
+        <div class="text-center pt-5 pb-5">
+            <h1>Hi, @Html.DisplayFor(model => model.FirstName)</h1>
+            <p>Manage clients, employees, appointments, and inventory.</p>
+        </div>
+        <div class="row my-4">
+            <div class="col-12 col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4>Clients <i class="bi bi-people"></i></h4>
+                        <p class="card-text">Create, update, delete or view a list of all clients. </p>
                     </div>
-                </div>
-                <div class="col-12 col-md-6">
-                    <div class="card">
-                        <h5 class="card-header">Inventory</h5>
-                        <div class="card-body">
-                            <h5 class="card-title">Current Stock (units): 1500</h5>
-                            <p class="card-text">Products to Reorder: <b class="text-danger">7</b></p>
-                            <p class="card-text">Zero Stock Products: <b class="text-danger">2</b></p>
-                        </div>
+                    <div class="card-footer">
+                        <a asp-area="" asp-controller="Clients" asp-action="Index">View Clients</a>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
-                    <div class="card">
-                        <h5 class="card-header">Latest Invoices</h5>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Order</th>
-                                            <th scope="col">Description</th>
-                                            <th scope="col">Client</th>
-                                            <th scope="col">Total</th>
-                                            <th scope="col">Date</th>
-                                            <th scope="col"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">12345678</th>
-                                            <td>Premium Oil Change</td>
-                                            <td>testing@gmail.com</td>
-                                            <td>$79.99</td>
-                                            <td>Oct 09 2021</td>
-                                            <td><a href="#" class="btn btn-sm btn-primary">View</a></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <a href="#" class="btn btn-block btn-light disabled">View all</a>
-                        </div>
+            <div class="col-12 col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4>Employees <i class="bi bi-people-fill"></i></h4>
+                        <p class="card-text">Create, update, delete or view a list of all employees. </p>
+                    </div>
+                    <div class="card-footer">
+                        <a asp-area="" asp-controller="Employees" asp-action="Index">View Employees</a>
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
+        <div class="row my-4">
+            <div class="col-12 col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4>Appointments <i class="bi bi-calendar-week"></i></h4>
+                        <p class="card-text">Create, update, delete or view all appointments. </p>
+                    </div>
+                    <div class="card-footer">
+                        <a asp-area="" asp-controller="Appointments" asp-action="Index">View Appointments</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4>Inventory <i class="bi bi-clipboard-data"></i></h4>
+                        <p class="card-text">Create, update, delete or view the inventory. </p>
+                    </div>
+                    <div class="card-footer">
+                        <a asp-area="" asp-controller="Parts" asp-action="Index">View Inventory</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
