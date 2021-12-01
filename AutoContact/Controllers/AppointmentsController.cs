@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -63,6 +62,7 @@ namespace AutoContact.Controllers
                 car.Vin ??= "";
                 _context.Add(car);
                 appointment.BookedAtTime = DateTime.Now;
+                //appointment.ClientId = ;    // assign to the logged in client
                 appointment.CarId = car.CarId;
                 _context.Add(appointment);
                 
@@ -95,7 +95,7 @@ namespace AutoContact.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("AppointmentId,Appointme,AppointmentStartTime,BookedAtTime,Message,BoontDatekingEmployeeId,ClientId,CarId")] Appointment appointment, [Bind("CarId,Vin,Make,Model,Colour,Odometer")] Car car)
+        public async Task<IActionResult> Edit(long id, [Bind("AppointmentId,AppointmentDate,AppointmentStartTime,BookedAtTime,Message,BookingEmployeeId,ClientId,CarId")] Appointment appointment, [Bind("CarId,Vin,Make,Model,Colour,Odometer")] Car car)
         {
             if (id != appointment.AppointmentId)
             {
