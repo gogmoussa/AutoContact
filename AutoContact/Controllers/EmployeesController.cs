@@ -69,7 +69,13 @@ namespace AutoContact.Controllers
         // GET: Employees/Create
         public IActionResult Create()
         {
-            return View();
+            Employee model = new Employee();
+            model.AllEmployees = _context.Employees.Select(e => new SelectListItem
+            {
+                Value = e.EmployeeId.ToString(),
+                Text = $"{e.FirstName} {e.LastName}"
+            }).ToList();
+            return View(model);
         }
 
         // POST: Employees/Create
@@ -77,12 +83,17 @@ namespace AutoContact.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EmployeeId,FirstName,LastName,AddressId,Email,PhoneNum,EmployeeSin,Manager,HireDate,TerminationDate,TerminationReason,HashPass,HashSalt")] Employee employee)
+        public async Task<IActionResult> Create([Bind("FirstName,LastName,AddressId,Email,PhoneNum,EmployeeSin,Manager,HireDate,Password")] Employee employee)
         {
             if (ModelState.IsValid)
             {
+                if (string.IsNullOrEmpty(employee.Password) || employee.Password.Length < 6)
+                {
+                    ModelState.AddModelError("Password", "Password has to be atleast 6 characters long!");
+                    return View(employee);
+                }
                 employee.HashSalt = Crypto.generateSalt();
-                employee.HashPass = Crypto.hashPassword(employee.HashPass, employee.HashSalt);
+                employee.HashPass = Crypto.hashPassword(employee.Password, employee.HashSalt);
                 _context.Add(employee);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -111,7 +122,7 @@ namespace AutoContact.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("EmployeeId,FirstName,LastName,AddressId,Email,PhoneNum,EmployeeSin,Manager,HireDate,TerminationDate,TerminationReason,HashPass,HashSalt")] Employee employee, [Bind("AddressId,StreetNum,UnitNum,StreetName,CityName,ProvinceName,Country")] Address address)
+        public async Task<IActionResult> Edit(long id, [Bind("EmployeeId,FirstName,LastName,AddressId,Email,PhoneNum,EmployeeSin,Manager,HireDate,TerminationDate,TerminationReason,Password,HashPass,HashSalt")] Employee employee, [Bind("AddressId,StreetNum,UnitNum,StreetName,CityName,ProvinceName,Country")] Address address)
         {
             if (id != employee.EmployeeId)
             {
@@ -122,8 +133,20 @@ namespace AutoContact.Controllers
             {
                 try
                 {
-                    employee.HashSalt = Crypto.generateSalt();
-                    employee.HashPass = Crypto.hashPassword(employee.HashPass, employee.HashSalt);
+                    if (!string.IsNullOrEmpty(employee.Password))
+                    {
+                        if (employee.Password.Length >= 6)
+                        {
+                            employee.HashSalt = Crypto.generateSalt();
+                            employee.HashPass = Crypto.hashPassword(employee.Password, employee.HashSalt);
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("Password", "Password has to be atleast 6 characters long!");
+                            return View(employee);
+                        }
+                    }
+
                     _context.Update(employee);
                     //await _context.SaveChangesAsync();
 

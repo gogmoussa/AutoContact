@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 #nullable disable
 
 namespace AutoContact.Models
 {
+    [Table("Appointment")]
     public partial class Appointment
     {
         public Appointment()
@@ -13,18 +16,23 @@ namespace AutoContact.Models
             AppointmentInvoices = new HashSet<AppointmentInvoice>();
         }
 
+        [Key]
         public long AppointmentId { get; set; }
-        [DataType(DataType.Date)]
+        [Column(TypeName = "datetime")]
         public DateTime AppointmentDate { get; set; }
-        [DataType(DataType.Time)]
+        [Column(TypeName = "datetime")]
         public DateTime AppointmentStartTime { get; set; }
+        [Column(TypeName = "datetime")]
         public DateTime BookedAtTime { get; set; }
         public string Message { get; set; }
         public long? BookingEmployeeId { get; set; }
         public long ClientId { get; set; }
         public long CarId { get; set; }
-        
+
+        [ForeignKey(nameof(CarId))]
+        [InverseProperty("Appointments")]
         public virtual Car Car { get; set; }
+        [InverseProperty(nameof(AppointmentInvoice.Appointment))]
         public virtual ICollection<AppointmentInvoice> AppointmentInvoices { get; set; }
     }
 }
