@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
+
+#nullable disable
 
 namespace AutoContact.Models
 {
+    [Table("Category")]
     public partial class Category
     {
         public Category()
@@ -12,9 +16,14 @@ namespace AutoContact.Models
             Parts = new HashSet<Part>();
         }
 
+        [Key]
         public long CategoryId { get; set; }
+        [Required]
+        [Column("Category")]
+        [StringLength(50)]
         public string CategoryName { get; set; }
 
+        [InverseProperty(nameof(Part.Category))]
         public virtual ICollection<Part> Parts { get; set; }
     }
 }
