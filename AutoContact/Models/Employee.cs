@@ -65,6 +65,16 @@ namespace AutoContact.Models
         public string PhoneNum { get; set; }
         [NotMapped]
         public List<SelectListItem> AllEmployees { get; set; }
+        [NotMapped]
+        public List<SelectListItem> AllAccessLevels
+        {
+            get
+            {
+                return new List<SelectListItem>() { new SelectListItem("Admin", "Admin"), new SelectListItem("Employee", "Employee"), new SelectListItem("Client", "Client") };
+            }
+        }
+        [NotMapped]
+        public AccessLevel EmployeeAccessLevel { get; set; }
 
         [ForeignKey(nameof(AddressId))]
         [InverseProperty("Employees")]

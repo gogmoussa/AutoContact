@@ -125,25 +125,29 @@
                             <span asp-validation-for="HireDate" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="form-row">
-                        <label asp-for="Password"></label>
-                        <div class="input-group flex-nowrap">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <span id="ShowPassword" class="bi bi-eye-fill"></span>
-                                </div>
-                            </div>
-                            <input asp-for="Password" class="form-control" />
-                        </div>
-                        <span asp-validation-for="Password" class="text-danger"></span>
-                        @*
-                                       <div class="form-group col-md-6">
-                                <label asp-for="HashSalt"></label>
-                                <input asp-for="HashSalt" class="form-control" />
-                                <span asp-validation-for="HashSalt" class="text-danger"></span>
-                            </div>
-                                    </div>*@
 
+                    <hr class="my-4" />
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="Password"></label>
+                            <div class="input-group flex-nowrap">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <span id="ShowPassword" class="bi bi-eye-fill"></span>
+                                    </div>
+                                </div>
+                                <input asp-for="Password" class="form-control" />
+                            </div>
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="EmployeeAccessLevel.AccessLevel1"></label>
+                            <select asp-for="EmployeeAccessLevel.AccessLevel1" asp-items="Model.AllAccessLevels" class="form-control">
+                                <option value="">Choose an Access Level</option>
+                            </select>
+                            <span asp-validation-for="EmployeeAccessLevel.AccessLevel1" class="text-danger"></span>
+                        </div>
                     </div>
                     <br />
                     <div>

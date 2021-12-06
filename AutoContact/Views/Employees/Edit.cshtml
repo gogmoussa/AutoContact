@@ -161,7 +161,13 @@
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-6">
+                    <div class="form-check form-switch ml-4">
+                        <input class="form-check-input" type="checkbox" id="BtnEditPassword">
+                        <label class="form-check-label" for="BtnEditPassword">Change Password?</label>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6" id="EditPassword" style="display:none;">
                         <label asp-for="Password"></label>
                         <div class="input-group flex-nowrap">
                             <div class="input-group-prepend">
@@ -172,15 +178,11 @@
                             <input asp-for="Password" class="form-control" />
                         </div>
                         <span asp-validation-for="Password" class="text-danger"></span>
-                        <!-- don't need to show hashsalt here-->
-                        @*<div class="form-group col-md-6">
-                                <label asp-for="HashSalt"></label>
-                                <input asp-for="HashSalt" class="form-control" />
-                                <span asp-validation-for="HashSalt" class="text-danger"></span>
-                            </div>*@
                     </div>
                     @Html.Hidden("HashPass")
                     @Html.Hidden("HashSalt")
+                    @Html.Hidden("Address.AddressId")
+                    @Html.Hidden("AddressId")
                 </div>
                 <br />
                 <div>
@@ -201,6 +203,11 @@
             $('#ShowPassword').click(function () {
                 $('#Password').attr('type', (_, attr) => attr == 'password' ? 'text' : 'password');
                 $(this).toggleClass('bi-eye-fill').toggleClass('bi-eye-slash-fill');
+            });
+
+            //CheckBox Edit Password
+            $('#BtnEditPassword').click(function () {
+                $('#EditPassword').toggle();
             });
         });
     </script>

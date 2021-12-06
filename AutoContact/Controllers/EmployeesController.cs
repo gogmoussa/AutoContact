@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AutoContact.Models;
 using AutoContact.Helpers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AutoContact.Controllers
 {
+    [Authorize]
     public class EmployeesController : Controller
     {
         private readonly AutoContactContext _context;
@@ -67,9 +69,12 @@ namespace AutoContact.Controllers
         }
 
         // GET: Employees/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             Employee model = new Employee();
+            model.Address = new Address();
+            model.EmployeeAccessLevel = new AccessLevel();
             model.AllEmployees = _context.Employees.Select(e => new SelectListItem
             {
                 Value = e.EmployeeId.ToString(),
@@ -82,8 +87,9 @@ namespace AutoContact.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FirstName,LastName,AddressId,Email,PhoneNum,EmployeeSin,Manager,HireDate,Password")] Employee employee)
+        public async Task<IActionResult> Create([Bind("FirstName,LastName,AddressId,Email,PhoneNum,EmployeeSin,Manager,HireDate,Password,EmployeeAccessLevel,Address")] Employee employee)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +100,14 @@ namespace AutoContact.Controllers
                 }
                 employee.HashSalt = Crypto.generateSalt();
                 employee.HashPass = Crypto.hashPassword(employee.Password, employee.HashSalt);
+                if (string.IsNullOrEmpty(employee.Address.UnitNum))
+                    employee.Address.UnitNum = "";
+
                 _context.Add(employee);
+                await _context.SaveChangesAsync();
+
+                employee.EmployeeAccessLevel.EmployeeId = employee.EmployeeId;
+                _context.Add(employee.EmployeeAccessLevel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -102,6 +115,7 @@ namespace AutoContact.Controllers
         }
 
         // GET: Employees/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(long? id)
         {
             if (id == null)
@@ -109,7 +123,7 @@ namespace AutoContact.Controllers
                 return NotFound();
             }
 
-            var employee = await _context.Employees.Include(x => x.Address).FirstOrDefaultAsync(e => e.EmployeeId == id);
+            var employee = await _context.Employees.Include(x => x.Address).Include(y => y.AccessLevels).FirstOrDefaultAsync(e => e.EmployeeId == id);
             if (employee == null)
             {
                 return NotFound();
@@ -121,6 +135,7 @@ namespace AutoContact.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(long id, [Bind("EmployeeId,FirstName,LastName,AddressId,Email,PhoneNum,EmployeeSin,Manager,HireDate,TerminationDate,TerminationReason,Password,HashPass,HashSalt")] Employee employee, [Bind("AddressId,StreetNum,UnitNum,StreetName,CityName,ProvinceName,Country")] Address address)
         {
@@ -169,6 +184,7 @@ namespace AutoContact.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
             return View(employee);
         }
 
