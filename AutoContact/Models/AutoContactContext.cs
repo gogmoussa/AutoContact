@@ -435,7 +435,7 @@ namespace AutoContact.Models
             {
                 entity.ToTable("PurchaseOrder");
 
-                entity.Property(e => e.PurchaseOrderId).ValueGeneratedNever();
+                entity.Property(e => e.PurchaseOrderId).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Amount).HasColumnType("money");
 
@@ -449,7 +449,7 @@ namespace AutoContact.Models
             {
                 entity.ToTable("PurchaseOrderLineItem");
 
-                entity.Property(e => e.PurchaseOrderLineItemId).ValueGeneratedNever();
+                entity.Property(e => e.PurchaseOrderLineItemId).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Qty).HasColumnType("int");
 

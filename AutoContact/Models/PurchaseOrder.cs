@@ -17,7 +17,7 @@ namespace AutoContact.Models
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long PurchaseOrderId { get; }
+        public long? PurchaseOrderId { get; set; }
         public long VendorId { get; set; }
         public double? Amount { get; set; }
         public DateTime PODate { get; set; }

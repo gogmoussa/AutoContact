@@ -13,18 +13,18 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="PurchaseOrderId" />
-            <div class="form-group">
-                <label asp-for="PurchaseOrderId" class="control-label"></label>
-                <input asp-for="PurchaseOrderId" class="form-control" />
-                <span asp-validation-for="PurchaseOrderId" class="text-danger"></span>
-            </div>
+            <!--<div class="form-group">
+        <label asp-for="PurchaseOrderId" class="control-label"></label>
+        <input asp-for="PurchaseOrderId" class="form-control" />
+        <span asp-validation-for="PurchaseOrderId" class="text-danger"></span>
+    </div>-->
             <div class="form-group">
                 <label asp-for="VendorId" class="control-label"></label>
-                <select asp-for="VendorId" class="form-control" asp-items="ViewBag.VendorId"></select>
+                @Html.DropDownList("VendorId", (IEnumerable<SelectListItem>)ViewBag.Vendors, "Select A Vendor", new { @class = "form-control" })
             </div>
             <div class="form-group">
                 <label asp-for="Amount" class="control-label"></label>
-                <input asp-for="Amount" class="form-control" />
+                <input asp-for="Amount" class="form-control" readonly/>
                 <span asp-validation-for="Amount" class="text-danger"></span>
             </div>
             <div class="form-group">

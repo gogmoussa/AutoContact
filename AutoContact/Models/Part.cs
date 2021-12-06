@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,5 +26,10 @@ namespace AutoContact.Models
         public virtual Vendor Vendor { get; set; }
         public virtual Category Category { get; set; }
         public virtual ICollection<PurchaseOrderLineItem> PurchaseOrderLineItems { get; set; }
+
+        public static explicit operator Part(DbSet<Part> v)
+        {
+            return (Part)v;
+        }
     }
 }

@@ -39,7 +39,7 @@
             <label asp-for="PurchaseOrderLineItems" class="control-label">Items</label>
             @Html.DropDownList("PurchaseOrderLineItemId", (IEnumerable<SelectListItem>)ViewBag.PurchaseOrderLineItems, "", new { @class = "form-control" })
         }
-
+        </br>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.CancelledDate)
         </dt>
