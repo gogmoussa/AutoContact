@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -40,5 +41,10 @@ namespace AutoContact.Models
         [InverseProperty(nameof(Invoice.Part))]
         public virtual ICollection<Invoice> Invoices { get; set; }
         public virtual ICollection<PurchaseOrderLineItem> PurchaseOrderLineItems { get; set; }
+
+        public static explicit operator Part(DbSet<Part> v)
+        {
+            return (Part)v;
+        }
     }
 }

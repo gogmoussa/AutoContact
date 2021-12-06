@@ -17,7 +17,8 @@ namespace AutoContact.Models
         }
 
         [Key]
-        public long PurchaseOrderId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public long? PurchaseOrderId { get; set; }
         public long VendorId { get; set; }
         [Column(TypeName = "money")]
         public decimal Amount { get; set; }

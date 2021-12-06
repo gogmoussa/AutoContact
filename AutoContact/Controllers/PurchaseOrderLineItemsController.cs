@@ -64,6 +64,23 @@ namespace AutoContact.Controllers
         {
             if (ModelState.IsValid)
             {
+                //polineitem.PurchaseOrderId = outlong;
+
+                var parts = _context.Parts;
+                Part part = new Part();
+                List<Part> partList = new List<Part>(parts);
+                foreach (var p in partList)
+                {
+                    if (p.PartId == polineitem.PartId)
+                    {
+                        part = p;
+                        break;
+                    }
+                }
+                //polineitem.Part = part;
+                polineitem.Price = (double)(polineitem.Qty * part.CostPrice);
+                polineitem.PurchaseOrderId = long.Parse((string)TempData["poid"]);
+
                 _context.Add(polineitem);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -92,7 +109,7 @@ namespace AutoContact.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("PurchaseOrderLineItemId,PurchaseOrderId,PartId,Qty,Price")] PurchaseOrderLineItem polineitem)
+        public async Task<IActionResult> Edit(long id, [Bind("PurchaseOrderId,PartId,Qty,Price")] PurchaseOrderLineItem polineitem)
         {
             if (id != polineitem.PartId)
             {
@@ -153,7 +170,7 @@ namespace AutoContact.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool POLineItemExists(long id)
+        private bool POLineItemExists(long? id)
         {
             return _context.PurchaseOrderLineItems.Any(e => e.PurchaseOrderLineItemId == id);
         }

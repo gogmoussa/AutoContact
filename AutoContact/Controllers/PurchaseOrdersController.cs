@@ -43,6 +43,9 @@ namespace AutoContact.Controllers
                 return NotFound();
             }
 
+            TempData["CurrentPurchaseOrderId"] = purchaseOrder.PurchaseOrderId.ToString();
+            TempData["poid"] = purchaseOrder.PurchaseOrderId.ToString();
+
             return View(purchaseOrder);
         }
 
@@ -61,7 +64,7 @@ namespace AutoContact.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PurchaseOrderId,VendorId,Amount,PODate,CancelledDate")] PurchaseOrder purchaseOrder)
+        public async Task<IActionResult> Create([Bind("VendorId,Amount,PODate,CancelledDate")] PurchaseOrder purchaseOrder)
         {
             if (ModelState.IsValid)
             {
@@ -69,6 +72,7 @@ namespace AutoContact.Controllers
                 await _context.SaveChangesAsync();
 
                 TempData["CurrentPurchaseOrderId"] = purchaseOrder.PurchaseOrderId.ToString();
+                TempData["poid"] = purchaseOrder.PurchaseOrderId.ToString();
 
                 var items = _context.PurchaseOrderLineItems.ToList();
                 List<PurchaseOrderLineItem> poItems = new List<PurchaseOrderLineItem>();
@@ -88,7 +92,7 @@ namespace AutoContact.Controllers
                 ViewBag.PurchaseOrderLineItems = new SelectList(poItems, "PurchaseOrderLineItemId");
                 ViewBag.Parts = new SelectList(poParts, "PartId", "Name");
 
-                long id = purchaseOrder.PurchaseOrderId;
+                long? id = purchaseOrder.PurchaseOrderId;
                 return RedirectToAction("Details", new { id = purchaseOrder.PurchaseOrderId });
             }
 
@@ -102,7 +106,7 @@ namespace AutoContact.Controllers
             {
                 return NotFound();
             }
-
+            ViewBag.Vendors = new SelectList(_context.Vendors, "VendorId", "Name");
             var purchaseOrder = await _context.PurchaseOrders.Include(x => x.Vendor).FirstOrDefaultAsync(p => p.PurchaseOrderId == id);
             if (purchaseOrder == null)
             {
@@ -178,7 +182,7 @@ namespace AutoContact.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PurchaseOrderExists(long id)
+        private bool PurchaseOrderExists(long? id)
         {
             return _context.PurchaseOrders.Any(e => e.PurchaseOrderId == id);
         }

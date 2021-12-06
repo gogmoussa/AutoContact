@@ -252,7 +252,9 @@ namespace AutoContact.Models
 
             modelBuilder.Entity<PurchaseOrder>(entity =>
             {
-                entity.Property(e => e.PurchaseOrderId).ValueGeneratedNever();
+                entity.ToTable("PurchaseOrder");
+
+                entity.Property(e => e.PurchaseOrderId).ValueGeneratedOnAdd();
 
                 entity.HasOne(d => d.Vendor)
                     .WithMany(p => p.PurchaseOrders)
@@ -263,7 +265,9 @@ namespace AutoContact.Models
 
             modelBuilder.Entity<PurchaseOrderLineItem>(entity =>
             {
-                entity.Property(e => e.PurchaseOrderLineItemId).ValueGeneratedNever();
+                entity.ToTable("PurchaseOrderLineItem");
+
+                entity.Property(e => e.PurchaseOrderLineItemId).ValueGeneratedOnAdd();
 
                 entity.HasOne(d => d.PurchaseOrder)
                     .WithMany(p => p.PurchaseOrderLineItems)
