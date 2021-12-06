@@ -36,22 +36,6 @@
         .text-muted {
             font-weight: 300;
         }
-
-        .form-control {
-            display: block;
-            width: 100%;
-            height: calc(1.5em + 0.75rem + 2px);
-            padding: 0.375rem 0.75rem;
-            font-size: 0.875rem;
-            font-weight: 400;
-            line-height: 1.5;
-            color: #4d5154;
-            background-color: #ffffff;
-            background-clip: padding-box;
-            border: 1px solid #eef0f3;
-            border-radius: 0.25rem;
-            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-        }
     </style>
 </head>
 <body>
@@ -75,122 +59,130 @@
                         </div>
                     </div>
                 </div>
-                <div>
-                    <hr class="my-4" />
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label asp-for="FirstName"></label>
-                            <input asp-for="FirstName" class="form-control" />
-                            <span asp-validation-for="FirstName" class="text-danger"></span>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label asp-for="LastName"></label>
-                            <input asp-for="LastName" class="form-control" />
-                            <span asp-validation-for="LastName" class="text-danger"></span>
-                        </div>
+                <hr class="my-4" />
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label asp-for="FirstName"></label>
+                        <input asp-for="FirstName" class="form-control" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label asp-for="Email"></label>
-                            <input asp-for="Email" class="form-control" />
-                            <span asp-validation-for="Email" class="text-danger"></span>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label asp-for="PhoneNum"></label>
-                            <input asp-for="PhoneNum" class="form-control" />
-                            <span asp-validation-for="PhoneNum" class="text-danger"></span>
-                        </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="LastName"></label>
+                        <input asp-for="LastName" class="form-control" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
                     </div>
-                    <hr class="my-4" />
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label asp-for="Email"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="PhoneNum"></label>
+                        <input asp-for="PhoneNum" class="form-control" />
+                        <span asp-validation-for="PhoneNum" class="text-danger"></span>
+                    </div>
+                </div>
+                <hr class="my-4" />
 
-                    <!-- Address -->
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label asp-for="Address.StreetNum"></label>
-                            <input asp-for="Address.StreetNum" class="form-control" />
-                            <span asp-validation-for="Address.StreetNum" class="text-danger"></span>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label asp-for="Address.StreetName"></label>
-                            <input asp-for="Address.StreetName" class="form-control" />
-                            <span asp-validation-for="Address.StreetName" class="text-danger"></span>
-                        </div>
+                <!-- Address -->
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label asp-for="Address.StreetNum"></label>
+                        <input asp-for="Address.StreetNum" class="form-control" />
+                        <span asp-validation-for="Address.StreetNum" class="text-danger"></span>
                     </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="Address.StreetName"></label>
+                        <input asp-for="Address.StreetName" class="form-control" />
+                        <span asp-validation-for="Address.StreetName" class="text-danger"></span>
+                    </div>
+                </div>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label asp-for="Address.UnitNum"></label>
-                            <input asp-for="Address.UnitNum" class="form-control" />
-                            <span asp-validation-for="Address.UnitNum" class="text-danger"></span>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label asp-for="Address.CityName"></label>
-                            <input asp-for="Address.CityName" class="form-control" />
-                            <span asp-validation-for="Address.CityName" class="text-danger"></span>
-                        </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label asp-for="Address.UnitNum"></label>
+                        <input asp-for="Address.UnitNum" class="form-control" />
+                        <span asp-validation-for="Address.UnitNum" class="text-danger"></span>
                     </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="Address.CityName"></label>
+                        <input asp-for="Address.CityName" class="form-control" />
+                        <span asp-validation-for="Address.CityName" class="text-danger"></span>
+                    </div>
+                </div>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label asp-for="Address.ProvinceName"></label>
-                            <input asp-for="Address.ProvinceName" class="form-control" />
-                            <span asp-validation-for="Address.ProvinceName" class="text-danger"></span>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label asp-for="Address.Country"></label>
-                            <input asp-for="Address.Country" class="form-control" />
-                            <span asp-validation-for="Address.Country" class="text-danger"></span>
-                        </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label asp-for="Address.ProvinceName"></label>
+                        <input asp-for="Address.ProvinceName" class="form-control" />
+                        <span asp-validation-for="Address.ProvinceName" class="text-danger"></span>
                     </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="Address.Country"></label>
+                        <input asp-for="Address.Country" class="form-control" />
+                        <span asp-validation-for="Address.Country" class="text-danger"></span>
+                    </div>
+                </div>
 
-                    <hr class="my-4" />
+                <hr class="my-4" />
 
-                    <!-- Employment Information -->
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label asp-for="EmployeeSin"></label>
-                            <input asp-for="EmployeeSin" class="form-control" />
-                            <span asp-validation-for="EmployeeSin" class="text-danger"></span>
-                        </div>
+                <!-- Employment Information -->
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label asp-for="EmployeeSin"></label>
+                        <input asp-for="EmployeeSin" class="form-control" />
+                        <span asp-validation-for="EmployeeSin" class="text-danger"></span>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label asp-for="Manager"></label>
-                            <input asp-for="Manager" class="form-control" />
-                            <span asp-validation-for="Manager" class="text-danger"></span>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label asp-for="HireDate"></label>
-                            <input asp-for="HireDate" class="form-control" />
-                            <span asp-validation-for="HireDate" class="text-danger"></span>
-                        </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label asp-for="Manager"></label>
+                        <input asp-for="Manager" class="form-control" />
+                        <span asp-validation-for="Manager" class="text-danger"></span>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label asp-for="TerminationDate"></label>
-                            <input asp-for="TerminationDate" class="form-control" />
-                            <span asp-validation-for="TerminationDate" class="text-danger"></span>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label asp-for="TerminationReason"></label>
-                            <input asp-for="TerminationReason" class="form-control" />
-                            <span asp-validation-for="TerminationReason" class="text-danger"></span>
-                        </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="HireDate"></label>
+                        <input asp-for="HireDate" class="form-control" />
+                        <span asp-validation-for="HireDate" class="text-danger"></span>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label asp-for="HashPass"></label>
-                            <input asp-for="HashPass" class="form-control" />
-                            <span asp-validation-for="HashPass" class="text-danger"></span>
-                        </div>
-                        <!-- don't need to show hashsalt here-->
-                        @*<div class="form-group col-md-6">
-                                <label asp-for="HashSalt"></label>
-                                <input asp-for="HashSalt" class="form-control" />
-                                <span asp-validation-for="HashSalt" class="text-danger"></span>
-                            </div>*@
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label asp-for="TerminationDate"></label>
+                        <input asp-for="TerminationDate" class="form-control" />
+                        <span asp-validation-for="TerminationDate" class="text-danger"></span>
                     </div>
-
+                    <div class="form-group col-md-6">
+                        <label asp-for="TerminationReason"></label>
+                        <input asp-for="TerminationReason" class="form-control" />
+                        <span asp-validation-for="TerminationReason" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-check form-switch ml-4">
+                        <input class="form-check-input" type="checkbox" id="BtnEditPassword">
+                        <label class="form-check-label" for="BtnEditPassword">Change Password?</label>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6" id="EditPassword" style="display:none;">
+                        <label asp-for="Password"></label>
+                        <div class="input-group flex-nowrap">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <span id="ShowPassword" class="bi bi-eye-fill"></span>
+                                </div>
+                            </div>
+                            <input asp-for="Password" class="form-control" />
+                        </div>
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    @Html.Hidden("HashPass")
+                    @Html.Hidden("HashSalt")
+                    @Html.Hidden("Address.AddressId")
+                    @Html.Hidden("AddressId")
                 </div>
                 <br />
                 <div>
@@ -205,4 +197,18 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function () {
+            //CheckBox Show Password
+            $('#ShowPassword').click(function () {
+                $('#Password').attr('type', (_, attr) => attr == 'password' ? 'text' : 'password');
+                $(this).toggleClass('bi-eye-fill').toggleClass('bi-eye-slash-fill');
+            });
+
+            //CheckBox Edit Password
+            $('#BtnEditPassword').click(function () {
+                $('#EditPassword').toggle();
+            });
+        });
+    </script>
 }

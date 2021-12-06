@@ -1,6 +1,6 @@
 ﻿@{
     string layout = "";
-    string authLevel = "Mechanic"; //need to actually set this once user logs in 
+    string authLevel = this.User.Claims.Where(x => x.Type == ClaimTypes.Role).FirstOrDefault()?.Value; //need to actually set this once user logs in ; //need to actually set this once user logs in 
 
     switch (authLevel)
     {
@@ -8,7 +8,7 @@
             layout = "~/Views/Shared/_ClientLayout.cshtml";
             break;
 
-        case "Mechanic":
+        case "Employee":
             layout = "~/Views/Shared/_MechanicLayout.cshtml";
             break;
 
@@ -17,7 +17,7 @@
             break;
 
         default:
-            layout = "~/Views/Shared/_ClientLayout.cshtml";
+            layout = "~/Views/Shared/_Layout.cshtml";
             break;
     }
 
