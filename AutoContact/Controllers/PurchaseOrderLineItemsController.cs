@@ -78,7 +78,7 @@ namespace AutoContact.Controllers
                     }
                 }
                 //polineitem.Part = part;
-                polineitem.Price = (double)(polineitem.Qty * part.CostPrice);
+                polineitem.Price = (decimal)(double)(polineitem.Qty * part.CostPrice);
                 polineitem.PurchaseOrderId = long.Parse((string)TempData["poid"]);
 
                 _context.Add(polineitem);
