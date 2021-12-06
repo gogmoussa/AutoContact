@@ -53,7 +53,7 @@ namespace AutoContact.Models
 
             modelBuilder.Entity<AccessLevel>(entity =>
             {
-                entity.Property(e => e.AccessLevelId).ValueGeneratedNever();
+                entity.Property(e => e.AccessLevelId).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.AccessLevel1).IsUnicode(false);
 
@@ -71,7 +71,7 @@ namespace AutoContact.Models
 
             modelBuilder.Entity<Address>(entity =>
             {
-                entity.Property(e => e.AddressId).ValueGeneratedNever();
+                entity.Property(e => e.AddressId).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.StreetNum).IsUnicode(false);
 

@@ -19,6 +19,7 @@ namespace AutoContact.Models
         }
 
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long AddressId { get; set; }
         [Required]
         [StringLength(10)]
