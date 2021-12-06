@@ -86,7 +86,7 @@ namespace AutoContactApp.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AdminLogin(string email, string password, string returnUrl)
+        public async Task<IActionResult> AdminLogin(string email, string password, bool rememberUser, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -116,12 +116,12 @@ namespace AutoContactApp.Controllers
                             //AllowRefresh = <bool>,
                             // Refreshing the authentication session should be allowed.
 
-                            ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
+                            ExpiresUtc = rememberUser ? DateTimeOffset.UtcNow.AddDays(14) : DateTimeOffset.UtcNow.AddMinutes(10),
                             // The time at which the authentication ticket expires. A 
                             // value set here overrides the ExpireTimeSpan option of 
                             // CookieAuthenticationOptions set with AddCookie.
 
-                            //IsPersistent = true,
+                            IsPersistent = rememberUser,
                             // Whether the authentication session is persisted across 
                             // multiple requests. When used with cookies, controls
                             // whether the cookie's lifetime is absolute (matching the
