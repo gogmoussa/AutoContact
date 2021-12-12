@@ -3,6 +3,22 @@
 @{
     ViewData["Title"] = "Index";
 }
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            events: @Html.Raw(ViewData["Events"]),
+            headerToolbar: {
+                left: 'today prev,next',
+                center: 'title',
+                right: 'timeGridWeek,dayGridMonth,listMonth'
+            },
+        });
+        calendar.render();
+    });
+</script>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,5 +89,13 @@
             </tbody>
         </table>
     </div>
+
+    <!-- CALENDAR -->
+    <div class="container-fluid">
+    @*<div class="text-center">*@
+        @*<h1 class="display-4">Welcome To Our Calendar App</h1>*@
+        <div id='calendar'></div>
+    </div>
+
 </body>
 </html>

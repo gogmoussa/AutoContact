@@ -4,43 +4,66 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <style>
+        body {
+            color: #8e9194;
+            background-color: #f4f6f9;
+        }
 
-<h4>Purchase Order Items</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="PurchaseOrderId" class="control-label">Purchase Order Id</label>
-                <input class="form-control" placeholder="@TempData["CurrentPurchaseOrderId"]" readonly>
-            </div>
-            <div class="form-group">
-                <label asp-for="PartId" class="control-label">Part</label>
-                @Html.DropDownList("PartId", (IEnumerable<SelectListItem>)ViewBag.Parts, "Select A Part", new { @class = "form-control" })
-            </div>
-            <div class="form-group">
-                <label asp-for="Qty" class="control-label"></label>
-                <input asp-for="Qty" class="form-control" />
-                <span asp-validation-for="Qty" class="text-danger"></span>
-            </div>
-            <!-- Don't show simply calculate after part and qty selected
-    <div class="form-group">
-        <label asp-for="Price" class="control-label"></label>
-        <input asp-for="Price" class="form-control" />
-        <span asp-validation-for="Price" class="text-danger"></span>
-    </div>-->
-            <div class="form-group">
-                <input type="submit" value="Add Item" class="btn btn-primary" />
-            </div>
-        </form>
+        .text-muted {
+            color: #aeb0b4 !important;
+        }
+
+        .text-muted {
+            font-weight: 300;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <h1 class="mt-4">Create Purchase Order Item</h1>
+                <hr class="my-4" />
+                <div class="form-group">
+                    <label asp-for="PurchaseOrderId" class="control-label">Purchase Order Id</label>
+                    <input class="form-control" placeholder="@TempData["CurrentPurchaseOrderId"]" readonly>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PartId" class="control-label">Part</label>
+                    @Html.DropDownList("PartId", (IEnumerable<SelectListItem>)ViewBag.Parts, "Select A Part", new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label asp-for="Qty" class="control-label"></label>
+                    <input asp-for="Qty" class="form-control" />
+                    <span asp-validation-for="Qty" class="text-danger"></span>
+                </div>
+                <!-- Don't show simply calculate after part and qty selected
+                <div class="form-group">
+                    <label asp-for="Price" class="control-label"></label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>-->
+                @*<div>
+                    <a asp-controller="PurchaseOrders" asp-action="Details" asp-route-id="@TempData["CurrentPurchaseOrderId"]">Back to Order</a>
+                </div>*@
+                <br />
+                <div>
+                    <button class="btn btn-primary" type="submit" value="Add Item">Add Item</button>
+                    <a class="btn btn-outline-secondary" asp-action="Index">Cancel</a>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-controller="PurchaseOrders" asp-action="Details" asp-route-id="@TempData["CurrentPurchaseOrderId"]">Back to Order</a>
-</div>
+</body>
+</html>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
