@@ -4,49 +4,69 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <style>
+        body {
+            color: #8e9194;
+            background-color: #f4f6f9;
+        }
 
-<h4>Purchase Orders</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="PurchaseOrderId" />
-            <!--<div class="form-group">
-        <label asp-for="PurchaseOrderId" class="control-label"></label>
-        <input asp-for="PurchaseOrderId" class="form-control" />
-        <span asp-validation-for="PurchaseOrderId" class="text-danger"></span>
-    </div>-->
-            <div class="form-group">
-                <label asp-for="VendorId" class="control-label"></label>
-                @Html.DropDownList("VendorId", (IEnumerable<SelectListItem>)ViewBag.Vendors, "Select A Vendor", new { @class = "form-control" })
-            </div>
-            <div class="form-group">
-                <label asp-for="Amount" class="control-label"></label>
-                <input asp-for="Amount" class="form-control" readonly/>
-                <span asp-validation-for="Amount" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PODate" class="control-label"></label>
-                <input asp-for="PODate" class="form-control" />
-                <span asp-validation-for="PODate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CancelledDate" class="control-label"></label>
-                <input asp-for="CancelledDate" class="form-control" />
-                <span asp-validation-for="CancelledDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        .text-muted {
+            color: #aeb0b4 !important;
+        }
+
+        .text-muted {
+            font-weight: 300;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <h1 class="mt-4">Edit Purchase Order</h1>
+                <hr class="my-4" />
+                <input type="hidden" asp-for="PurchaseOrderId" />
+                <!--<div class="form-group">
+                    <label asp-for="PurchaseOrderId" class="control-label"></label>
+                    <input asp-for="PurchaseOrderId" class="form-control" />
+                    <span asp-validation-for="PurchaseOrderId" class="text-danger"></span>
+                </div>-->
+                <div class="form-group">
+                    <label asp-for="VendorId" class="control-label"></label>
+                    @Html.DropDownList("VendorId", (IEnumerable<SelectListItem>)ViewBag.Vendors, "Select A Vendor", new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label asp-for="Amount" class="control-label"></label>
+                    <input asp-for="Amount" class="form-control" readonly />
+                    <span asp-validation-for="Amount" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PODate" class="control-label"></label>
+                    <input asp-for="PODate" class="form-control" />
+                    <span asp-validation-for="PODate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CancelledDate" class="control-label"></label>
+                    <input asp-for="CancelledDate" class="form-control" />
+                    <span asp-validation-for="CancelledDate" class="text-danger"></span>
+                </div>
+                <br />
+                <div>
+                    <button class="btn btn-primary" type="submit" value="Save">Save</button>
+                    <a class="btn btn-outline-secondary" asp-action="Index">Cancel</a>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+</body>
+</html>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

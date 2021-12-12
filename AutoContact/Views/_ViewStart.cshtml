@@ -1,6 +1,8 @@
 ﻿@{
     string layout = "";
     string authLevel = this.User.Claims.Where(x => x.Type == ClaimTypes.Role).FirstOrDefault()?.Value; //need to actually set this once user logs in ; //need to actually set this once user logs in 
+    // string authLevel = "Admin"; 
+
 
     switch (authLevel)
     {

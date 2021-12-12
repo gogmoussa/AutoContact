@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AutoContact.Models;
+using AutoContact.Helpers;
+
 
 namespace AutoContact.Controllers
 {
@@ -20,6 +22,7 @@ namespace AutoContact.Controllers
         // GET: Appointments
         public async Task<IActionResult> Index()
         {
+            ViewData["Events"] = JSONHelper.GetAppointmentListJSONString(_context.Appointments.ToList());
             var autoContactContext = _context.Appointments.Include(a => a.Car);
             return View(await autoContactContext.ToListAsync());
         }

@@ -4,52 +4,85 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <style>
+        body {
+            color: #8e9194;
+            background-color: #f4f6f9;
+        }
 
-<h4>Appointment</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="AppointmentId" />
-            <div class="form-group">
-                <label asp-for="AppointmentDate" class="control-label"></label>
-                <input asp-for="AppointmentDate" type="date" class="form-control" />
-                <span asp-validation-for="AppointmentDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AppointmentStartTime" class="control-label"></label>
-                <input asp-for="AppointmentStartTime" type="time" class="form-control" />
-                <span asp-validation-for="AppointmentStartTime" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BookedAtTime" class="control-label"></label>
-                <input asp-for="BookedAtTime" class="form-control" />
-                <span asp-validation-for="BookedAtTime" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BookingEmployeeId" class="control-label"></label>
-                <input asp-for="BookingEmployeeId" class="form-control" />
-                <span asp-validation-for="BookingEmployeeId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Car" class="control-label"></label>
-                <input asp-for="Car.Make" type="text" class="form-control" placeholder="Make"/>
-                <input asp-for="Car.Model" type="text" class="form-control" placeholder="Model"/>
-                <input asp-for="Car.Colour" type="text" class="form-control" placeholder="Color"/>
-                <span asp-validation-for="Car" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        .avatar-xl img {
+            width: 110px;
+        }
+
+        .rounded-circle {
+            border-radius: 50% !important;
+        }
+
+        img {
+            vertical-align: middle;
+            border-style: none;
+        }
+
+        .text-muted {
+            color: #aeb0b4 !important;
+        }
+
+        .text-muted {
+            font-weight: 300;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <h1 class="mt-4">Edit Appointment</h1>
+                <hr class="my-4" />
+                <input type="hidden" asp-for="AppointmentId" />
+                <div class="form-group">
+                    <label asp-for="AppointmentDate" class="control-label"></label>
+                    <input asp-for="AppointmentDate" type="date" class="form-control" />
+                    <span asp-validation-for="AppointmentDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="AppointmentStartTime" class="control-label"></label>
+                    <input asp-for="AppointmentStartTime" type="time" class="form-control" />
+                    <span asp-validation-for="AppointmentStartTime" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BookedAtTime" class="control-label"></label>
+                    <input asp-for="BookedAtTime" class="form-control" />
+                    <span asp-validation-for="BookedAtTime" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BookingEmployeeId" class="control-label"></label>
+                    <input asp-for="BookingEmployeeId" class="form-control" />
+                    <span asp-validation-for="BookingEmployeeId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Car" class="control-label"></label>
+                    <input asp-for="Car.Make" type="text" class="form-control" placeholder="Make" />
+                    <input asp-for="Car.Model" type="text" class="form-control" placeholder="Model" />
+                    <input asp-for="Car.Colour" type="text" class="form-control" placeholder="Color" />
+                    <span asp-validation-for="Car" class="text-danger"></span>
+                </div>
+                <br />
+                <div>
+                    <button class="btn btn-primary" type="submit" value="Save">Save</button>
+                    <a class="btn btn-outline-secondary" asp-action="Index">Cancel</a>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+</body>
+</html>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
