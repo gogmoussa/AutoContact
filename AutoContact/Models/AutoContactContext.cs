@@ -80,7 +80,7 @@ namespace AutoContact.Models
 
             modelBuilder.Entity<Appointment>(entity =>
             {
-                entity.Property(e => e.AppointmentId).ValueGeneratedNever();
+                entity.Property(e => e.AppointmentId).ValueGeneratedOnAdd();
 
                 entity.HasOne(d => d.Car)
                     .WithMany(p => p.Appointments)
@@ -91,7 +91,7 @@ namespace AutoContact.Models
 
             modelBuilder.Entity<AppointmentInvoice>(entity =>
             {
-                entity.Property(e => e.AppointmentInvoiceId).ValueGeneratedNever();
+                entity.Property(e => e.AppointmentInvoiceId).ValueGeneratedOnAdd();
 
                 entity.HasOne(d => d.Appointment)
                     .WithMany(p => p.AppointmentInvoices)
@@ -106,7 +106,7 @@ namespace AutoContact.Models
 
             modelBuilder.Entity<Car>(entity =>
             {
-                entity.Property(e => e.CarId).ValueGeneratedNever();
+                entity.Property(e => e.CarId).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Colour).IsUnicode(false);
 
@@ -132,12 +132,12 @@ namespace AutoContact.Models
 
             modelBuilder.Entity<Category>(entity =>
             {
-                entity.Property(e => e.CategoryId).ValueGeneratedNever();
+                entity.Property(e => e.CategoryId).ValueGeneratedOnAdd();
             });
 
             modelBuilder.Entity<Client>(entity =>
             {
-                entity.Property(e => e.ClientId).ValueGeneratedNever();
+                entity.Property(e => e.ClientId).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.DriverLicence).IsUnicode(false);
 
@@ -157,7 +157,7 @@ namespace AutoContact.Models
 
             modelBuilder.Entity<Department>(entity =>
             {
-                entity.Property(e => e.DepartmentId).ValueGeneratedNever();
+                entity.Property(e => e.DepartmentId).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.DepartmentName).IsUnicode(false);
 
@@ -198,7 +198,7 @@ namespace AutoContact.Models
 
             modelBuilder.Entity<Invoice>(entity =>
             {
-                entity.Property(e => e.InvoiceId).ValueGeneratedNever();
+                entity.Property(e => e.InvoiceId).ValueGeneratedOnAdd();
 
                 entity.HasOne(d => d.Employee)
                     .WithMany(p => p.Invoices)
@@ -219,7 +219,7 @@ namespace AutoContact.Models
 
             modelBuilder.Entity<LoanerCar>(entity =>
             {
-                entity.Property(e => e.LoanerCarId).ValueGeneratedNever();
+                entity.Property(e => e.LoanerCarId).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Colour).IsUnicode(false);
 
@@ -232,7 +232,7 @@ namespace AutoContact.Models
 
             modelBuilder.Entity<Part>(entity =>
             {
-                entity.Property(e => e.PartId).ValueGeneratedNever();
+                entity.Property(e => e.PartId).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Description).IsUnicode(false);
 
@@ -284,7 +284,7 @@ namespace AutoContact.Models
 
             modelBuilder.Entity<Vendor>(entity =>
             {
-                entity.Property(e => e.VendorId).ValueGeneratedNever();
+                entity.Property(e => e.VendorId).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Phone).IsFixedLength(true);
 
