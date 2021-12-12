@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 #nullable disable
@@ -31,6 +31,10 @@ namespace AutoContact.Models
         public int? QtyOnHand { get; set; }
         public int? QtyOnOrder { get; set; }
         public long CategoryId { get; set; }
+        [NotMapped]
+        public List<SelectListItem> AllCategories { get; set; }
+        [NotMapped]
+        public List<SelectListItem> AllVendors { get; set; }
 
         [ForeignKey(nameof(CategoryId))]
         [InverseProperty("Parts")]

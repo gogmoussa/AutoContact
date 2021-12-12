@@ -76,7 +76,18 @@ namespace AutoContact.Controllers
         // GET: Parts/Create
         public IActionResult Create()
         {
-            return View();
+            Part model = new Part();
+            model.AllCategories = _context.Categories.Select(e => new SelectListItem
+            {
+                Value = e.CategoryId.ToString(),
+                Text = $"{e.CategoryName}"
+            }).ToList();
+            model.AllVendors = _context.Vendors.Select(e => new SelectListItem
+            {
+                Value = e.VendorId.ToString(),
+                Text = $"{e.Name}"
+            }).ToList();
+            return View(model);
         }
 
         // POST: Parts/Create
@@ -104,6 +115,16 @@ namespace AutoContact.Controllers
             }
 
             var part = await _context.Parts.Include(x => x.Vendor).Include(x => x.Category).FirstOrDefaultAsync(p => p.PartId == id);
+            part.AllCategories = _context.Categories.Select(e => new SelectListItem
+            {
+                Value = e.CategoryId.ToString(),
+                Text = $"{e.CategoryName}"
+            }).ToList();
+            part.AllVendors = _context.Vendors.Select(e => new SelectListItem
+            {
+                Value = e.VendorId.ToString(),
+                Text = $"{e.Name}"
+            }).ToList();
             if (part == null)
             {
                 return NotFound();
