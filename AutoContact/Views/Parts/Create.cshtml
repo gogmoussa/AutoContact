@@ -32,11 +32,6 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <h1 class="mt-4">Create Part</h1>
                 <hr class="my-4" />
-                @*<div class="form-group">
-            <label asp-for="PartId" class="control-label"></label>
-            <input asp-for="PartId" class="form-control" />
-            <span asp-validation-for="PartId" class="text-danger"></span>
-        </div>*@
                 <div class="form-group">
                     <label asp-for="Name" class="control-label"></label>
                     <input asp-for="Name" class="form-control" />
@@ -48,16 +43,12 @@
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Vendor"></label>
-                    <select asp-for="Vendor" asp-items="Model.AllVendors" class="form-control">
+                    <label asp-for="VendorId"></label>
+                    <select asp-for="VendorId" asp-items="Model.AllVendors" class="form-control">
                         <option value="">Choose a Vendor</option>
                     </select>
-                    <span asp-validation-for="Vendor" class="text-danger"></span>
+                    <span asp-validation-for="VendorId" class="text-danger"></span>
                 </div>
-                @*<div class="form-group">
-                    <label asp-for="VendorId" class="control-label"></label>
-                    <select asp-for="VendorId" class="form-control" asp-items="ViewBag.VendorId"></select>
-                </div>*@
                 <div class="form-group">
                     <label asp-for="CostPrice" class="control-label"></label>
                     <input asp-for="CostPrice" class="form-control" />
@@ -84,16 +75,12 @@
                     <span asp-validation-for="QtyOnOrder" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Category"></label>
-                    <select asp-for="Category" asp-items="Model.AllCategories" class="form-control">
+                    <label asp-for="CategoryId"></label>
+                    <select asp-for="CategoryId" asp-items="Model.AllCategories" class="form-control">
                         <option value="">Choose a Category</option>
                     </select>
-                    <span asp-validation-for="Category" class="text-danger"></span>
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
                 </div>
-                @*<div class="form-group">
-            <label asp-for="CategoryId" class="control-label"></label>
-            <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
-        </div>*@
                 <br />
                 <div>
                     <button class="btn btn-primary" type="submit" value="Create">Create</button>
