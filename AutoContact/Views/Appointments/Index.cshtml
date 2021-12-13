@@ -58,33 +58,67 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model)
+                @if (@User.FindFirstValue(ClaimTypes.Role) == "Client")
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ClientId)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.AppointmentDate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.AppointmentStartTime)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.BookedAtTime)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.BookingEmployeeId)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Car.Model)
-                        </td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.AppointmentId"><i class="bi bi-pencil-square"></i></a>
-                            <a asp-action="Delete" asp-route-id="@item.AppointmentId"><i class="bi bi-trash"></i></a>
-                            <a asp-action="Details" asp-route-id="@item.AppointmentId"><i class="bi bi-three-dots-vertical"></i></a>
-                        </td>
-                    </tr>
+                    @foreach (var item in Model.Where(a => a.ClientId.ToString() == @User.FindFirstValue(ClaimTypes.NameIdentifier)))
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ClientId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AppointmentDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AppointmentStartTime)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BookedAtTime)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BookingEmployeeId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Car.Model)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.AppointmentId"><i class="bi bi-pencil-square"></i></a>
+                                <a asp-action="Delete" asp-route-id="@item.AppointmentId"><i class="bi bi-trash"></i></a>
+                                <a asp-action="Details" asp-route-id="@item.AppointmentId"><i class="bi bi-three-dots-vertical"></i></a>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ClientId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AppointmentDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AppointmentStartTime)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BookedAtTime)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BookingEmployeeId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Car.Model)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.AppointmentId"><i class="bi bi-pencil-square"></i></a>
+                                <a asp-action="Delete" asp-route-id="@item.AppointmentId"><i class="bi bi-trash"></i></a>
+                                <a asp-action="Details" asp-route-id="@item.AppointmentId"><i class="bi bi-three-dots-vertical"></i></a>
+                            </td>
+                        </tr>
+                    }
                 }
             </tbody>
         </table>

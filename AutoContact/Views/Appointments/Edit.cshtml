@@ -61,16 +61,44 @@
                     <input asp-for="BookedAtTime" class="form-control" />
                     <span asp-validation-for="BookedAtTime" class="text-danger"></span>
                 </div>
+                @if (@User.FindFirstValue(ClaimTypes.Role) != "Client")
+                {
+                    <div class="form-group">
+                        <label asp-for="BookingEmployeeId" class="control-label"></label>
+                        <input asp-for="BookingEmployeeId" class="form-control" readonly />
+                        <span asp-validation-for="BookingEmployeeId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ClientId" class="control-label">Client</label>
+                        @Html.DropDownList("ClientId", (IEnumerable<SelectListItem>)ViewBag.Clients, new { @class = "form-control" })
+                        <span asp-validation-for="ClientId" class="text-danger"></span>
+                    </div>
+                }
+                else
+                {
+                    <div class="form-group">
+                        <label asp-for="BookingEmployeeId" class="control-label"></label>
+                        <input asp-for="BookingEmployeeId" class="form-control" readonly />
+                        <span asp-validation-for="BookingEmployeeId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ClientId" class="control-label"></label>
+                        <input asp-for="ClientId" class="form-control" readonly />
+                        <span asp-validation-for="ClientId" class="text-danger"></span>
+                    </div>
+                }
                 <div class="form-group">
-                    <label asp-for="BookingEmployeeId" class="control-label"></label>
-                    <input asp-for="BookingEmployeeId" class="form-control" />
-                    <span asp-validation-for="BookingEmployeeId" class="text-danger"></span>
+                    <label asp-for="Message" class="control-label"></label>
+                    <input asp-for="Message" class="form-control" />
+                    <span asp-validation-for="Message" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Car" class="control-label"></label>
                     <input asp-for="Car.Make" type="text" class="form-control" placeholder="Make" />
                     <input asp-for="Car.Model" type="text" class="form-control" placeholder="Model" />
                     <input asp-for="Car.Colour" type="text" class="form-control" placeholder="Color" />
+                    <input asp-for="Car.Vin" type="text" class="form-control" placeholder="Vin" />
+                    <input asp-for="Car.Odometer" type="text" class="form-control" placeholder="Odometer" />
                     <span asp-validation-for="Car" class="text-danger"></span>
                 </div>
                 <br />

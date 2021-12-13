@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AutoContact.Models;
 using AutoContact.Helpers;
-
+using System.Security.Claims;
 
 namespace AutoContact.Controllers
 {
@@ -49,6 +49,7 @@ namespace AutoContact.Controllers
         // GET: Appointments/Create
         public IActionResult Create()
         {
+            ViewData["Clients"] = new SelectList(_context.Clients, "ClientId", "FirstName");
             ViewData["CarId"] = new SelectList(_context.Cars, "CarId", "Model");
             return View();
         }
@@ -58,17 +59,18 @@ namespace AutoContact.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AppointmentId,AppointmentDate,AppointmentStartTime,BookedAtTime,Message,BookingEmployeeId,ClientId,CarId")] Appointment appointment, [Bind("CarId,Vin,Make,Model,Colour,Odometer")] Car car)
+        public async Task<IActionResult> Create([Bind("AppointmentId,AppointmentDate,AppointmentStartTime,BookedAtTime,Message,BookingEmployeeId,ClientId,Car")] Appointment appointment)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid)  
             {
-                car.Vin ??= "";
-                _context.Add(car);
+                if (User.FindFirstValue(ClaimTypes.Role) == "Client")
+                    appointment.ClientId = long.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
                 appointment.BookedAtTime = DateTime.Now;
-                //appointment.ClientId = ;    // assign to the logged in client
-                appointment.CarId = car.CarId;
+                appointment.BookingEmployeeId = long.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                appointment.Car.Vin ??= "N/A";
                 _context.Add(appointment);
-                
+                _context.Add(appointment.Car);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -89,6 +91,7 @@ namespace AutoContact.Controllers
             {
                 return NotFound();
             }
+            ViewData["Clients"] = new SelectList(_context.Clients, "ClientId", "FirstName", appointment.ClientId);
             ViewData["CarId"] = new SelectList(_context.Cars, "CarId", "Model", appointment.CarId);
             return View(appointment);
         }
@@ -98,7 +101,7 @@ namespace AutoContact.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("AppointmentId,AppointmentDate,AppointmentStartTime,BookedAtTime,Message,BookingEmployeeId,ClientId,CarId")] Appointment appointment, [Bind("CarId,Vin,Make,Model,Colour,Odometer")] Car car)
+        public async Task<IActionResult> Edit(long id, [Bind("AppointmentId,AppointmentDate,AppointmentStartTime,BookedAtTime,Message,BookingEmployeeId,ClientId,Car")] Appointment appointment)
         {
             if (id != appointment.AppointmentId)
             {
@@ -109,7 +112,7 @@ namespace AutoContact.Controllers
             {
                 try
                 {
-                    _context.Update(car);                    
+                    _context.Update(appointment.Car);                    
                     _context.Update(appointment);
 
                     await _context.SaveChangesAsync();
@@ -127,6 +130,7 @@ namespace AutoContact.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["Clients"] = new SelectList(_context.Clients, "ClientId", "FirstName", appointment.ClientId);
             ViewData["CarId"] = new SelectList(_context.Cars, "CarId", "Model", appointment.CarId);
             return View(appointment);
         }

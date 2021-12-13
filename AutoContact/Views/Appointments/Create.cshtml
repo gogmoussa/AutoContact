@@ -119,15 +119,13 @@
                         <div class="bg-white">
                             <form asp-action="Create">
                                 <div asp-validation-summary="ModelOnly" class="text-danger" />
+                                @if (@User.FindFirstValue(ClaimTypes.Role) != "Client")
+                                { 
                                 <div class="form-row border-bottom p-4">
-                                    <label class="text-inverse font-12 text-uppercase">Select Location</label>
-                                    <select class="border-0 p-0 font-14 form-control" id="sellocation">
-                                        <option>London</option>
-                                        <option>Toronto</option>
-                                        <option>Waterloo</option>
-                                        <option>Ottawa</option>
-                                    </select>
-                                </div>
+                                    <label asp-for="ClientId" class="text-inverse font-12 text-uppercase">Select Client</label>
+                                    <select asp-for="ClientId" class="border-0 p-0 font-14 form-control" asp-items="ViewBag.Clients"></select>
+                                </div>                                
+                                }
                                 <div class="form-row p-4 position-relative">
                                     <label asp-for="AppointmentDate" class="text-inverse font-12 text-uppercase">Booking Date</label>
                                     <input asp-for="AppointmentDate" type="date" class="border-0 p-0 font-14 form-control" id="bookingDate" />

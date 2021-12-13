@@ -25,56 +25,78 @@
     <div class="container font pt-3 pb-3">
         <div class="text-center pt-5 pb-5">
             <h1>Hi, @Html.DisplayFor(model => model.FirstName)</h1>
-            <p>Manage clients, employees, appointments, and inventory.</p>
+            <p>Use this dashboard to access account features</p>
         </div>
-        <div class="row my-4">
-            <div class="col-12 col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h4>Clients <i class="bi bi-people"></i></h4>
-                        <p class="card-text">Create, update, delete or view a list of all clients. </p>
+        @if (@User.FindFirstValue(ClaimTypes.Role) != "Client")
+        {
+            if (@User.FindFirstValue(ClaimTypes.Role) != "Employee")
+            {
+                <div class="row my-4">
+                    <div class="col-12 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4>Clients <i class="bi bi-people"></i></h4>
+                                <p class="card-text">Create, update, delete or view a list of all clients. </p>
+                            </div>
+                            <div class="card-footer">
+                                <a asp-area="" asp-controller="Clients" asp-action="Index">View Clients</a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-footer">
-                        <a asp-area="" asp-controller="Clients" asp-action="Index">View Clients</a>
+                    <div class="col-12 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4>Employees <i class="bi bi-people-fill"></i></h4>
+                                <p class="card-text">Create, update, delete or view a list of all employees. </p>
+                            </div>
+                            <div class="card-footer">
+                                <a asp-area="" asp-controller="Employees" asp-action="Index">View Employees</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="row my-4">
+                <div class="col-12 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>Inventory <i class="bi bi-clipboard-data"></i></h4>
+                            <p class="card-text">Create, update, delete or view the inventory. </p>
+                        </div>
+                        <div class="card-footer">
+                            <a asp-area="" asp-controller="Parts" asp-action="Index">View Inventory</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>Appointments <i class="bi bi-calendar-week"></i></h4>
+                            <p class="card-text">Create, update, delete or view all appointments. </p>
+                        </div>
+                        <div class="card-footer">
+                            <a asp-area="" asp-controller="Appointments" asp-action="Index">View Appointments</a>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h4>Employees <i class="bi bi-people-fill"></i></h4>
-                        <p class="card-text">Create, update, delete or view a list of all employees. </p>
-                    </div>
-                    <div class="card-footer">
-                        <a asp-area="" asp-controller="Employees" asp-action="Index">View Employees</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row my-4">
-            <div class="col-12 col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h4>Appointments <i class="bi bi-calendar-week"></i></h4>
-                        <p class="card-text">Create, update, delete or view all appointments. </p>
-                    </div>
-                    <div class="card-footer">
-                        <a asp-area="" asp-controller="Appointments" asp-action="Index">View Appointments</a>
+        }
+        else
+        {
+            <div class="row my-4 ml-auto">
+                <div class="col-12 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>Appointments <i class="bi bi-calendar-week"></i></h4>
+                            <p class="card-text">Create, update, delete or view all appointments. </p>
+                        </div>
+                        <div class="card-footer">
+                            <a asp-area="" asp-controller="Appointments" asp-action="Index">View Appointments</a>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h4>Inventory <i class="bi bi-clipboard-data"></i></h4>
-                        <p class="card-text">Create, update, delete or view the inventory. </p>
-                    </div>
-                    <div class="card-footer">
-                        <a asp-area="" asp-controller="Parts" asp-action="Index">View Inventory</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        }
     </div>
 </body>
 </html>
