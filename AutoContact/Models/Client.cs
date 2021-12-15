@@ -29,12 +29,14 @@ namespace AutoContact.Models
         [Column(TypeName = "date")]
         public DateTime? BirthDate { get; set; }
         public long AddressId { get; set; }
-        [Required]
         public string HashPass { get; set; }
-        [Required]
         public string HashSalt { get; set; }
+        [NotMapped]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
         [Required]
         [StringLength(50)]
+        [EmailAddress]
         public string Email { get; set; }
         [Required]
         [StringLength(20)]

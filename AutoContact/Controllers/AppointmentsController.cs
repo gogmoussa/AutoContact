@@ -69,6 +69,7 @@ namespace AutoContact.Controllers
                 appointment.BookedAtTime = DateTime.Now;
                 appointment.BookingEmployeeId = long.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
                 appointment.Car.Vin ??= "N/A";
+                appointment.AppointmentStartTime = DateTime.Parse(appointment.AppointmentDate.ToShortDateString() + " " + appointment.AppointmentStartTime.ToShortTimeString());
                 _context.Add(appointment);
                 _context.Add(appointment.Car);
                 await _context.SaveChangesAsync();

@@ -3,58 +3,77 @@
 @{
     ViewData["Title"] = "Details";
 }
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <style>
+        body {
+            color: #8e9194;
+            background-color: #f4f6f9;
+        }
 
-<h1>Details</h1>
+        .text-muted {
+            color: #aeb0b4 !important;
+        }
 
-<div>
-    <h4>Appointment</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ClientId)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ClientId)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.AppointmentDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.AppointmentDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.AppointmentStartTime)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.AppointmentStartTime)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BookedAtTime)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BookedAtTime)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BookingEmployeeId)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BookingEmployeeId)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Car)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Car.Model)
-        </dd>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Car.Make)
-        </dd>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Car.Colour)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.AppointmentId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+        .text-muted {
+            font-weight: 300;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div>
+                <h1 class="mt-4">Appointment</h1>
+                <hr class="my-4" />
+                <dl class="row">
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.ClientId)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.ClientId)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.AppointmentDate)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.AppointmentDate)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.AppointmentStartTime)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.AppointmentStartTime)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.BookedAtTime)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.BookedAtTime)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.BookingEmployeeId)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.BookingEmployeeId)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Car)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Car.Model), @Html.DisplayFor(model => model.Car.Make), @Html.DisplayFor(model => model.Car.Colour)
+                    </dd>
+                </dl>
+            </div>
+            <div>
+                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.AppointmentId">Edit</a>
+                <a class="btn btn-outline-secondary" asp-action="Index">Back to List</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

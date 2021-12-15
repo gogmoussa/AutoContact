@@ -154,6 +154,10 @@
                             <input asp-for="Address.Country" class="form-control" />
                             <span asp-validation-for="Address.Country" class="text-danger"></span>
                         </div>
+                        @Html.Hidden("HashPass")
+                        @Html.Hidden("HashSalt")
+                        @Html.Hidden("Address.AddressId")
+                        @Html.Hidden("AddressId")
                     </div>
                 </div>
                 <br />

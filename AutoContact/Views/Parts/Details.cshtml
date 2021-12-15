@@ -3,68 +3,94 @@
 @{
     ViewData["Title"] = "Details";
 }
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <style>
+        body {
+            color: #8e9194;
+            background-color: #f4f6f9;
+        }
 
-<h1>Details</h1>
+        .text-muted {
+            color: #aeb0b4 !important;
+        }
 
-<div>
-    <h4>Part</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Vendor)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Vendor.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CostPrice)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CostPrice)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ReorderQty)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ReorderQty)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.EconomicalOrderQty)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.EconomicalOrderQty)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.QtyOnHand)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.QtyOnHand)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.QtyOnOrder)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.QtyOnOrder)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Category)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Category.CategoryName)
-        </dd>
-    </dl>
-        <a asp-action="Edit" asp-route-id="@Model.PartId">Edit</a> |
-        <a asp-action="Index">Back to List</a>
+        .text-muted {
+            font-weight: 300;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div>
+                <h1 class="mt-4">Part</h1>
+                <hr class="my-4" />
+
+                <dl class="row">
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Name)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Name)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Description)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Description)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Vendor)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Vendor.Name)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.CostPrice)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.CostPrice)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.ReorderQty)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.ReorderQty)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.EconomicalOrderQty)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.EconomicalOrderQty)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.QtyOnHand)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.QtyOnHand)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.QtyOnOrder)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.QtyOnOrder)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Category)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Category.CategoryName)
+                    </dd>
+                </dl>
+                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.PartId">Edit</a> 
+                <a class="btn btn-outline-secondary" asp-action="Index">Back to List</a>
+            </div>
+        </div>
     </div>
+</body>
+</html>

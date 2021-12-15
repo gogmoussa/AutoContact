@@ -30,6 +30,7 @@
         <div class="row justify-content-center">
             <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="PartId" />
                 <h1 class="mt-4">Edit Part</h1>
                 <hr class="my-4" />
                 @*<input type="hidden" asp-for="PartId" />
