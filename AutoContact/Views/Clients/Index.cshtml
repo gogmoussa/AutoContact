@@ -59,7 +59,7 @@
                         @Html.DisplayFor(modelItem => item.DriverLicence)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.BirthDate)
+                        @Convert.ToDateTime(item.BirthDate).ToString("dd/MM/yyyy")
                     </td>
                     <td>
                         <a asp-action="Edit" asp-route-id="@item.ClientId"><i class="bi bi-pencil-square"></i></a>

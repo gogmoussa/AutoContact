@@ -46,7 +46,9 @@ namespace AutoContact.Controllers
         // GET: Clients/Create
         public IActionResult Create()
         {
-            return View();
+            Client model = new Client();
+            model.Address = new Address();
+            return View(model);
         }
 
         // POST: Clients/Create
@@ -54,12 +56,15 @@ namespace AutoContact.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ClientId,FirstName,LastName,DriverLicence,BirthDate,AddressId,Email,PhoneNum,HashPass,HashSalt")] Client client)
+        public async Task<IActionResult> Create([Bind("ClientId,FirstName,LastName,DriverLicence,BirthDate,AddressId,Email,PhoneNum,HashPass,HashSalt,Address")] Client client)
         {
             if (ModelState.IsValid)
             {
                 client.HashSalt = Crypto.generateSalt();
                 client.HashPass = Crypto.hashPassword(client.HashPass, client.HashSalt);
+                if (string.IsNullOrEmpty(client.Address.UnitNum))
+                    client.Address.UnitNum = "";
+
                 _context.Add(client);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -88,7 +93,7 @@ namespace AutoContact.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("ClientId,FirstName,LastName,DriverLicence,BirthDate,AddressId,Email,PhoneNum,HashPass,HashSalt")] Client client, [Bind("AddressId,StreetNum,UnitNum,StreetName,CityName,ProvinceName,Country")] Address address)
+        public async Task<IActionResult> Edit(long id, [Bind("ClientId,FirstName,LastName,DriverLicence,BirthDate,AddressId,Email,PhoneNum,HashPass,HashSalt,Password")] Client client, [Bind("AddressId,StreetNum,UnitNum,StreetName,CityName,ProvinceName,Country")] Address address)
         {
             if (id != client.ClientId)
             {
@@ -103,9 +108,10 @@ namespace AutoContact.Controllers
                     client.HashPass = Crypto.hashPassword(client.HashPass, client.HashSalt);
                     _context.Update(client);
 
-                    address.UnitNum ??= "";
-                    _context.Update(address);
+                    if (address.UnitNum == null)
+                        address.UnitNum = " ";
 
+                    _context.Update(address);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

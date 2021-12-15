@@ -67,10 +67,10 @@
                                 @Html.DisplayFor(modelItem => item.ClientId)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.AppointmentDate)
+                                @Convert.ToDateTime(item.AppointmentDate).ToString("dd/MM/yyyy")
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.AppointmentStartTime)
+                                @Convert.ToDateTime(item.AppointmentStartTime).ToString("h:mm tt")
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.BookedAtTime)
@@ -98,10 +98,10 @@
                                 @Html.DisplayFor(modelItem => item.ClientId)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.AppointmentDate)
+                                @Convert.ToDateTime(item.AppointmentDate).ToString("dd/MM/yyyy")
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.AppointmentStartTime)
+                                @Convert.ToDateTime(item.AppointmentStartTime).ToString("h:mm tt")
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.BookedAtTime)
