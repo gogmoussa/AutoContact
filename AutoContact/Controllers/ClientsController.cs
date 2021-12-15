@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AutoContact.Models;
 using AutoContact.Helpers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AutoContact.Controllers
 {
@@ -44,6 +45,7 @@ namespace AutoContact.Controllers
         }
 
         // GET: Clients/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             Client model = new Client();
@@ -56,16 +58,30 @@ namespace AutoContact.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ClientId,FirstName,LastName,DriverLicence,BirthDate,AddressId,Email,PhoneNum,HashPass,HashSalt,Address")] Client client)
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Create([Bind("ClientId,FirstName,LastName,DriverLicence,BirthDate,AddressId,Email,PhoneNum,HashPass,HashSalt,Address,Password")] Client client)
         {
             if (ModelState.IsValid)
             {
+                if (string.IsNullOrEmpty(client.Password) || client.Password.Length < 6)
+                {
+                    ModelState.AddModelError("Password", "Password has to be atleast 6 characters long!");
+                    return View(client);
+                }
                 client.HashSalt = Crypto.generateSalt();
-                client.HashPass = Crypto.hashPassword(client.HashPass, client.HashSalt);
+                client.HashPass = Crypto.hashPassword(client.Password, client.HashSalt);
                 if (string.IsNullOrEmpty(client.Address.UnitNum))
                     client.Address.UnitNum = "";
 
                 _context.Add(client);
+                await _context.SaveChangesAsync();
+
+                AccessLevel clientAccessLevel = new AccessLevel();
+                clientAccessLevel.AccessLevel1 = "Client";
+                clientAccessLevel.ClientId = client.ClientId;
+
+                _context.Add(clientAccessLevel);
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

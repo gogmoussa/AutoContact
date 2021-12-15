@@ -1,6 +1,6 @@
-﻿@model AutoContact.Models.Employee
+﻿@model AutoContact.Models.Client
 @{
-    ViewData["Title"] = "Employee Dashboard";
+    ViewData["Title"] = "Client Dashboard";
 }
 <!DOCTYPE html>
 <html>
@@ -25,7 +25,7 @@
     <div class="container font pt-3 pb-3">
         <div class="text-center pt-5 pb-5">
             <h1>Hi, @Html.DisplayFor(model => model.FirstName)</h1>
-            <p>Use this AdminDashboard to access account features</p>
+            <p>Use this dashboard to access account features</p>
         </div>
         @if (@User.FindFirstValue(ClaimTypes.Role) != "Client")
         {

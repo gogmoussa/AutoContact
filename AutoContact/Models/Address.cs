@@ -23,20 +23,26 @@ namespace AutoContact.Models
         public long AddressId { get; set; }
         [Required]
         [StringLength(10)]
+        [Display(Name ="Street Number")]
         public string StreetNum { get; set; }
         [StringLength(10)]
+        [Display(Name = "Unit Number")]
         public string UnitNum { get; set; }
         [Required]
         [StringLength(50)]
+        [Display(Name = "Street Name")]
         public string StreetName { get; set; }
         [Required]
         [StringLength(50)]
+        [Display(Name = "City")]
         public string CityName { get; set; }
         [Required]
         [StringLength(50)]
+        [Display(Name = "Province/State")]
         public string ProvinceName { get; set; }
         [Required]
         [StringLength(50)]
+        [Display(Name = "Country")]
         public string Country { get; set; }
 
         [InverseProperty(nameof(Client.Address))]

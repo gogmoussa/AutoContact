@@ -35,7 +35,10 @@ namespace AutoContactApp.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("AdminDashboard", new { id = User.FindFirstValue(ClaimTypes.NameIdentifier) });
+                if (User.FindFirstValue(ClaimTypes.Role).Equals("Client"))
+                    return RedirectToAction("ClientDashboard", new { id = User.FindFirstValue(ClaimTypes.NameIdentifier) });
+                else
+                    return RedirectToAction("AdminDashboard", new { id = User.FindFirstValue(ClaimTypes.NameIdentifier) });
             }
             return View();
         }
@@ -70,6 +73,17 @@ namespace AutoContactApp.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("AdminDashboard", new { id = User.FindFirstValue(ClaimTypes.NameIdentifier) });
+            }
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
+        }
+
+        [AllowAnonymous]
+        public IActionResult ClientLogin(string returnUrl)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("ClientDashboard", new { id = User.FindFirstValue(ClaimTypes.NameIdentifier) });
             }
             ViewBag.ReturnUrl = returnUrl;
             return View();
@@ -149,15 +163,85 @@ namespace AutoContactApp.Controllers
             return View();
         }
 
+        // POST: Home/ClientLogin
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ClientLogin(string email, string password, bool rememberUser, string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password))
+                {
+                    var client = await (from cli in _context.Clients
+                                        where cli.Email == email
+                                        select new { ClientId = cli.ClientId, Email = cli.Email, Password = cli.HashPass, Salt = cli.HashSalt }).FirstOrDefaultAsync();
+
+                    if (client != null && Crypto.hashPassword(password, client.Salt).Equals(client.Password))
+                    {
+                        var role = _context.AccessLevels.FirstOrDefault(x => x.ClientId == client.ClientId)?.AccessLevel1;
+                        HttpContext.Session.SetString("email", email);
+                        var claims = new List<Claim>
+                            {
+                                new Claim(ClaimTypes.Name, email),
+                                new Claim(ClaimTypes.NameIdentifier, client.ClientId.ToString()),
+                                new Claim(ClaimTypes.Role, role),
+                            };
+
+
+                        var claimsIdentity = new ClaimsIdentity(
+                            claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                        var authProperties = new AuthenticationProperties
+                        {
+                            //AllowRefresh = <bool>,
+                            // Refreshing the authentication session should be allowed.
+
+                            ExpiresUtc = rememberUser ? DateTimeOffset.UtcNow.AddDays(14) : DateTimeOffset.UtcNow.AddMinutes(10),
+                            // The time at which the authentication ticket expires. A 
+                            // value set here overrides the ExpireTimeSpan option of 
+                            // CookieAuthenticationOptions set with AddCookie.
+
+                            IsPersistent = rememberUser,
+                            // Whether the authentication session is persisted across 
+                            // multiple requests. When used with cookies, controls
+                            // whether the cookie's lifetime is absolute (matching the
+                            // lifetime of the authentication ticket) or session-based.
+
+                            //IssuedUtc = <DateTimeOffset>,
+                            // The time at which the authentication ticket was issued.
+
+                            //RedirectUri = <string>
+                            // The full path or absolute URI to be used as an http 
+                            // redirect response value.
+                        };
+
+                        await HttpContext.SignInAsync(
+                            CookieAuthenticationDefaults.AuthenticationScheme,
+                            new ClaimsPrincipal(claimsIdentity),
+                            authProperties);
+                        if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                            return Redirect(returnUrl);
+                        return RedirectToAction("ClientDashboard", new { id = client.ClientId });
+                    }
+                }
+            }
+            ModelState.AddModelError("Error", "Invalid Login");
+            return View();
+        }
+
         [HttpGet]
         public async Task<IActionResult> Logout()
         {
             HttpContext.Session.Remove("email");
             await HttpContext.SignOutAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction(nameof(AdminLogin));
+            return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = "Admin,Employee")]
         public async Task<IActionResult> AdminDashboard(long? id)
         {
             if (id == null)
@@ -173,6 +257,41 @@ namespace AutoContactApp.Controllers
             }
 
             return View(employee);
+        }
+
+        [Authorize(Roles = "Client")]
+        public async Task<IActionResult> ClientDashboard(long? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var client = await _context.Clients
+                .FirstOrDefaultAsync(m => m.ClientId == id);
+            if (client == null)
+            {
+                return NotFound();
+            }
+
+            return View(client);
+        }
+
+        public async Task<IActionResult> ClientProfile(long? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var client = await _context.Clients
+                .FirstOrDefaultAsync(m => m.ClientId == id);
+            if (client == null)
+            {
+                return NotFound();
+            }
+
+            return View(client);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

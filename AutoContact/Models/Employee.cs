@@ -70,7 +70,7 @@ namespace AutoContact.Models
         {
             get
             {
-                return new List<SelectListItem>() { new SelectListItem("Admin", "Admin"), new SelectListItem("Employee", "Employee"), new SelectListItem("Client", "Client") };
+                return new List<SelectListItem>() { new SelectListItem("Admin", "Admin"), new SelectListItem("Employee", "Employee") };
             }
         }
         [NotMapped]

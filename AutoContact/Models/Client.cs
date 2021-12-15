@@ -20,13 +20,17 @@ namespace AutoContact.Models
         public long ClientId { get; set; }
         [Required]
         [StringLength(50)]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
         [Required]
         [StringLength(50)]
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
         [StringLength(17)]
+        [Display(Name = "Driver's License Number")]
         public string DriverLicence { get; set; }
-        [Column(TypeName = "date")]
+        [DataType(DataType.Date)]
+        [Display(Name = "Birth Date")]
         public DateTime? BirthDate { get; set; }
         public long AddressId { get; set; }
         public string HashPass { get; set; }
@@ -40,6 +44,9 @@ namespace AutoContact.Models
         public string Email { get; set; }
         [Required]
         [StringLength(20)]
+        [Display(Name = "Phone Number")]
+        [DataType(DataType.PhoneNumber, ErrorMessage = "Invalid Phone Number")]
+        [RegularExpression(@"\(?\d{3}\)?-? *\d{3}-? *-?\d{4}", ErrorMessage = "Invalid Phone Number.")]
         public string PhoneNum { get; set; }
 
         [ForeignKey(nameof(AddressId))]
