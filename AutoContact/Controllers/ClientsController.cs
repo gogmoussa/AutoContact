@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AutoContact.Models;
 using AutoContact.Helpers;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace AutoContact.Controllers
 {
@@ -120,8 +118,22 @@ namespace AutoContact.Controllers
             {
                 try
                 {
-                    client.HashSalt = Crypto.generateSalt();
-                    client.HashPass = Crypto.hashPassword(client.HashPass, client.HashSalt);
+                    if(User.FindFirstValue(ClaimTypes.Role) != "Client")
+                    {
+                        if (!string.IsNullOrEmpty(client.Password))
+                        {
+                            if (client.Password.Length >= 6)
+                            {
+                                client.HashSalt = Crypto.generateSalt();
+                                client.HashPass = Crypto.hashPassword(client.Password, client.HashSalt);
+                            }
+                            else
+                            {
+                                ModelState.AddModelError("Password", "Password has to be atleast 6 characters long!");
+                                return View(client);
+                            }
+                        }
+                    }
                     _context.Update(client);
 
                     if (address.UnitNum == null)
@@ -141,7 +153,7 @@ namespace AutoContact.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return View(nameof(Details), client);
             }
             return View(client);
         }

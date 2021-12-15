@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -220,8 +218,6 @@ namespace AutoContact.Controllers
             {
                 try
                 {
-                    employee.HashSalt = Crypto.generateSalt();
-                    employee.HashPass = Crypto.hashPassword(employee.HashPass, employee.HashSalt);
                     _context.Update(employee);
                     //await _context.SaveChangesAsync();
 
@@ -242,7 +238,7 @@ namespace AutoContact.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("MechanicDetails", new { id = 1 });
+                return View(nameof(MechanicDetails), employee);
             }
             return View(employee);
         }
@@ -258,6 +254,7 @@ namespace AutoContact.Controllers
             var employee = await _context.Employees
                .Include(e => e.Address)
                .Include(e => e.ManagerNavigation)
+               .Include(y => y.AccessLevels)
                .FirstOrDefaultAsync(m => m.EmployeeId == id);
             if (employee == null)
             {
@@ -272,7 +269,9 @@ namespace AutoContact.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
         {
-            var employee = await _context.Employees.FindAsync(id);
+            var employee = await _context.Employees.Include(e => e.Address)
+               .Include(e => e.ManagerNavigation)
+               .Include(y => y.AccessLevels).FirstOrDefaultAsync(e => e.EmployeeId == id);
             _context.Employees.Remove(employee);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
