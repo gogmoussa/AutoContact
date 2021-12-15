@@ -1,0 +1,157 @@
+﻿@{
+    ViewData["Title"] = "Client Login";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <style>
+        .vertical-center {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .header1 {
+            margin-bottom: -15px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .header2 {
+            margin-bottom: 25px;
+            font-family: 'Montserrat', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="container vertical-center">
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-xl-4 mr-4">
+                <img src="~/images/mechanic_clipart.png" class="img-fluid"
+                     alt="Sample image">
+            </div>
+            <div class="col-xl-5">
+                <form method="post" asp-controller="home" asp-action="clientlogin">
+                    <div>
+                        <div class="header1">
+                            <h5>Hello Again</h5>
+                        </div>
+                        <div class="header2">
+                            <h3>Login to your account</h3>
+                        </div>
+                    </div>
+                    <!-- Email input -->
+                    <div class="form-group">
+                        <input type="email" class="form-control form-control-lg" id="loginEmail" name="email" placeholder="Email" required />
+                    </div>
+                    <!-- Password input -->
+                    <div class="form-group">
+                        <input type="password" class="form-control form-control-lg" id="userPassword" name="password" placeholder="Password" required />
+                    </div>
+                    <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
+                    <div class="d-flex justify-content-between align-items-center">
+                        <!-- Checkbox -->
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="rememberUser" name="rememberUser" value="true" />
+                            <input name="rememberUser" value="false" type="hidden">
+                            <label class="form-check-label" for="rememberUser">
+                                Remember me
+                            </label>
+                        </div>
+                        <a href="#" data-toggle="modal" data-target="#forgotPasswordModal"
+                           class="btn-link">Forgot Password?</a>
+                    </div>
+                    <!-- Submit button -->
+                    <div class="text-center text-lg-start mt-3">
+                        <input type="submit" class="btn btn-primary btn-lg" style="padding-left: 30px; padding-right: 30px;" value="Login" />
+                        @*<button class="btn btn-primary btn-lg" type="submit" href="~/Home/AdminDashboard" style="padding-left: 30px; padding-right: 30px;">Login</button>*@
+                        <div class="col-12">
+                            @Html.ValidationMessage("Error")
+                        </div>
+                        <p class="small mt-2 pt-1">
+                            Don't have an account? <a href="#" data-toggle="modal" data-target="#requestAccessModal"
+                                                      class="btn-link">Sign up now!</a>
+                        </p>
+                    </div>
+
+                    <!-- Forgot Password Modal -->
+                    <div class="modal fade" id="forgotPasswordModal" tabindex="-1" role="dialog" aria-labelledby="forgotPasswordModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="forgotPasswordModalLabel">Request Password Reset</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" name="email" placeholder="Email" />
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#submitModal" data-dismiss="modal">Submit Request</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Request Access Modal -->
+                    <div class="modal fade" id="requestAccessModal" tabindex="-1" role="dialog" aria-labelledby="requestAccessModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="requestAccessModalLabel">Request Access</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="firstname" placeholder="First Name">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="lastname" placeholder="Last Name">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" name="email" placeholder="Email" />
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#submitModal" data-dismiss="modal">Submit Request</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Submit Modal -->
+                    <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="requestAccessModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="requestAccessModalLabel">Request Submitted</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Request has been submitted to the Administration Team.
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
