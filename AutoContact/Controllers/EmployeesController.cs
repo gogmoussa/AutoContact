@@ -73,7 +73,7 @@ namespace AutoContact.Controllers
             Employee model = new Employee();
             model.Address = new Address();
             model.EmployeeAccessLevel = new AccessLevel();
-            model.AllEmployees = _context.Employees.Select(e => new SelectListItem
+            ViewData["AllEmployees"] = _context.Employees.Select(e => new SelectListItem
             {
                 Value = e.EmployeeId.ToString(),
                 Text = $"{e.FirstName} {e.LastName}"
@@ -126,6 +126,12 @@ namespace AutoContact.Controllers
             {
                 return NotFound();
             }
+            ViewData["AllEmployees"] = _context.Employees.Select(e => new SelectListItem
+            {
+                Value = e.EmployeeId.ToString(),
+                Text = $"{e.FirstName} {e.LastName}"
+            }).ToList();
+
             return View(employee);
         }
 

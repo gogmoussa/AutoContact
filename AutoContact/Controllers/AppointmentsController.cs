@@ -49,7 +49,12 @@ namespace AutoContact.Controllers
         // GET: Appointments/Create
         public IActionResult Create()
         {
-            ViewData["Clients"] = new SelectList(_context.Clients, "ClientId", "FirstName");
+            ViewData["Clients"] = _context.Clients.Select(c => new SelectListItem
+            {
+                Value = c.ClientId.ToString(),
+                Text = $"{c.FirstName} {c.LastName}"
+            }).ToList();
+
             ViewData["CarId"] = new SelectList(_context.Cars, "CarId", "Model");
             return View();
         }
@@ -75,7 +80,6 @@ namespace AutoContact.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CarId"] = new SelectList(_context.Cars, "CarId", "Model", appointment.CarId);
             return View(appointment);
         }
 
@@ -92,7 +96,11 @@ namespace AutoContact.Controllers
             {
                 return NotFound();
             }
-            ViewData["Clients"] = new SelectList(_context.Clients, "ClientId", "FirstName", appointment.ClientId);
+            ViewData["Clients"] = _context.Clients.Select(c => new SelectListItem
+            {
+                Value = c.ClientId.ToString(),
+                Text = $"{c.FirstName} {c.LastName}"
+            }).ToList();
             ViewData["CarId"] = new SelectList(_context.Cars, "CarId", "Model", appointment.CarId);
             return View(appointment);
         }
@@ -131,8 +139,6 @@ namespace AutoContact.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Clients"] = new SelectList(_context.Clients, "ClientId", "FirstName", appointment.ClientId);
-            ViewData["CarId"] = new SelectList(_context.Cars, "CarId", "Model", appointment.CarId);
             return View(appointment);
         }
 

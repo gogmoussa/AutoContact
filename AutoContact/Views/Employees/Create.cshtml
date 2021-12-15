@@ -113,7 +113,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label asp-for="Manager"></label>
-                            <select asp-for="Manager" asp-items="Model.AllEmployees" class="form-control">
+                            <select asp-for="Manager" asp-items="ViewBag.AllEmployees" class="form-control">
                                 <option value="">Choose a Manager</option>
                             </select>
                             <span asp-validation-for="Manager" class="text-danger"></span>
