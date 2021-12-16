@@ -18,13 +18,16 @@ namespace AutoContact.Models
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Display(Name = "Purchase Order ID")]
         public long? PurchaseOrderId { get; set; }
         public long VendorId { get; set; }
         [Column(TypeName = "money")]
         public decimal Amount { get; set; }
         [Column("PODate", TypeName = "date")]
+        [Display(Name = "Date Ordered")]
         public DateTime PODate { get; set; }
         [Column(TypeName = "date")]
+        [Display(Name = "Date Cancelled")]
         public DateTime? CancelledDate { get; set; }
 
         [ForeignKey(nameof(VendorId))]

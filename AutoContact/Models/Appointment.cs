@@ -19,14 +19,21 @@ namespace AutoContact.Models
         [Key]
         public long AppointmentId { get; set; }
         [Column(TypeName = "datetime")]
+        [Display(Name = "Date")]
         public DateTime AppointmentDate { get; set; }
         [Column(TypeName = "datetime")]
+        [Display(Name = "Start Time")]
         public DateTime AppointmentStartTime { get; set; }
         [Column(TypeName = "datetime")]
+        [Display(Name = "Booked")]
         public DateTime BookedAtTime { get; set; }
         public string Message { get; set; }
+        [Display(Name = "Booked By")]
         public long? BookingEmployeeId { get; set; }
+
+        [Display(Name = "Client ID")]
         public long ClientId { get; set; }
+        
         public long CarId { get; set; }
 
         [ForeignKey(nameof(CarId))]

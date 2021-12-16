@@ -17,9 +17,11 @@ namespace AutoContact.Models
         }
 
         [Key]
+        [Display(Name = "Category ID")]
         public long CategoryId { get; set; }
         [Required]
         [Column("Category")]
+        [Display(Name = "Category Name")]
         [StringLength(50)]
         public string CategoryName { get; set; }
 

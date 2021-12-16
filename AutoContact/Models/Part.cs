@@ -19,17 +19,24 @@ namespace AutoContact.Models
         }
 
         [Key]
+        [Display(Name = "Part ID")]
         public long PartId { get; set; }
         [StringLength(50)]
         public string Name { get; set; }
         public string Description { get; set; }
         public long? VendorId { get; set; }
         [Column(TypeName = "money")]
+        [Display(Name = "Cost Price")]
         public decimal? CostPrice { get; set; }
+        [Display(Name = "Reorder Qty")]
         public int ReorderQty { get; set; }
+        [Display(Name = "Economical Order Qty")]
         public int EconomicalOrderQty { get; set; }
+        [Display(Name = "Qty on Hand")]
         public int? QtyOnHand { get; set; }
+        [Display(Name = "Qty on Order")]
         public int? QtyOnOrder { get; set; }
+        [Display(Name = "Category")]
         public long CategoryId { get; set; }
         [NotMapped]
         public List<SelectListItem> AllCategories { get; set; }

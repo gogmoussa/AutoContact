@@ -27,6 +27,7 @@ namespace AutoContact.Models
         [StringLength(50)]
         public string Email { get; set; }
         [StringLength(50)]
+        [Display(Name = "Main Contact")]
         public string MainContact { get; set; }
         [StringLength(50)]
         public string Type { get; set; }
