@@ -64,7 +64,7 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.ClientId)
+                                @Html.DisplayFor(modelItem => item.Client.FirstName) @Html.DisplayFor(modelItem => item.Client.LastName)
                             </td>
                             <td>
                                 @Convert.ToDateTime(item.AppointmentDate).ToString("dd/MM/yyyy")
@@ -76,7 +76,7 @@
                                 @Html.DisplayFor(modelItem => item.BookedAtTime)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.BookingEmployeeId)
+                                @Html.DisplayFor(modelItem => item.Employee.FirstName) @Html.DisplayFor(modelItem => item.Employee.LastName)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Car.Model)
@@ -95,7 +95,7 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.ClientId)
+                                @Html.DisplayFor(modelItem => item.Client.FirstName) @Html.DisplayFor(modelItem => item.Client.LastName)
                             </td>
                             <td>
                                 @Convert.ToDateTime(item.AppointmentDate).ToString("dd/MM/yyyy")
@@ -107,7 +107,7 @@
                                 @Html.DisplayFor(modelItem => item.BookedAtTime)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.BookingEmployeeId)
+                                @Html.DisplayFor(modelItem => item.Employee.FirstName) @Html.DisplayFor(modelItem => item.Employee.LastName)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Car.Model)
