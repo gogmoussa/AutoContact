@@ -98,7 +98,6 @@
                     </div>
                     <hr class="my-4" />
 
-                    <p>We need access to address fields, currently only pulling in address id</p>
                     <!-- Address -->
                     <div class="form-row">
                         <div class="form-group col-md-6">
@@ -140,12 +139,15 @@
                     </div>
 
                     <hr class="my-4" />
-
+                    @Html.Hidden("Address.AddressId")
+                    @Html.Hidden("AddressId")
+                    @Html.Hidden("MainContact")
+                    @Html.Hidden("Type")
                 </div>
                 <br />
                 <div>
                     <button class="btn btn-primary" type="submit" value="Save">Save</button>
-                    <button class="btn btn-outline-secondary" asp-action="Index" asp-route-id="@Model.VendorId">Back to List</button>
+                    <button class="btn btn-outline-secondary" asp-action="Details" asp-route-id="@Model.VendorId">Cancel</button>
                 </div>
             </form>
         </div>
