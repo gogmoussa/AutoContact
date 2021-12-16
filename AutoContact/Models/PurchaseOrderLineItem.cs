@@ -15,7 +15,9 @@ namespace AutoContact.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Display(Name = "Line Item ID")]
         public long? PurchaseOrderLineItemId { get; set; }
+        [Display(Name = "Purchase Order ID")]
         public long PurchaseOrderId { get; set; }
         public long PartId { get; set; }
         public int Qty { get; set; }
