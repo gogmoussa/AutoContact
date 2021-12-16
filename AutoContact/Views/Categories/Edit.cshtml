@@ -30,9 +30,9 @@
         <div class="row justify-content-center">
             <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="CategoryId" />
                 <h1 class="mt-4">Edit Category</h1>
                 <hr class="my-4" />
-                @*<input type="hidden" asp-for="CategoryId" />*@
                 <div class="form-group">
                     <label asp-for="CategoryName" class="control-label"></label>
                     <input asp-for="CategoryName" class="form-control" />

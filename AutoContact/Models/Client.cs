@@ -14,6 +14,7 @@ namespace AutoContact.Models
         public Client()
         {
             AccessLevels = new HashSet<AccessLevel>();
+            Appointments = new HashSet<Appointment>();
         }
 
         [Key]
@@ -54,5 +55,7 @@ namespace AutoContact.Models
         public virtual Address Address { get; set; }
         [InverseProperty(nameof(AccessLevel.Client))]
         public virtual ICollection<AccessLevel> AccessLevels { get; set; }
+        [InverseProperty(nameof(Appointment.Client))]
+        public virtual ICollection<Appointment> Appointments { get; set; }
     }
 }
