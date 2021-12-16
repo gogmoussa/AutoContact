@@ -88,7 +88,7 @@ namespace AutoContact.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("VendorId,Name,AddressId,Phone,Email,MainContact,Type")] Vendor vendor)
+        public async Task<IActionResult> Edit(long id, [Bind("VendorId,Name,AddressId,Phone,Email,MainContact,Type")] Vendor vendor, [Bind("AddressId,StreetNum,UnitNum,StreetName,CityName,ProvinceName,Country")]Address address)
         {
             if (id != vendor.VendorId)
             {
@@ -100,6 +100,12 @@ namespace AutoContact.Controllers
                 try
                 {
                     _context.Update(vendor);
+
+                    if (address.UnitNum == null)
+                        address.UnitNum = " ";
+
+                    _context.Update(address);
+                    
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
