@@ -32,6 +32,12 @@ namespace AutoContact.Models
         [ForeignKey(nameof(CarId))]
         [InverseProperty("Appointments")]
         public virtual Car Car { get; set; }
+        [ForeignKey(nameof(ClientId))]
+        [InverseProperty("Appointments")]
+        public virtual Client Client { get; set; }
+        [ForeignKey(nameof(BookingEmployeeId))]
+        [InverseProperty("Appointments")]
+        public virtual Employee Employee { get; set; }
         [InverseProperty(nameof(AppointmentInvoice.Appointment))]
         public virtual ICollection<AppointmentInvoice> AppointmentInvoices { get; set; }
     }

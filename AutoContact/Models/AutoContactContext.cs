@@ -87,6 +87,18 @@ namespace AutoContact.Models
                     .HasForeignKey(d => d.CarId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Appointment_Car");
+
+                entity.HasOne(d => d.Client)
+                    .WithMany(p => p.Appointments)
+                    .HasForeignKey(d => d.ClientId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Appointment_Client");
+
+                entity.HasOne(d => d.Employee)
+                    .WithMany(p => p.Appointments)
+                    .HasForeignKey(d => d.BookingEmployeeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Appointment_Employee");
             });
 
             modelBuilder.Entity<AppointmentInvoice>(entity =>
@@ -133,6 +145,7 @@ namespace AutoContact.Models
             modelBuilder.Entity<Category>(entity =>
             {
                 entity.Property(e => e.CategoryId).ValueGeneratedOnAdd();
+                entity.Property(e => e.CategoryName).IsUnicode(false);
             });
 
             modelBuilder.Entity<Client>(entity =>

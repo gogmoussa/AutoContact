@@ -18,6 +18,7 @@ namespace AutoContact.Models
             Departments = new HashSet<Department>();
             InverseManagerNavigation = new HashSet<Employee>();
             Invoices = new HashSet<Invoice>();
+            Appointments = new HashSet<Appointment>();
         }
 
         [Key]
@@ -90,5 +91,7 @@ namespace AutoContact.Models
         public virtual ICollection<Employee> InverseManagerNavigation { get; set; }
         [InverseProperty(nameof(Invoice.Employee))]
         public virtual ICollection<Invoice> Invoices { get; set; }
+        [InverseProperty(nameof(Appointment.Employee))]
+        public virtual ICollection<Appointment> Appointments { get; set; }
     }
 }
