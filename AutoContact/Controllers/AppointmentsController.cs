@@ -23,7 +23,7 @@ namespace AutoContact.Controllers
         public async Task<IActionResult> Index()
         {
             ViewData["Events"] = JSONHelper.GetAppointmentListJSONString(_context.Appointments.ToList());
-            var autoContactContext = _context.Appointments.Include(a => a.Car);
+            var autoContactContext = _context.Appointments.Include(a => a.Car).Include(p => p.Client).Include(p => p.Employee);
             return View(await autoContactContext.ToListAsync());
         }
 
@@ -37,6 +37,8 @@ namespace AutoContact.Controllers
 
             var appointment = await _context.Appointments
                 .Include(a => a.Car)
+                .Include(a => a.Client)
+                .Include(a => a.Employee)
                 .FirstOrDefaultAsync(m => m.AppointmentId == id);
             if (appointment == null)
             {
@@ -54,7 +56,6 @@ namespace AutoContact.Controllers
                 Value = c.ClientId.ToString(),
                 Text = $"{c.FirstName} {c.LastName}"
             }).ToList();
-
             ViewData["CarId"] = new SelectList(_context.Cars, "CarId", "Model");
             return View();
         }
@@ -99,6 +100,11 @@ namespace AutoContact.Controllers
             ViewData["Clients"] = _context.Clients.Select(c => new SelectListItem
             {
                 Value = c.ClientId.ToString(),
+                Text = $"{c.FirstName} {c.LastName}"
+            }).ToList();
+            ViewData["Employees"] = _context.Employees.Select(c => new SelectListItem
+            {
+                Value = c.EmployeeId.ToString(),
                 Text = $"{c.FirstName} {c.LastName}"
             }).ToList();
             ViewData["CarId"] = new SelectList(_context.Cars, "CarId", "Model", appointment.CarId);
@@ -152,6 +158,8 @@ namespace AutoContact.Controllers
 
             var appointment = await _context.Appointments
                 .Include(a => a.Car)
+                .Include(a => a.Client)
+                .Include(a => a.Employee)
                 .FirstOrDefaultAsync(m => m.AppointmentId == id);
             if (appointment == null)
             {
